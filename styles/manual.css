@@ -1,0 +1,20 @@
+#manual {
+    border: 2px solid var(--teal-blue);
+    border-radius: 8px;
+    width: 60%;
+    margin: auto;
+}
+
+#man-title {
+    text-align: center;
+    margin-bottom: 10px;
+    color: var(--ruby-red);
+}
+
+#manual p {
+    padding: 15px;
+    text-align: justify;
+    text-justify: inter-word;
+
+    border-top: 2px solid var(--teal-blue)
+}
