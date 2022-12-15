@@ -5,8 +5,6 @@ use BloodBankPisa;
 set foreign_key_checks = 0; -- to remove fk check
 -- set global event_scheduler = on; -- start scheduler event
 
--- aggiungere cascade
-
 --  ----------------- --
 --  USER              --
 -- ------------------ --
@@ -35,17 +33,15 @@ create table if not exists `donator` {
     primary key (`_id`)
 } engine = InnoDB;
 
-create table if not exists `patient` {
+create table if not exists `hospital` {
     `_id` int not null auto_increment,
-    `first_name` varchar(30) not null,
-    `second_name` varchar(30) not null,
+    `name` varchar(30) not null,
     `email` varchar(50) not null,
     `country` varchar(20) not null,
-    `city` varchar(40) not null,
+    `city` varchar(45) not null,
+    `address` varchar(45) not null,
     `phone` varchar(11) not null,
     `hash_pwd` tinytext not null,
-    `blood_group` varchar(3) not null,
-    `why` text not null,  -- why need blood trasfusion
     `isAuth` tinyint not null check (`auth` in (0,1)), -- 0 not enabled, 1 enable to use account
     primary key (`_id`)
 } engine = InnoDB;
@@ -76,15 +72,21 @@ create table if not exists `blood_request` {
     `_id` int not null auto_increment,
     `date` date default null,
     `isPending` tinyint not null check (`auth` in (0,1)), -- 0 pending, 1 accepted
-    `patient_` int not null,
-    `site_` int not null,
+    `blood_type` varchar(3) not null,
+    `quantity` int not null,
+    `site_` int not null, -- aggiunto dopo l'accettazione
+    `hospital_` int not null,
     primary key (`_id`),
-    foreign key (`patient_`) references `patient` (`_id`),
+    foreign key (`hospital_`) references `hospital` (`_id`)
+        on update cascade
+        on delete no action,
     foreign key (`site_`) references `site` (`_id`)
+        on update cascade
+        on delete no action
 }
 
-create index `index_patient` ON `blood_request` (`patient_`);
-create index `index_site_1` ON `donation` (`_site_`);
+create index `index_hospital` ON `blood_request` (`hospital_`);
+create index `index_site_1` ON `blood_request` (`_site_`);
 
 
 create table if not exists `donation` {
@@ -93,7 +95,11 @@ create table if not exists `donation` {
     `date` date int not null, --  data della donazione perchè non può donare entro tot mesi controllare ultima data e bloccare tasto dona
     primary key (`_donator_`, `_site_`),
     foreign key (`_donator_`) references `donator` (`_id`),
+        on update cascade
+        on delete no action
     foreign key (`_site_`) references `site` (`_id`)
+        on update cascade
+        on delete no action
 }
 
 create index `index_donator` ON `donation` (`_donator_`);
@@ -125,6 +131,8 @@ create table if not exists `news` {
     `author_` int not null,
     primary key (`_id`),
     foreign key (`author_`) references `admin` (`_id`)
+        on update cascade
+        on delete no action
 } engine = InnoDB;
 
 create index `index_author` ON `news` (`author_`);
