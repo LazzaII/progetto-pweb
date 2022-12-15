@@ -19,6 +19,8 @@
 
 /* common elements */
 body {
+    margin: 0;
+    padding: 0;
     background-color: var(--light-gray);
     font-family: 'SF Pro Display', sans-serif;
 }
@@ -26,6 +28,7 @@ body {
 footer {
     position: absolute;
     bottom: 0;
+    width: 100%;
     background-color: var(--teal-blue);
     color: var(--snow);
 }
@@ -62,6 +65,5 @@ nav {
 .title {
     color: var(--ruby-red);
     font-size: 45px;
-    padding: 0;
     margin: 0;
 }
