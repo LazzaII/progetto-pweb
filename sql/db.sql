@@ -1,6 +1,6 @@
-drop database if exists BloodBankPisa;
-create schema BloodBankPisa default character set utf8;
-use BloodBankPisa;
+drop database if exists bloodbank;
+create schema bloodbank default character set utf8;
+use bloodbank;
 
 set foreign_key_checks = 0; -- to remove fk check
 -- set global event_scheduler = on; -- start scheduler event
@@ -88,11 +88,27 @@ create table if not exists `blood_request` {
 create index `index_hospital` ON `blood_request` (`hospital_`);
 create index `index_site_1` ON `blood_request` (`_site_`);
 
+/*
+    trigger to automatically remove 1 to the site stock after the accepted request
+*/
+drop trigger if exists removeQuantity
+delimiter $$
+create trigger removeQuantity 
+after update on `blood_request`
+for each row 
+begin   
+    if new.`isPending` = 1 
+    then
+        -- fare switch per il sangue per sapere cosa rimuovere
+    end if;
+end $$
+delimiter ;
+
 
 create table if not exists `donation` {
     `_donator_` int not null,
     `_site_` int not null,
-    `date` date int not null, --  data della donazione perchè non può donare entro tot mesi controllare ultima data e bloccare tasto dona
+    `date` date int default null, --  data della donazione perchè non può donare entro tot mesi controllare ultima data e bloccare tasto dona
     primary key (`_donator_`, `_site_`),
     foreign key (`_donator_`) references `donator` (`_id`),
         on update cascade
@@ -104,6 +120,21 @@ create table if not exists `donation` {
 
 create index `index_donator` ON `donation` (`_donator_`);
 create index `index_site_1` ON `donation` (`_site_`);
+
+/*
+    trigger to automatically add 1 to the site stock after the accepted request
+*/
+drop trigger if exists addQuantity
+delimiter $$
+create trigger addQuantity 
+after insert on `donation`
+for each row 
+begin   
+    -- aggiungere la data
+    new.`date` = current_date;
+   -- join per sapere che tipo di sangue ha donato così da addare nello stock corretto
+end $$
+delimiter ;
 
 --  ----------------- --
 --  MESSAGE           --
