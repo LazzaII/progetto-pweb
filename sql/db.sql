@@ -3,13 +3,12 @@ create schema bloodbank default character set utf8;
 use bloodbank;
 
 set foreign_key_checks = 0; -- to remove fk check
--- set global event_scheduler = on; -- start scheduler event
 
 --  ----------------- --
 --  USER              --
 -- ------------------ --
 
-create table if not exists `admin` {
+create table if not exists `admin` (
     `_id` int not null auto_increment,
     `first_name` varchar(30) not null,
     `second_name` varchar(30) not null,
@@ -17,61 +16,82 @@ create table if not exists `admin` {
     `email` varchar(50) not null,
     `hash_pwd` tinytext not null,
     primary key (`_id`)
-} engine = InnoDB;
+) engine = InnoDB;
 
-create table if not exists `donator` {
+create table if not exists `donator` (
     `_id` int not null auto_increment,
     `first_name` varchar(30) not null,
     `second_name` varchar(30) not null,
     `email` varchar(50) not null,
-    `country` varchar(20) not null,
-    `city` varchar(40) not null,
     `phone` varchar(11) not null,
     `hash_pwd` tinytext not null,
     `blood_group` varchar(3) not null,
-    `isAuth` tinyint not null check (`auth` in (0,1)), -- 0 not enabled, 1 enable to use account
-    primary key (`_id`)
-} engine = InnoDB;
+    `isAuth` tinyint not null default 0 check (`isAuth` in (0,1,2)), -- 0 not enabled, 1 enable to use account, 2 blocked
+    `address` varchar(45) not null,
+    `city_` int not null,
+    primary key (`_id`),
+    foreign key (`city_`) references `city` (`_id`)
+        on update cascade
+        on delete no action
+) engine = InnoDB;
 
-create table if not exists `hospital` {
+create index `index_city_1` ON `donator` (`city_`);
+
+create table if not exists `hospital` (
     `_id` int not null auto_increment,
     `name` varchar(30) not null,
     `email` varchar(50) not null,
-    `country` varchar(20) not null,
-    `city` varchar(45) not null,
-    `address` varchar(45) not null,
     `phone` varchar(11) not null,
     `hash_pwd` tinytext not null,
-    `isAuth` tinyint not null check (`auth` in (0,1)), -- 0 not enabled, 1 enable to use account
-    primary key (`_id`)
-} engine = InnoDB;
+    `isAuth` tinyint not null default 0 check (`isAuth` in (0,1,2)), -- 0 not enabled, 1 enable to use account, 2 blocked
+    `address` varchar(45) not null,
+    `city_` int not null,
+    primary key (`_id`),
+    foreign key (`city_`) references `city` (`_id`)
+        on update cascade
+        on delete no action
+) engine = InnoDB;
+
+create index `index_city_2` ON `hospital` (`city_`);
 
 --  ----------------- --
 --  SITE              --
 -- ------------------ --
 
-create table if not exists `site` {
+create table if not exists `site` (
     `_id` int not null auto_increment,
-    `city` varchar(45) not null,
-    `nbs_Ap` int not null default 0, -- number os a+ blood sack -- gestire tutto dai trigger per aumentare e togliere
-    `nbs_Am` int not null default 0, -- number os a- blood sack
-    `nbs_Bp` int not null default 0, -- number os b+ blood sack
-    `nbs_Bm` int not null default 0, -- number os b- blood sack
-    `nbs_ABp` int not null default 0, -- number os ab+ blood sack
-    `nbs_ABm` int not null default 0, -- number os ab- blood sack
-    `nbs_Zp` int not null default 0, -- number os 0+ blood sack
-    `nbs_Zm` int not null default 0, -- number os 0- blood sack
+    `address` varchar(45) not null,
+    `city_` int not null,
+    primary key (`_id`),
+    foreign key (`city_`) references `city` (`_id`)
+        on update cascade
+        on delete no action
+) engine = InnoDB;
+
+create index `index_city_3` ON `site` (`city_`);
+
+--  ----------------- --
+--  CITY              --
+-- ------------------ --
+
+create table if not exists `city` (
+    `_id` int auto_increment,
+    `city` varchar(29) not null,
+    `lat` float  not null,
+    `lng` float  not null,
+    `region` varchar(21) not null,
+    `capital`varchar(7),
     primary key (`_id`)
-}
+) engine=InnoDB;
 
 --  ----------------- --
 --  REQUEST           --
 -- ------------------ --
 
-create table if not exists `blood_request` {
+create table if not exists `blood_request` (
     `_id` int not null auto_increment,
     `date` date default null,
-    `isPending` tinyint not null check (`auth` in (0,1)), -- 0 pending, 1 accepted
+    `isPending` tinyint not null check (`isPending` in (0,1,2,3)), -- 0 pending, 1 accepted, 2 cancelled by hospital, 3 not accepted by admin
     `blood_type` varchar(3) not null,
     `quantity` int not null,
     `site_` int not null, -- aggiunto dopo l'accettazione
@@ -83,64 +103,33 @@ create table if not exists `blood_request` {
     foreign key (`site_`) references `site` (`_id`)
         on update cascade
         on delete no action
-}
+) engine = InnoDB;
 
 create index `index_hospital` ON `blood_request` (`hospital_`);
 create index `index_site_1` ON `blood_request` (`_site_`);
 
-/*
-    trigger to automatically remove 1 to the site stock after the accepted request
-*/
-drop trigger if exists removeQuantity
-delimiter $$
-create trigger removeQuantity 
-after update on `blood_request`
-for each row 
-begin   
-    if new.`isPending` = 1 
-    then
-        -- fare switch per il sangue per sapere cosa rimuovere
-    end if;
-end $$
-delimiter ;
-
-
-create table if not exists `donation` {
+create table if not exists `donation` (
+    `_date` date not null, --  data della donazione perchè non può donare entro tot mesi controllare ultima data e bloccare tasto dona
     `_donator_` int not null,
     `_site_` int not null,
-    `date` date int default null, --  data della donazione perchè non può donare entro tot mesi controllare ultima data e bloccare tasto dona
-    primary key (`_donator_`, `_site_`),
+    `isUsed` tinyint not null check(`isUsed` in (0, 1)), -- 0 blood not used, 1 blood used
+    primary key (`_date`, `_donator_`, `_site_`),
     foreign key (`_donator_`) references `donator` (`_id`),
         on update cascade
         on delete no action
     foreign key (`_site_`) references `site` (`_id`)
         on update cascade
         on delete no action
-}
+)
 
 create index `index_donator` ON `donation` (`_donator_`);
 create index `index_site_1` ON `donation` (`_site_`);
-
-/*
-    trigger to automatically add 1 to the site stock after the accepted request
-*/
-drop trigger if exists addQuantity
-delimiter $$
-create trigger addQuantity 
-after insert on `donation`
-for each row 
-begin   
-    -- aggiungere la data
-    new.`date` = current_date;
-   -- join per sapere che tipo di sangue ha donato così da addare nello stock corretto
-end $$
-delimiter ;
 
 --  ----------------- --
 --  MESSAGE           --
 -- ------------------ --
 
-create table if not exists `message` {
+create table if not exists `message` (
     `_id` int not null auto_increment
     `object` varchar(140) not null,
     `body` text not null,
@@ -148,13 +137,13 @@ create table if not exists `message` {
     `second_name` varchar(30) not null,
     `email` varchar(60) not null,
     primary key (`_id`)
-} engine = InnoDB;
+) engine = InnoDB;
 
 --  ----------------- --
 --  NEWS              --
 -- ------------------ --
 
-create table if not exists `news` {
+create table if not exists `news` (
     `_id` int not null auto_increment,
     `title` varchar(140) not null,
     `body` text not null,
@@ -164,6 +153,6 @@ create table if not exists `news` {
     foreign key (`author_`) references `admin` (`_id`)
         on update cascade
         on delete no action
-} engine = InnoDB;
+) engine = InnoDB;
 
 create index `index_author` ON `news` (`author_`);
