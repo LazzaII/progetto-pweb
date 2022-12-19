@@ -1,12 +1,14 @@
 <?php
+/*
+$body = file_get_contents("php://input"); //get the body
+$decodeBody = json_decode($body);
+
+potrebbe servire per prendere i dati nella post invece di usare $_POST['...']
+*/
+
+require_once '../include/config.inc.php';
+
 # class database
-
-# configuration 
-define(`BB_HOST`, `localhost`);
-define(`BB_DB`, `bloodbank`);
-define(`BB_USER`, `root`);
-define(`BB_PWD`, ``);
-
 class Database {
     private $pdo;
     

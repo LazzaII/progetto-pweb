@@ -28,11 +28,11 @@ create table if not exists `donator` (
     `blood_group` varchar(3) not null,
     `isAuth` tinyint not null default 0 check (`isAuth` in (0,1,2)), -- 0 not enabled, 1 enable to use account, 2 blocked
     `address` varchar(45) not null,
-    `city_` int not null,
+    `city_` int default null,
     primary key (`_id`),
     foreign key (`city_`) references `city` (`_id`)
         on update cascade
-        on delete no action
+        on delete set null
 ) engine = InnoDB;
 
 create index `index_city_1` ON `donator` (`city_`);
@@ -45,27 +45,27 @@ create table if not exists `hospital` (
     `hash_pwd` tinytext not null,
     `isAuth` tinyint not null default 0 check (`isAuth` in (0,1,2)), -- 0 not enabled, 1 enable to use account, 2 blocked
     `address` varchar(45) not null,
-    `city_` int not null,
+    `city_` int default null,
     primary key (`_id`),
     foreign key (`city_`) references `city` (`_id`)
         on update cascade
-        on delete no action
+        on delete set null
 ) engine = InnoDB;
 
 create index `index_city_2` ON `hospital` (`city_`);
 
 --  ----------------- --
---  SITE              --
+--  STOCKS            --
 -- ------------------ --
 
 create table if not exists `site` (
     `_id` int not null auto_increment,
     `address` varchar(45) not null,
-    `city_` int not null,
+    `city_` int default null,
     primary key (`_id`),
     foreign key (`city_`) references `city` (`_id`)
         on update cascade
-        on delete no action
+        on delete set null
 ) engine = InnoDB;
 
 create index `index_city_3` ON `site` (`city_`);
@@ -79,10 +79,21 @@ create table if not exists `city` (
     `city` varchar(29) not null,
     `lat` float  not null,
     `lng` float  not null,
-    `region` varchar(21) not null,
     `capital`varchar(7),
+    `region_` int not null,
+    primary key (`_id`),
+    foreign key (`region_`) references `region` (`_id`)
+        on update cascade
+        on delete cascade
+) engine = InnoDB;
+
+create index `index_region` ON `city` (`region_`);
+
+create table if not exists `region` (
+    `_id` int auto_increment,
+    `name` varchar(25),
     primary key (`_id`)
-) engine=InnoDB;
+) engine = InnoDB;
 
 --  ----------------- --
 --  REQUEST           --

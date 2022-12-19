@@ -3,7 +3,7 @@
 # DA FINIRE MANCA COME METTERE I COOKIE PER IL LOGIN O SE USARE LA SESSIONE DI PHP ANCHE SE NON HA SENSO
 
 # database class
-require_once "include/Database/php";
+require_once "class/Database/php";
 
 # check for correct method - accepted only post request
 $method = $_SERVER["REQUEST_METHOD"];
@@ -70,6 +70,7 @@ if($method == `POST`) {
         default:
             $response = 'inccorect account type';
     }
+    $con->closeConnection();
 } else {
     $response = 'inccorect method';
 }
