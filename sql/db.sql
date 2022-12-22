@@ -5,6 +5,31 @@ use bloodbank;
 set foreign_key_checks = 0; -- to remove fk check
 
 --  ----------------- --
+--  CITY              --
+-- ------------------ --
+
+create table if not exists `region` (
+    `_id` int auto_increment,
+    `name` varchar(25),
+    primary key (`_id`)
+) engine = InnoDB;
+
+create table if not exists `city` (
+    `_id` int auto_increment,
+    `city` varchar(29) not null,
+    `lat` float  not null,
+    `lng` float  not null,
+    `capital`varchar(7),
+    `region_` int not null, --fk
+    primary key (`_id`),
+    foreign key (`region_`) references `region` (`_id`)
+        on update cascade
+        on delete cascade
+) engine = InnoDB;
+
+create index `index_region` ON `city` (`region_`);
+
+--  ----------------- --
 --  USER              --
 -- ------------------ --
 
@@ -26,9 +51,8 @@ create table if not exists `donator` (
     `phone` varchar(11) not null,
     `hash_pwd` tinytext not null,
     `blood_group` varchar(3) not null,
-    `isAuth` tinyint not null default 0 check (`isAuth` in (0,1,2)), -- 0 not enabled, 1 enable to use account, 2 blocked
-    `address` varchar(45) not null,
-    `city_` int default null,
+    `city_` int default null, --fk
+    `isAuth` tinyint not null default 0 check (`isAuth` in (0,1)), -- 0 not enabled, 1 enable to use account
     primary key (`_id`),
     foreign key (`city_`) references `city` (`_id`)
         on update cascade
@@ -43,9 +67,9 @@ create table if not exists `hospital` (
     `email` varchar(50) not null,
     `phone` varchar(11) not null,
     `hash_pwd` tinytext not null,
-    `isAuth` tinyint not null default 0 check (`isAuth` in (0,1,2)), -- 0 not enabled, 1 enable to use account, 2 blocked
     `address` varchar(45) not null,
-    `city_` int default null,
+    `city_` int default null, -- fk
+    `isAuth` tinyint not null default 0 check (`isAuth` in (0,1)), -- 0 not enabled, 1 enable to use account
     primary key (`_id`),
     foreign key (`city_`) references `city` (`_id`)
         on update cascade
@@ -65,48 +89,23 @@ create table if not exists `site` (
     primary key (`_id`),
     foreign key (`city_`) references `city` (`_id`)
         on update cascade
-        on delete set null
+        on delete set null -- fare qualcosa per riassegnare
 ) engine = InnoDB;
 
 create index `index_city_3` ON `site` (`city_`);
 
 --  ----------------- --
---  CITY              --
--- ------------------ --
-
-create table if not exists `city` (
-    `_id` int auto_increment,
-    `city` varchar(29) not null,
-    `lat` float  not null,
-    `lng` float  not null,
-    `capital`varchar(7),
-    `region_` int not null,
-    primary key (`_id`),
-    foreign key (`region_`) references `region` (`_id`)
-        on update cascade
-        on delete cascade
-) engine = InnoDB;
-
-create index `index_region` ON `city` (`region_`);
-
-create table if not exists `region` (
-    `_id` int auto_increment,
-    `name` varchar(25),
-    primary key (`_id`)
-) engine = InnoDB;
-
---  ----------------- --
---  REQUEST           --
+--  BLOOD             --
 -- ------------------ --
 
 create table if not exists `blood_request` (
     `_id` int not null auto_increment,
     `date` date default null,
-    `isPending` tinyint not null check (`isPending` in (0,1,2,3)), -- 0 pending, 1 accepted, 2 cancelled by hospital, 3 not accepted by admin
     `blood_type` varchar(3) not null,
     `quantity` int not null,
-    `site_` int not null, -- aggiunto dopo l'accettazione
-    `hospital_` int not null,
+    `hospital_` int not null, --fk
+    `site_` int default null, -- fk
+    `isPending` tinyint default 0 check (`isPending` in (0,1,2,3)), -- 0 pending, 1 accepted, 2 not accepted by admin
     primary key (`_id`),
     foreign key (`hospital_`) references `hospital` (`_id`)
         on update cascade
@@ -121,9 +120,9 @@ create index `index_site_1` ON `blood_request` (`_site_`);
 
 create table if not exists `donation` (
     `_date` date not null, --  data della donazione perchè non può donare entro tot mesi controllare ultima data e bloccare tasto dona
-    `_donator_` int not null,
-    `_site_` int not null,
-    `isUsed` tinyint not null check(`isUsed` in (0, 1)), -- 0 blood not used, 1 blood used
+    `_donator_` int not null, -- fk
+    `_site_` int not null, -- fk
+    `isUsed` tinyint default 0 check(`isUsed` in (0, 1)), -- 0 blood not used, 1 blood used
     primary key (`_date`, `_donator_`, `_site_`),
     foreign key (`_donator_`) references `donator` (`_id`),
         on update cascade
@@ -141,7 +140,7 @@ create index `index_site_1` ON `donation` (`_site_`);
 -- ------------------ --
 
 create table if not exists `message` (
-    `_id` int not null auto_increment
+    `_id` int not null auto_increment,
     `object` varchar(140) not null,
     `body` text not null,
     `first_name` varchar(30) not null,
@@ -159,7 +158,7 @@ create table if not exists `news` (
     `title` varchar(140) not null,
     `body` text not null,
     `img` tinytext default null,
-    `author_` int not null,
+    `author_` int not null, -- fk ad admin
     primary key (`_id`),
     foreign key (`author_`) references `admin` (`_id`)
         on update cascade
