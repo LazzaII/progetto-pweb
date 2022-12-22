@@ -6,7 +6,7 @@ insert into `region` (`name`) values
 ('Marche'), ('Basilicata'), ('Molise'), ('Valle d’Aosta');
 
 
-insert into `city` (`_id`, `city`, `lat`, `lng`, `region`) values
+insert into `city` (`_id`, `city`, `lat`, `lng`, `region_`) values
 (1, 'Rome', 41.8931, 12.4828, '1'),
 (2, 'Milan', 45.4669, 9.19, '2'),
 (3, 'Naples', 40.8333, 14.25, '3'),
@@ -934,7 +934,7 @@ insert into `city` (`_id`, `city`, `lat`, `lng`, `region`) values
 (925, 'Bitetto', 41.0333, 16.75, '9'),
 (926, 'Baranzate', 45.5167, 9.1, '2'),
 (927, 'Arluno', 45.5, 8.9333, '2'),
-(928, 'Occhiobello', 44.9216, 11.5812, 'Ferrara'),
+(928, 'Occhiobello', 44.9216, 11.5812, '7'),
 (929, 'Cornedo Vicentino', 45.6167, 11.35, '10'),
 (930, 'Taviano', 39.9833, 18.0833, '9'),
 (931, 'Ronchi dei Legionari', 45.8333, 13.5, '11'),
@@ -1049,7 +1049,7 @@ insert into `city` (`_id`, `city`, `lat`, `lng`, `region`) values
 (1040, 'Gemona del Friuli', 46.2833, 13.1333, '11'),
 (1041, 'Ramacca', 37.3833, 14.7, '5');
 
-INSERT INTO `city` (`_id`, `city`, `lat`, `lng`, `region`) VALUES
+INSERT INTO `city` (`_id`, `city`, `lat`, `lng`, `region_`) VALUES
 (1042, 'Botticino Sera', 45.5339, 10.3078, '2'),
 (1043, 'Medesano', 44.7568, 10.1403, '7'),
 (1044, 'Grezzana', 45.5167, 11.0167, '10'),
@@ -1281,7 +1281,7 @@ INSERT INTO `city` (`_id`, `city`, `lat`, `lng`, `region`) VALUES
 (1270, 'Lavis', 46.139, 11.1123, '16'),
 (1271, 'Guardiagrele', 42.1892, 14.2216, '15'),
 (1272, 'Tarcento', 46.2167, 13.2167, '11'),
-(1273, 'Luzzara', 44.9667, 10.6833, 'Mantova'),
+(1273, 'Luzzara', 44.9667, 10.6833, '2'),
 (1274, 'Lacchiarella', 45.325, 9.14, '2'),
 (1275, 'Cutrofiano', 40.1333, 18.2, '9'),
 (1276, 'Legnaro', 45.35, 11.9667, '10'),
@@ -1470,7 +1470,7 @@ INSERT INTO `city` (`_id`, `city`, `lat`, `lng`, `region`) VALUES
 (1459, 'Rizziconi', 38.4122, 15.9589, '12'),
 (1460, 'Torrile', 44.9209, 10.3264, '7'),
 (1461, 'San Gimignano', 43.4677, 11.0432, '8'),
-(1462, 'Pantelleria', 36.7875, 11.9925, 'Trapani'),
+(1462, 'Pantelleria', 36.7875, 11.9925, '5'),
 (1463, 'Tavernelle in Val di Pesa', 43.5614, 11.1729, '8'),
 (1464, 'Pelago', 43.7739, 11.5047, '8'),
 (1465, 'Appiano Gentile', 45.7383, 8.9797, '2'),
@@ -1492,7 +1492,7 @@ INSERT INTO `city` (`_id`, `city`, `lat`, `lng`, `region`) VALUES
 (1481, 'Castiglione Olona', 45.7531, 8.8744, '2'),
 (1482, 'Vergato', 44.2833, 11.1167, '7'),
 (1483, 'Costabissara', 45.5833, 11.4833, '10'),
-(1484, 'Mozzecane', 45.3, 10.8167, 'Mantova'),
+(1484, 'Mozzecane', 45.3, 10.8167, '2'),
 (1485, 'Soncino', 45.4, 9.8667, '2'),
 (1486, 'Stra', 45.4167, 12.25, '10'),
 (1487, 'Vigarano Mainarda', 44.85, 11.5, '7'),
@@ -2045,7 +2045,7 @@ INSERT INTO `city` (`_id`, `city`, `lat`, `lng`, `region`) VALUES
 (2034, 'Sarcedo', 45.7, 11.5333, '10'),
 (2035, 'Botricello', 38.9333, 16.85, '12');
 
-INSERT INTO `city` (`_id`, `city`, `lat`, `lng`, `region`) VALUES
+INSERT INTO `city` (`_id`, `city`, `lat`, `lng`, `region_`) VALUES
 (2036, 'Calatabiano', 37.8228, 15.2278, '5'),
 (2037, 'Polla', 40.5167, 15.5, '3'),
 (2038, 'Muravera', 39.4196, 9.5763, '14'),
@@ -2466,7 +2466,7 @@ INSERT INTO `city` (`_id`, `city`, `lat`, `lng`, `region`) VALUES
 (2453, 'San Pietro a Maida', 38.85, 16.35, '12'),
 (2454, 'Offlaga', 45.3833, 10.1167, '2'),
 (2455, 'Moretta', 44.7614, 7.5363, '4'),
-(2456, 'Castelmassa', 45.0167, 11.3167, 'Mantova'),
+(2456, 'Castelmassa', 45.0167, 11.3167, '2'),
 (2457, 'Carpino', 41.75, 15.8417, '9'),
 (2458, 'Moiano', 41.0833, 14.55, '3'),
 (2459, 'Limatola', 41.15, 14.4, '3'),
@@ -2781,7 +2781,7 @@ INSERT INTO `city` (`_id`, `city`, `lat`, `lng`, `region`) VALUES
 (2768, 'Cimadolmo', 45.7833, 12.3667, '10'),
 (2769, 'Castione della Presolana', 45.9, 10.0333, '2'),
 (2770, 'Castel di Casio', 44.1667, 11.0333, '7'),
-(2771, 'Dosolo', 44.95, 10.6333, 'Mantova'),
+(2771, 'Dosolo', 44.95, 10.6333, '2'),
 (2772, 'Sarsina', 43.9167, 12.15, '7'),
 (2773, 'Castelliri', 41.6833, 13.55, '1'),
 (2774, 'Sicignano degli Alburni', 40.5597, 15.307, '3'),
@@ -2882,7 +2882,7 @@ INSERT INTO `city` (`_id`, `city`, `lat`, `lng`, `region`) VALUES
 (2869, 'Scerni', 42.1167, 14.5667, '15'),
 (2870, 'Bibbona', 43.2694, 10.5944, '8'),
 (2871, 'Casnigo', 45.8164, 9.8667, '2'),
-(2872, 'Stienta', 44.9333, 11.55, 'Ferrara'),
+(2872, 'Stienta', 44.9333, 11.55, '7'),
 (2873, 'Sarnano', 43.0356, 13.3007, '17'),
 (2874, 'Andorno Micca', 45.6, 8.05, '4'),
 (2875, 'Mezzani', 44.9167, 10.4333, '7'),
@@ -3043,7 +3043,7 @@ INSERT INTO `city` (`_id`, `city`, `lat`, `lng`, `region`) VALUES
 (3030, 'Cassine', 44.7508, 8.5289, '4'),
 (3031, 'Monterosso Almo', 37.1, 14.7667, '5'),
 (3032, 'San Giorgio la Molara', 41.2667, 14.9167, '3');
-INSERT INTO `city` (`_id`, `city`, `lat`, `lng`, `region`) VALUES
+INSERT INTO `city` (`_id`, `city`, `lat`, `lng`, `region_`) VALUES
 (3033, 'Prata Camportaccio', 46.3167, 9.4, '2'),
 (3034, 'Montevago', 37.7033, 12.9867, '5'),
 (3035, 'Pollina', 38, 14.15, '5'),

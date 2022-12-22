@@ -19,8 +19,7 @@ create table if not exists `city` (
     `city` varchar(29) not null,
     `lat` float  not null,
     `lng` float  not null,
-    `capital`varchar(7),
-    `region_` int not null, --fk
+    `region_` int not null, -- fk
     primary key (`_id`),
     foreign key (`region_`) references `region` (`_id`)
         on update cascade
@@ -48,10 +47,10 @@ create table if not exists `donator` (
     `first_name` varchar(30) not null,
     `second_name` varchar(30) not null,
     `email` varchar(50) not null,
-    `phone` varchar(11) not null,
+    `phone` int not null,
     `hash_pwd` tinytext not null,
     `blood_group` varchar(3) not null,
-    `city_` int default null, --fk
+    `city_` int default null, -- fk
     `isAuth` tinyint not null default 0 check (`isAuth` in (0,1)), -- 0 not enabled, 1 enable to use account
     primary key (`_id`),
     foreign key (`city_`) references `city` (`_id`)
@@ -103,7 +102,7 @@ create table if not exists `blood_request` (
     `date` date default null,
     `blood_type` varchar(3) not null,
     `quantity` int not null,
-    `hospital_` int not null, --fk
+    `hospital_` int not null, -- fk
     `site_` int default null, -- fk
     `isPending` tinyint default 0 check (`isPending` in (0,1,2,3)), -- 0 pending, 1 accepted, 2 not accepted by admin
     primary key (`_id`),
@@ -116,7 +115,7 @@ create table if not exists `blood_request` (
 ) engine = InnoDB;
 
 create index `index_hospital` ON `blood_request` (`hospital_`);
-create index `index_site_1` ON `blood_request` (`_site_`);
+create index `index_site_1` ON `blood_request` (`site_`);
 
 create table if not exists `donation` (
     `_date` date not null, --  data della donazione perchè non può donare entro tot mesi controllare ultima data e bloccare tasto dona

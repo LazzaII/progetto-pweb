@@ -1,18 +1,18 @@
 <?php
 # import Database class
-require_once __DIR__ . '/Database.sql';
+require_once __DIR__ . '/Database.php';
 
 # class User
 class Hospital {
     private $pdo;
-    private $id;
-    private $name;
-    private $email;
-    private $phone;
-    private $pwd;
-    private $isAuth;
-    private $addr;
-    private $city;
+    public $id;
+    public $name;
+    public $email;
+    public $phone;
+    public $pwd;
+    public $isAuth;
+    public $addr;
+    public $city;
     
     public function __construct(){
         $this->pdo = new Database();

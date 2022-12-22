@@ -1,13 +1,13 @@
 <?php
 # import Database class
-require_once __DIR__ . '/Database.sql';
+require_once __DIR__ . '/Database.php';
 
 # class User
 class Site {
     private $pdo;
-    private $id;
-    private $addr;
-    private $city;
+    public $id;
+    public $addr;
+    public $city;
 
     public function __construct()
     {

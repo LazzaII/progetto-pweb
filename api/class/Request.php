@@ -1,17 +1,17 @@
 <?php
 # import Database class
-require_once __DIR__ . '/Database.sql';
+require_once __DIR__ . '/Database.php';
 
 # class User
 class Request {
     private $pdo;
-    private $id;
-    private $date;
-    private $blood_type;
-    private $quantity;
-    private $hospital;
-    private $site;
-    private $isPending;
+    public $id;
+    public $date;
+    public $blood_type;
+    public $quantity;
+    public $hospital;
+    public $site;
+    public $isPending;
     
     public function __construct(){
         $this->pdo = new Database();

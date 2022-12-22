@@ -1,16 +1,16 @@
 <?php
 # import Database class
-require_once __DIR__ . '/Database.sql';
+require_once __DIR__ . '/Database.php';
 
 # class User
 class Admin {
     private $pdo;
-    private $id;
-    private $fn;
-    private $sn;
-    private $type;
-    private $email;
-    private $pwd;
+    public $id;
+    public $fn;
+    public $sn;
+    public $type;
+    public $email;
+    public $pwd;
     
     public function __construct(){
         $this->pdo = new Database();

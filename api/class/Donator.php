@@ -1,19 +1,20 @@
 <?php
 # import Database class
-require_once __DIR__ . '/Database.sql';
+require_once __DIR__ . '/Database.php';
 
 # class User
 class Donator {
     private $pdo;
-    private $id;
-    private $fn;
-    private $sn;
-    private $email;
-    private $phone;
-    private $pwd;
-    private $blood;
-    private $isAuth;
-    private $city;
+    public $id;
+    public $fn;
+    public $sn;
+    public $email;
+    public $phone;
+    public $pwd;
+    public $blood;
+    public $city;
+
+    public $isAuth;
     
     public function __construct(){
         $this->pdo = new Database();
@@ -41,11 +42,11 @@ class Donator {
 
     public function add($donator) {
         if(empty(self::findFromEmail($donator->email))) {
-            $query = "insert into `donator` 
+            $query = "insert into `donator` (`first_name`, `second_name`, `email`, `phone`, `hash_pwd`, `blood_group`, `city_`)
                       values (:fn, :sn, :email, :phone, :pwd, :blood, :city)";
             $stmt = $this->pdo->prepare($query);
             $data = [
-                'fn' => $donator->fs,
+                'fn' => $donator->fn,
                 'sn' => $donator->sn,
                 'email' => $donator->email,
                 'phone' => $donator->phone,

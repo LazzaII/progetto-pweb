@@ -7,7 +7,7 @@ $decodeBody = json_decode($body);
 potrebbe servire per prendere i dati nella post invece di usare $_POST['...']
 */
 
-require_once __DIR__.'../include/config.inc.php';
+require_once __DIR__.'/../include/config.inc.php';
 
 # class database
 class Database {

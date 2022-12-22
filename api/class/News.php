@@ -1,15 +1,15 @@
 <?php
 # import Database class
-require_once __DIR__ . '/Database.sql';
+require_once __DIR__ . '/Database.php';
 
 # class User
 class News {
     private $pdo;
-    private $id;
-    private $title;
-    private $body;
-    private $img;
-    private $author;
+    public $id;
+    public $title;
+    public $body;
+    public $img;
+    public $author;
     
     public function __construct(){
         $this->pdo = new Database();
