@@ -1,3 +1,6 @@
+insert into `admin` values 
+('Mario', 'Rossi', 0, 'mario@rossi.com', '$2y$10$FivlRR/HgDipCOiKXzbOqu/ZLF9HBGAQXTxI0IsZM8kQ1m26PJZUu'); -- questo è l'hash della password Prova123
+
 insert into `region` (`name`) values 
 ('Lazio'), ('Lombardy'), ('Campania'), ('Piedmont'),
 ('Sicilia'), ('Liguria'), ('Emilia-Romagna'), ('Tuscany'),
@@ -2409,7 +2412,7 @@ INSERT INTO `city` (`_id`, `city`, `lat`, `lng`, `region_`) VALUES
 (2396, 'Revello', 44.65, 7.3833, '4'),
 (2397, 'Sant’Antonio di Susa', 45.1071, 7.2723, '4'),
 (2398, 'San Salvatore Monferrato', 44.995, 8.5669, '4'),
-(2399, '17no', 45.7, 10.2167, '2'),
+(2399, 'Marcheno', 45.7, 10.2167, '2'),
 (2400, 'Ariano nel Polesine', 44.9461, 12.1249, '10'),
 (2401, 'Calvenzano', 45.495, 9.5994, '2'),
 (2402, 'Bastiglia', 44.727, 10.9986, '7'),

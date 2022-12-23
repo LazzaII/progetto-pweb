@@ -38,11 +38,11 @@ class Admin {
 
     public function add($admin) {
         if(empty(self::findFromEmail($admin->email))) {
-            $query = 'insert into `admin` 
+            $query = 'insert into `admin` (`first_name`, `second_name`, `email`, `hash_pwd`)
                       values (:fn, :sn, :email, :pwd)';
             $stmt = $this->pdo->prepare($query);
             $data = [
-                'fn' => $admin->fs,
+                'fn' => $admin->fn,
                 'sn' => $admin->sn,
                 'email' => $admin->email,
                 'pwd' => $admin->pwd

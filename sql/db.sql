@@ -16,7 +16,7 @@ create table if not exists `region` (
 
 create table if not exists `city` (
     `_id` int auto_increment,
-    `city` varchar(29) not null,
+    `name` varchar(29) not null,
     `lat` float  not null,
     `lng` float  not null,
     `region_` int not null, -- fk
@@ -36,7 +36,7 @@ create table if not exists `admin` (
     `_id` int not null auto_increment,
     `first_name` varchar(30) not null,
     `second_name` varchar(30) not null,
-    `type` tinyint not null check (`type` in (0,1)), -- 0 super admin, 1 admin, 2 donator, 3 applicant
+    `type` tinyint default 1 check (`type` in (0,1)), -- 0 super admin, 1 admin
     `email` varchar(50) not null,
     `hash_pwd` tinytext not null,
     primary key (`_id`)

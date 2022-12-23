@@ -38,7 +38,8 @@ class Hospital {
 
     public function add($hospital) {
         if(empty(self::findFromEmail($hospital->email))) {
-            $query = "insert into `hospital` values (:name, :email, :phone, :pwd, :addr, :city)";
+            $query = "insert into `hospital` (`name`, `email`, `phone`, `hash_pwd`, `address`, `city_`)
+                      values (:name, :email, :phone, :pwd, :addr, :city)";
             $stmt = $this->pdo->prepare($query);
             $data = [
                 'name' => $hospital->name,

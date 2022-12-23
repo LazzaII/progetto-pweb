@@ -18,4 +18,16 @@ class City {
         $stmt->execute();
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
+
+    public function getOne($id) {
+        $query = 'select * 
+                  from `city`
+                  where _id = :id';
+        $stmt = $this->pdo->prepare($query);
+        $data = [
+            'id' => $id
+        ];
+        $stmt->execute($data);
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
 }
