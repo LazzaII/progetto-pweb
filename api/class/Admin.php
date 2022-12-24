@@ -17,14 +17,26 @@ class Admin {
         $this->pdo = $this->pdo->getPDO();
     }
 
-    public function findFromEmail($email){
-        $query = 'select * 
-                  from `admin` 
-                  where `email` = :email';
-        $stmt = $this->pdo->prepare($query);
-        $data = [
-            'email' => $email
-        ];
+    public function findFromEmail($email, $id = null){
+        if($id == null){
+            $query = 'select * 
+                      from `admin` 
+                        where `email` = :email';
+            $stmt = $this->pdo->prepare($query);
+            $data = [
+                'email' => $email
+            ];
+        } else {
+            $query = 'select * 
+                      from `admin` 
+                      where `email` = :email
+                        and `_id` <> :id';
+            $stmt = $this->pdo->prepare($query);
+            $data = [
+                'email' => $email,
+                'id' => $id
+            ];
+        }
         $stmt->execute($data);
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
@@ -54,24 +66,25 @@ class Admin {
     }
 
     public function remove($id) {
-        $query = 'delete from `admin` where `_id` = :id';
+        $query = 'delete from `admin` 
+                  where `_id` = :id';
         $stmt = $this->pdo->prepare($query);
         $data = [
-            `id` => $id
+            'id' => $id
         ];
         $stmt->execute($data);
         return 'OK';
     }
 
     public function update($admin) {
-        if (empty(self::findFromEmail($admin->email))) {
+        if (empty(self::findFromEmail($admin->email, $admin->id))) {
             $query = 'update `admin` 
                       set `first_name` = :fn, `second_name` = :sn, `email` = :email, `hash_pwd` = :pwd
                       where `_id` = :id';
             $stmt = $this->pdo->prepare($query);
             $data = [
                 'id' => $admin->id,
-                'fn' => $admin->fs,
+                'fn' => $admin->fn,
                 'sn' => $admin->sn,
                 'email' => $admin->email,
                 'pwd' => $admin->pwd

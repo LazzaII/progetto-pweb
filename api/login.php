@@ -98,8 +98,6 @@ switch($method) {
                     else http_response_code(403); # forbidden (password error)
                 }    
                 else http_response_code(403); # forbidden (email error)
-
-                break;
         }
 
         break;

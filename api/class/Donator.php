@@ -21,14 +21,26 @@ class Donator {
         $this->pdo = $this->pdo->getPDO();
     }
 
-    public function findFromEmail($email){
-        $query = 'select * 
-                  from `donator`
-                  where `email` = :email';
-        $stmt = $this->pdo->prepare($query);
-        $data = [
-            'email' => $email
-        ];
+    public function findFromEmail($email, $id = null){
+        if($id == null){
+            $query = 'select * 
+                      from `donator` 
+                        where `email` = :email';
+            $stmt = $this->pdo->prepare($query);
+            $data = [
+                'email' => $email
+            ];
+        } else {
+            $query = 'select * 
+                      from `donator` 
+                      where `email` = :email
+                        and `_id` <> :id';
+            $stmt = $this->pdo->prepare($query);
+            $data = [
+                'email' => $email,
+                'id' => $id
+            ];
+        }
         $stmt->execute($data);
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
@@ -65,14 +77,14 @@ class Donator {
                   where `_id` = :id';
         $stmt = $this->pdo->prepare($query);
         $data = [
-            `id` => $id
+            'id' => $id
         ];
         $stmt->execute($data);
         return 'OK';
     }
 
     public function update($donator) {
-        if (empty(self::findFromEmail($donator->email))) {
+        if (empty(self::findFromEmail($donator->email, $donator->id))) {
             $query = 'update `donator` 
                       set `first_name` = :fn, `second_name` = :sn, `email` = :email, `phone` = :phone, 
                           `hash_pwd` = :pwd, `city_` = :city 
@@ -80,7 +92,7 @@ class Donator {
             $stmt = $this->pdo->prepare($query);
             $data = [
                 'id' => $donator->id,
-                'fn' => $donator->fs,
+                'fn' => $donator->fn,
                 'sn' => $donator->sn,
                 'email' => $donator->email,
                 'phone' => $donator->phone,

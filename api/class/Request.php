@@ -44,7 +44,7 @@ class Request {
                   where `_id` = :id';
         $stmt = $this->pdo->prepare($query);
         $data = [
-            `id` => $id
+            'id' => $id
         ];
         $stmt->execute($data);
         return 'OK';

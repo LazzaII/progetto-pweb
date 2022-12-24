@@ -25,7 +25,7 @@ class Message {
     }
 
     public function add($message) {
-        $query = 'insert into `message` 
+        $query = 'insert into `message` (`object`, `body`, `first_name`, `second_name`, `email`)
                   values (:obj, :body, :fn, :sn, :email)';
         $stmt = $this->pdo->prepare($query);
         $data = [
@@ -39,12 +39,12 @@ class Message {
         return 'OK';
     }
 
-    public function remove($id) {
+    public function delete($id) {
         $query = 'delete from `message` 
                   where `_id` = :id';
         $stmt = $this->pdo->prepare($query);
         $data = [
-            `id` => $id
+            'id' => $id
         ];
         $stmt->execute($data);
         return 'OK';

@@ -19,12 +19,26 @@ class Hospital {
         $this->pdo = $this->pdo->getPDO();
     }
 
-    public function findFromEmail($email){
-        $query = 'select * from `hospital` where `email` = :email';
-        $stmt = $this->pdo->prepare($query);
-        $data = [
-            'email' => $email
-        ];
+    public function findFromEmail($email, $id = null){
+        if($id == null){
+            $query = 'select * 
+                      from `hospital` 
+                        where `email` = :email';
+            $stmt = $this->pdo->prepare($query);
+            $data = [
+                'email' => $email
+            ];
+        } else {
+            $query = 'select * 
+                      from `hospital` 
+                      where `email` = :email
+                        and `_id` <> :id';
+            $stmt = $this->pdo->prepare($query);
+            $data = [
+                'email' => $email,
+                'id' => $id
+            ];
+        }
         $stmt->execute($data);
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
@@ -67,9 +81,9 @@ class Hospital {
     }
 
     public function update($hospital) {
-        if (empty(self::findFromEmail($hospital->email))) {
+        if (empty(self::findFromEmail($hospital->email, $hospital->id))) {
             $query = 'update `hospital` 
-                      set `name` = :name, `email` = :email, `phone` = :phone, `hash_pwd` = :pwd, `address` = :addr, city_` = :city 
+                      set `name` = :name, `email` = :email, `phone` = :phone, `hash_pwd` = :pwd, `address` = :addr, `city_` = :city
                       where `_id` = :id';
             $stmt = $this->pdo->prepare($query);
             $data = [
@@ -88,7 +102,9 @@ class Hospital {
     }
 
     public function authetication() {
-        $query = 'update `hospital` set `isAuth` = 1 where `_id` = :id';
+        $query = 'update `hospital`
+                  set `isAuth` = 1
+                  where `_id` = :id';
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
         return 'OK';
