@@ -49,7 +49,7 @@ class Donator {
         $query = 'select * from `donator`';
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
-        return $stmt->fetch(\PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function add($donator) {
@@ -72,7 +72,7 @@ class Donator {
         return 'ERR';
     }
 
-    public function remove($id) {
+    public function delete($id) {
         $query = 'delete from `donator`
                   where `_id` = :id';
         $stmt = $this->pdo->prepare($query);

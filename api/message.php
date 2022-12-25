@@ -1,7 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
 require_once __DIR__ . '/class/Message.php';
 $mex = new Message();
@@ -29,10 +26,13 @@ switch($method){
         break;
 
     case 'DELETE':
-        $substringedURI = explode('/', $_SERVER["REQUEST_URI"]); //To get the id of the mex  
-        $mex->delete($substringedURI[count($substringedURI)-1]);
+        if($_COOKIE['login'] == 'logged'){ // only admin can delete message
+            $substringedURI = explode('/', $_SERVER["REQUEST_URI"]); //To get the id of the mex  
+            $mex->delete($substringedURI[count($substringedURI)-1]);
+        } else
+            http_response_code(401); // Unauthorized
         
         break;
     default:
-        http_response_code(405); # method error
+        http_response_code(405); // method error
 }

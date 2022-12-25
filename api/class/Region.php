@@ -16,7 +16,7 @@ class Region {
         $query = 'select * from `region`';
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
-        return $stmt->fetch(\PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function getOne($id) {

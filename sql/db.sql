@@ -99,7 +99,7 @@ create index `index_city_3` ON `site` (`city_`);
 
 create table if not exists `blood_request` (
     `_id` int not null auto_increment,
-    `date` date default null,
+    `date` date not null,
     `blood_type` varchar(3) not null,
     `quantity` int not null,
     `hospital_` int not null, -- fk
@@ -118,21 +118,22 @@ create index `index_hospital` ON `blood_request` (`hospital_`);
 create index `index_site_1` ON `blood_request` (`site_`);
 
 create table if not exists `donation` (
-    `_date` date not null, --  data della donazione perchè non può donare entro tot mesi controllare ultima data e bloccare tasto dona
-    `_donator_` int not null, -- fk
-    `_site_` int not null, -- fk
-    `isUsed` tinyint default 0 check(`isUsed` in (0, 1)), -- 0 blood not used, 1 blood used
-    primary key (`_date`, `_donator_`, `_site_`),
-    foreign key (`_donator_`) references `donator` (`_id`),
+    `_id` int not null auto_increment,
+    `date` date not null, --  data della donazione perchè non può donare entro tot mesi controllare ultima data e bloccare tasto dona
+    `donator_` int not null, -- fk
+    `site_` int not null, -- fk
+    `isUsed` tinyint default 0 check (`isUsed` in (0, 1)), -- 0 blood not used, 1 blood used
+    primary key (`_id`),
+    foreign key (`donator_`) references `donator` (`_id`)
+        on update cascade
+        on delete no action,
+    foreign key (`site_`) references `site` (`_id`)
         on update cascade
         on delete no action
-    foreign key (`_site_`) references `site` (`_id`)
-        on update cascade
-        on delete no action
-)
+) engine = InnoDB;
 
-create index `index_donator` ON `donation` (`_donator_`);
-create index `index_site_1` ON `donation` (`_site_`);
+create index `index_donator` ON `donation` (`donator_`);
+create index `index_site_1` ON `donation` (`site_`);
 
 --  ----------------- --
 --  MESSAGE           --
@@ -156,7 +157,7 @@ create table if not exists `news` (
     `_id` int not null auto_increment,
     `title` varchar(140) not null,
     `body` text not null,
-    `img` tinytext default null,
+    `img_uri` tinytext default null,
     `author_` int not null, -- fk ad admin
     primary key (`_id`),
     foreign key (`author_`) references `admin` (`_id`)

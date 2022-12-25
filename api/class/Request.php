@@ -22,16 +22,16 @@ class Request {
         $query = 'select * from `blood_request`';
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
-        return $stmt->fetch(\PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function add($request) {
-        $query = "insert into `blood_request` 
+        $query = "insert into `blood_request` (`date`, `blood_type`, `quantity`, `hospital_`, `site_`)
                   values (current_date(), :bt, :qta, :hospital, :site)";
         $stmt = $this->pdo->prepare($query);
         $data = [
-            'bt' => $request->bt,
-            'qta' => $request->qta,
+            'bt' => $request->blood_type,
+            'qta' => $request->quantity,
             'hospital' => $request->hospital,
             'site' => $request->site,
         ];
@@ -39,7 +39,7 @@ class Request {
         return 'OK';
     }
 
-    public function remove($id) {
+    public function delete($id) {
         $query = 'delete from `blood_request` 
                   where `_id` = :id';
         $stmt = $this->pdo->prepare($query);
@@ -53,14 +53,13 @@ class Request {
     // vedere se implementarla perchè c`è da fare check su disponibità
     public function update($request) { 
         $query = 'update `blood_request` 
-                  set `blood_type` = :bt, `quantity` = :qta, `site_` = :site
+                  set `blood_type` = :bt, `quantity` = :qta
                   where `_id` = :id';
         $stmt = $this->pdo->prepare($query);
         $data = [
-            `id` => $request->id,
-            'bt' => $request->bt,
-            'qta' => $request->qta,
-            'site' => $request->site
+            'id' => $request->id,
+            'bt' => $request->blood_type,
+            'qta' => $request->quantity
         ];
         $stmt->execute($data);
         return 'OK';
@@ -72,11 +71,14 @@ class Request {
                   where `_id` = :id ';
         $stmt = $this->pdo->prepare($query);
         $data = [
-            `id` => $id,
-            `val` => $value
+            'id' => $id,
+            'val' => $value
         ];
         $stmt->execute($data);
-        return 'OK';
+        
+       /* if($value == 2) { liberare le sacche se viene annullato l'ordine query per trvovare il numero, query per settare 0 su isUsd
+            // liberare le sacce
+        } */
     }
 
 

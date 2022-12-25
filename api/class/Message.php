@@ -21,7 +21,7 @@ class Message {
         $query = 'select * from `message`';
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
-        return $stmt->fetch(\PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function add($message) {
@@ -36,7 +36,6 @@ class Message {
             'email' => $message->email,
         ];
         $stmt->execute($data);
-        return 'OK';
     }
 
     public function delete($id) {
@@ -47,7 +46,6 @@ class Message {
             'id' => $id
         ];
         $stmt->execute($data);
-        return 'OK';
     }
 }
 

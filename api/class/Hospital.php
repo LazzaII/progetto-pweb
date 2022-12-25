@@ -47,7 +47,7 @@ class Hospital {
         $query = 'select * from `hospital`';
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
-        return $stmt->fetch(\PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function add($hospital) {
@@ -69,7 +69,7 @@ class Hospital {
         return 'ERR';
     }
 
-    public function remove($id) {
+    public function delete($id) {
         $query = 'delete from `hospital` 
                   where `_id` = :id';
         $stmt = $this->pdo->prepare($query);

@@ -20,24 +20,23 @@ class News {
         $query = 'select * from `news`';
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
-        return $stmt->fetch(\PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function add($news) {
-        $query = "insert into `news` 
+        $query = "insert into `news` (`title`, `body`, `img_uri`, `author_`)
                   values (:title, :body, :img, :author)";
         $stmt = $this->pdo->prepare($query);
         $data = [
-            'title' => $news->obj,
+            'title' => $news->title,
             'body' => $news->body,
-            'img' => $news->fn,
-            'author' => $news->email
+            'img' => $news->img,
+            'author' => $news->author
         ];
         $stmt->execute($data);
-        return 'OK';
     }
 
-    public function remove($id) {
+    public function delete($id) {
         $query = 'delete from `news`
                   where `_id` = :id';
         $stmt = $this->pdo->prepare($query);
@@ -45,11 +44,12 @@ class News {
             'id' => $id
         ];
         $stmt->execute($data);
-        return 'OK';
     }
 
     public function update($news) {
-        $query = 'update `news` set `title` = :title, `body` = :body, `img` = :img where `_id` = :id';
+        $query = 'update `news` 
+                  set `title` = :title, `body` = :body, `img_uri` = :img
+                  where `_id` = :id';
         $stmt = $this->pdo->prepare($query);
         $data = [
             'id' => $news->id,
@@ -58,7 +58,6 @@ class News {
             'img' => $news->img
         ];
         $stmt->execute($data);
-        return 'OK';
     }
 }
 

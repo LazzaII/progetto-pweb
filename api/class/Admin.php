@@ -45,7 +45,7 @@ class Admin {
         $query = 'select * from `admin`';
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
-        return $stmt->fetch(\PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function add($admin) {
@@ -65,7 +65,7 @@ class Admin {
         return 'ERR';
     }
 
-    public function remove($id) {
+    public function delete($id) {
         $query = 'delete from `admin` 
                   where `_id` = :id';
         $stmt = $this->pdo->prepare($query);
