@@ -18,15 +18,14 @@
         </div>
         <div class="nav-item-ce">
             <ul id="menu">
-                <li id="clk-who"><span>Chi Siamo</span></li>
-                <li id="clk-how"><span>Come funziona</span></li>
-                <li id="clk-news"><span>News</span></li>
-                <li id="clk-contact"><span>Contatti</span></li>
+                <li onclick="showWhy()"><span>Perchè donare</span></li>
+                <li onclick="showNews()"><span>News</span></li>
+                <li onclick="showContact()"><span>Contatti</span></li>
             </ul>
         </div>
         <div class="nav-item-bt">
-            <img id="clk-manual" src="icon/manual.svg"/>
-            <img id="clk-login" src="icon/account.svg"/>
+            <img src="icon/manual.svg" onclick="showManual()"/>
+            <img src="icon/account.svg" onclick="showLogin()"/>
         </div>
     </nav>
 
@@ -41,14 +40,43 @@
             </p>
         </div>
 
-        <!-- normal page -->
-        <div id="normal" hidden>
-            
+        <!-- why page -->
+        <div id="why">
+            <h3 id="why-title">Perchè donare è importante</h3>
         </div>
         
+        <!-- news page -->
+        <div id="news" hidden>
+            <p>test</p>
+        </div>
+
+        <!-- contact page -->
+        <div id="contacts">
+            <form>
+                <legend>Contattaci</legend>
+                <div> 
+                    <!-- contact -->
+                    <label for="fname">Nome</label>
+                    <input type="text" name="fname" id="fname" placeholder="mario">
+                    <label for="sname">Cognome</label>
+                    <input type="text" name="sname" id="sname" placeholder="rossi">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" placeholder="mario@rossi.it">
+                </div>
+                <div>
+                    <!-- message -->
+                    <label for="object">Oggetto</label>
+                    <input type="text" name="obg" id="obj" placeholder="oggetto">
+                    <label for="body">Messaggio</label>
+                    <textarea name="body" id="body" cols="30" rows="8" placeholder="..."></textarea>
+                </div>
+                <input type="button" onclick="sendMessage()" value="Invia"/>
+            </form>
+        </div>
+
         <!-- login page -->
         <div id="login" hidden>
-
+            <p>test</p>
         </div>
     </main>
     
@@ -58,5 +86,7 @@
             <p>2023 © Pisa Blood Bank SRL - P.IVA 19780955632</p>
         </div>
     </footer>
+    <script src="logic/logic.js"></script>
+    <script src="logic/api.js"></script>
 </body>
 </html>

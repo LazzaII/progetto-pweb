@@ -2,11 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700&display=swap');
 
 /* other css */
-@import url('./styles/who.css');
-@import url('./styles/news.css');
-@import url('./styles/form.css');
-@import url('./styles/manual.css');
-@import url('./styles/contatti.css');
+@import './styles/why.css';
+@import './styles/form.css';
+@import './styles/manual.css';
 
 /* system variables */
 :root {
@@ -36,6 +34,23 @@ footer {
 footer div p {
     text-align: center;
 }
+
+#contacts {
+    display: none;
+}
+
+#why {
+    display: none;
+}
+
+#news {
+    display: none;
+}
+
+#login {
+    display: none;
+}
+
 
 /* navbar */
 nav {
@@ -69,7 +84,7 @@ nav {
 }
 
 .nav-item-t, .nav-item-bt {
-    width: 20%;
+    width: 30%;
     display: flex;
     justify-content: end;
     align-items: center;
@@ -84,7 +99,6 @@ nav {
     width: 8%;
     margin-right: 0.7rem;
 }
-
 
 .title {
     color: var(--ruby-red);
