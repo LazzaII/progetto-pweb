@@ -1,0 +1,73 @@
+#form{
+    width: 340px;
+    height: 600px;
+    background: var(--snow);
+    border-radius:8px;
+    box-shadow:0 0 40px -10px var(--dark-sienna);
+    padding:20px 30px;
+    box-sizing:border-box;
+    position:relative;
+    margin: auto;
+}
+
+#title-contact {
+    margin: 10px 0;
+    padding-bottom: 10px;
+    width:180px;
+    color: var(--persian-plum);
+    border-bottom:3px solid var(--persian-plum);
+}
+
+.input-text {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width:100%;
+    padding:10px;
+    box-sizing:border-box;
+    background:none;
+    outline:none;
+    resize:none;
+    border-radius: 5px;
+    border:2px solid var(--vivid-burgundy);
+    transition:all .3s
+}
+
+.input-text:focus {
+    border:2px solid var(--persian-plum);
+}
+
+input[type=button] {
+    font-weight: bold;
+    float:right;
+    padding:8px 12px;
+    margin:8px 0 0;
+    border-radius: 5px;
+    border:2px solid var(--persian-plum);
+    background:0;
+    color: var(--vivid-burgundy);
+    cursor:pointer;
+    transition:all .3s
+}
+
+input[type=button]:hover {
+    background: var(--persian-plum);
+    color: var(--snow);
+}
+
+#contact-box {
+    content:'Hi';
+    position:absolute;
+    bottom:-15px;
+    right:-20px;
+    background: var(--vivid-burgundy);
+    color: var(--snow);
+    width:320px;
+    padding:16px 4px 16px 0;
+    border-radius:6px;
+    font-size:13px;
+    box-shadow:10px 10px 40px -14px var(--dark-sienna);
+}
+
+.contact-info {
+    margin:0 5px 0 15px
+}

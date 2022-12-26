@@ -1,6 +1,3 @@
-/* font */
-@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700&display=swap');
-
 /* other css */
 @import './styles/why.css';
 @import './styles/form.css';
@@ -8,26 +5,26 @@
 
 /* system variables */
 :root {
-    --ruby-red: #a31621ff;
     --snow: #fcf7f8ff;
     --light-gray: #ced3dcff;
-    --teal-blue: #4e8098ff;
-    --pale-cerulean: #90c2e7ff;
+    --vivid-burgundy: #a7333fff;
+    --persian-plum: #74121dff;
+    --dark-sienna: #580c1fff;
 }
 
 /* common elements */
 body {
     margin: 0;
     padding: 0;
-    background-color: var(--light-gray);
-    font-family: 'Titillium Web', sans-serif;
+    background-color: var(--vivid-burgundy);
+    font-family: 'Montserrat',sans-serif;
 }
 
 footer {
     position: absolute;
     bottom: 0;
     width: 100%;
-    background-color: var(--teal-blue);
+    background-color: var(--persian-plum);
     color: var(--snow);
 }
 
@@ -56,7 +53,7 @@ footer div p {
 nav {
     display: flex;
     flex-direction: row;
-    border-bottom: 2px solid var(--teal-blue);
+    border-bottom: 2px solid var(--dark-sienna);
     margin-bottom: 30px;
 }
 
@@ -66,11 +63,11 @@ nav {
     margin: 0;
     padding: 0;
     display: inline;
-    color: var(--ruby-red);
+    color: var(--snow);
 }  
 
 #menu li span:hover {
-    color: var(--pale-cerulean);
+    color: var(--dark-sienna);
 }
 
 #menu li span {
@@ -101,7 +98,7 @@ nav {
 }
 
 .title {
-    color: var(--ruby-red);
+    color: var(--snow);
     font-size: 2.8rem;
     margin: 0;
 }

@@ -33,7 +33,7 @@
     <main>
         <!-- manual page [LANDING] -->
         <div id="manual">
-            <h3 id="man-title">Manuale d'uso</h3>
+            <h2 id="man-title">Manuale d'uso</h2>
             <p>
                 PBBP - Pisa Blood Bank Platform è una piattaforma per la gestione di una banca del sangue in località di Pisa. La piattaforma oltre che spiegare i benefici della donazione del sangue permette diverse funzionalità. Tra le funzionalità possiamo ritrovare il controllo della disponibilità di sangue contenuto nei nostri magazzini, la possibilità di richiederlo se lo si necessità e la possibilità di donarlo se si è idonei.
                 Qui sotto una spiegazione più esplicativa delle vare funzionalità suddivise per utenti
@@ -42,7 +42,7 @@
 
         <!-- why page -->
         <div id="why">
-            <h3 id="why-title">Perchè donare è importante</h3>
+            <h2 id="why-title">Perchè donare è importante</h2>
         </div>
         
         <!-- news page -->
@@ -52,25 +52,33 @@
 
         <!-- contact page -->
         <div id="contacts">
-            <form>
-                <legend>Contattaci</legend>
+            <form id="form">
+                <h2 id="title-contact">CONTATTACI</h2>
                 <div> 
                     <!-- contact -->
                     <label for="fname">Nome</label>
-                    <input type="text" name="fname" id="fname" placeholder="mario">
+                    <input type="text" class="input-text" name="fname" id="fname" placeholder="mario" >
                     <label for="sname">Cognome</label>
-                    <input type="text" name="sname" id="sname" placeholder="rossi">
+                    <input type="text" class="input-text" name="sname" id="sname" placeholder="rossi" >
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email" placeholder="mario@rossi.it">
+                    <input type="email" class="input-text" name="email" id="email" placeholder="mario@rossi.it" >
                 </div>
                 <div>
                     <!-- message -->
                     <label for="object">Oggetto</label>
-                    <input type="text" name="obg" id="obj" placeholder="oggetto">
+                    <input type="text" class="input-text" name="obg" id="obj" placeholder="oggetto" >
                     <label for="body">Messaggio</label>
-                    <textarea name="body" id="body" cols="30" rows="8" placeholder="..."></textarea>
+                    <textarea name="body" class="input-text" id="body" cols="30" rows="5" placeholder="..." ></textarea>
                 </div>
                 <input type="button" onclick="sendMessage()" value="Invia"/>
+
+                <!-- INSERIRE MESSAGGIO DI CONFERMA INVIO (usare il verde) -->
+                <!-- E MESSAGGIO DI ERRORE, USARE LO STESSO DIV (usare il rosso) -->
+
+                <div id="contact-box">
+                    <span class="contact-info">055 782 9809</span>
+                    <span class="contact-info">info@bloodbank.com</span>
+                </div>
             </form>
         </div>
 
