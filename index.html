@@ -35,8 +35,71 @@
         <div id="manual">
             <h2 id="man-title">Manuale d'uso</h2>
             <p>
-                PBBP - Pisa Blood Bank Platform è una piattaforma per la gestione di una banca del sangue in località di Pisa. La piattaforma oltre che spiegare i benefici della donazione del sangue permette diverse funzionalità. Tra le funzionalità possiamo ritrovare il controllo della disponibilità di sangue contenuto nei nostri magazzini, la possibilità di richiederlo se lo si necessità e la possibilità di donarlo se si è idonei.
-                Qui sotto una spiegazione più esplicativa delle vare funzionalità suddivise per utenti
+                Blood Bank Lab. è una piattaforma per la raccolta di sangue con magazzini dislocati in tutta Italia.
+                La banca del sangue prevede l’utilizzo da 4 utenti diversi.
+                <ul>
+                    <li>Visitatore</li>
+                    <li>Donatore</li>
+                    <li>Struttura Ospedaliera (SO)</li>
+                    <li>Gestore</li>
+                </ul>
+            </p>
+            <h4>VISITATORE</h4>
+            <p>
+                Il visitatore rispecchia l’utente non registrato che si approccia alla piattaforma web senza registrarsi
+                <br>Al visitatore è permesso consultare alcune sezioni:
+                <ul>
+                    <li>Home (manuale) [icona del manuale in alto a dx]</li>
+                    <li>Perchè donare</li>
+                    <li>News</li>
+                    <li>Contatti</li>
+                    <li>Login/Registrazione come donatore o SO [icona del mezzo busto nero in alto a destra]</li>
+                </ul>
+            </p>
+            <h4>DONATORE</h4>
+            <p>
+                Il donatore è l’utente che dopo essersi registrato e aver ricevuto l’approvazione dagli amministratori può decidere di donare il sangue.
+                <br>Al donatore son permesse alcune azioni e alcune di base:
+                <ul>
+                    <li>Donare (se l'ultima donazione risale a piì di 3 mesi).</li>
+                    <li>Consultare le cecchie donazioni e vedere se sono state usate le sacche.</li>
+                    <li>Modificare i dati (tranne il gruppo sanguigno).</li>
+                    <li>Eliminare il proprio account.</li>
+                    <li>News, Contatti, Manuale (di base).</li>
+                </ul>
+            </p>
+            <h4>STRUTTURA OSPEDALIERA (SO)</h4>
+            <p>
+                La struttura ospedaliera rappresenta tutte quelle strutture pubbliche o private legate alla sanità che necessitano di sangue per trasfusioni. 
+                <br>Dopo essersi registrato e essere stati approvati dagli amministratori la SO può:
+                <ul>
+                    <li>Richiedere sangue. La SO può scegliere il magazzino da cui farsi consegnare il sangue. I magazzini sono divisi in 3 fasce: in citta, entro la regione, resto dell’Italia. A seconda del magazzino scelto vengono applicate fee per il trasporto a seconda della distanza. La richiesta inoltre può essere di due tipi, urgente non. Nel caso la richiesta sia urgente il sangue viene consegnato nel minor tempo possibile (tempo calcolato dalla distanza + 10% per imprevisti) e non vengono applicate fee.
+                        Altrimenti viene consegnato entro 48 ore e si applicano le fee di trasporto.</li>
+                    <li>Consultare gli ordini, annullarli o modificarli nel caso non siano stati accettati.</li>
+                    <li>Modificare i dati.</li>
+                    <li>Eliminare il proprio account.</li>
+                    <li>News, Contatti, Manuale (di base).</li>
+                </ul>
+            </p>
+            <h4>AMMINISTRATORE</h4>
+            <p>
+                L’utente admin è il gestore della piattaforma, per accedere al pannello di amministrazione bisogna recarsi a bloodbank/admin 
+                <br>L’amministratore della piattaforma può accedere ad alcune sezioni tra cui:
+                <ul>
+                    <li>Dashboard con statistiche.</li>
+                    <li>Accettare donatori/SO</li>
+                    <li>Visualizzare messaggi.</li>
+                    <li>Scrivere, modificare, eliminare news.</li>
+                    <li>Accettare richieste di sangue</li>
+                    <li>Aggiungere magazzini.</li>
+                </ul>
+            </p>
+            <p>
+                Tra gli amministratori è presente un amministratore speciale che è il gestore di tutta la piattaforma, anch’esso accede alla piattaforma degli amministratori.
+                In più rispetto agli amministratori “semplici” può creare nuovi amministratori.
+                Questo è l’unico modo per creare account amministratori. 
+                <br>user: mario@rossi.It
+                <br>psw: Prova123
             </p>
         </div>
 
@@ -74,6 +137,9 @@
 
                 <!-- INSERIRE MESSAGGIO DI CONFERMA INVIO (usare il verde) -->
                 <!-- E MESSAGGIO DI ERRORE, USARE LO STESSO DIV (usare il rosso) -->
+                <div id="message">
+                    <p></p>
+                </div>
 
                 <div id="contact-box">
                     <span class="contact-info">055 782 9809</span>
