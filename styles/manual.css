@@ -1,20 +1,24 @@
 #manual {
     border: 2px solid var(--dark-sienna);
     border-radius: 8px;
-    width: 60%;
+    width: 55%;
     margin: auto;
-    color: var(--snow);
+    background-color: snow;
+    color: #333;
     text-align: justify;
     text-justify: inter-word; 
     margin-bottom: 80px;
+    position: relative;
+    padding: 3vh 3vw;
 }
 
 #man-title {
     text-align: center;
-    color: var(--snow);
+    color: var(--dark-sienna);
     border-bottom: 2px solid var(--dark-sienna);
-    margin: 0px 25px 0px;
-    padding: 15px 0px 15px;
+    width: 70%;
+    margin: 25px auto;
+    padding: 25px 0px 25px 0px;
 }
 
 #manual p {
@@ -22,7 +26,18 @@
 }
 
 h4 {
-    padding: 15px 15px 0px;
-    margin: 0px;
+    margin: 20px auto;
+    padding: 20px;
     color: var(--dark-sienna);
+    width: 70%;
+    text-align: center;
+    border-bottom: 1px solid var(--dark-sienna);
+}
+
+.centered{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    padding: 20px;
 }

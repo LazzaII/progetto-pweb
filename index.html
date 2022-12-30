@@ -30,9 +30,9 @@
     </nav>
 
     <!-- main -->
-    <main>
+    <main class="centered">
         <!-- manual page [LANDING] -->
-        <div id="manual">
+        <section id="manual" class="manual-section">
             <h2 id="man-title">Manuale d'uso</h2>
             <p>
                 Blood Bank Lab. è una piattaforma per la raccolta di sangue con magazzini dislocati in tutta Italia.
@@ -101,21 +101,21 @@
                 <br>user: mario@rossi.It
                 <br>psw: Prova123
             </p>
-        </div>
+        </section>
 
         <!-- why page -->
-        <div id="why">
+        <section id="why">
             <h2 id="why-title">Perchè donare è importante</h2>
-        </div>
+        </section>
         
         <!-- news page -->
-        <div id="news" hidden>
-            <p>test</p>
-        </div>
+        <section id="news" hidden>
+            
+        </section>
 
         <!-- contact page -->
-        <div id="contacts">
-            <form id="form">
+        <section id="contacts">
+            <form id="form-c" class="centered">
                 <h2 id="title-contact">CONTATTACI</h2>
                 <div> 
                     <!-- contact -->
@@ -131,12 +131,10 @@
                     <label for="object">Oggetto</label>
                     <input type="text" class="input-text" name="obg" id="obj" placeholder="oggetto" >
                     <label for="body">Messaggio</label>
-                    <textarea name="body" class="input-text" id="body" cols="30" rows="5" placeholder="..." ></textarea>
+                    <input type="text" name="body" class="input-text body-message" id="body" cols="30" rows="5" placeholder="..." ></input>
                 </div>
                 <input type="button" onclick="sendMessage()" value="Invia"/>
 
-                <!-- INSERIRE MESSAGGIO DI CONFERMA INVIO (usare il verde) -->
-                <!-- E MESSAGGIO DI ERRORE, USARE LO STESSO DIV (usare il rosso) -->
                 <div id="message">
                     <p></p>
                 </div>
@@ -146,21 +144,44 @@
                     <span class="contact-info">info@bloodbank.com</span>
                 </div>
             </form>
-        </div>
+        </section>
 
         <!-- login page -->
         <div id="login" hidden>
-            <p>test</p>
+            <!-- login form [DEFAULT] -->
+            <form id="form-l">
+                <h2 id="title-contact">LOGIN</h2>
+                <div> 
+                    <!-- input -->
+                    <label for="email">Email</label>
+                    <input type="email" class="input-text" name="email-l" id="email-l" placeholder="mario@rossi.it" >
+                    <label for="password">Password</label>
+                    <input type="password" class="input-text" name="passsword-l" id="password-l" placeholder="********">
+                    <input type="radio" id="donatore" name="type" value="D" checked >
+                    <label for="donatore">Donatore</label><br>
+                    <input type="radio" id="so" name="type" value="H">
+                    <label for="so">Struttura Ospedaliera</label><br>
+                </div>
+                
+                <input type="button" onclick="login()" value="Invia"/>
+                
+                <span>Se non sei ancora registrato clicca qui</span>
+                <div id="message-l">
+                    <p ></p>
+                </div>
+            </form>
+
         </div>
     </main>
     
     <!-- footer - static position and element -->
     <footer>
         <div>
-            <p>2023 © Pisa Blood Bank SRL - P.IVA 19780955632</p>
+            <p>2023 © Blood Bank Lab. S.R.L. - P.IVA 19780955632</p>
         </div>
     </footer>
-    <script src="logic/logic.js"></script>
+
     <script src="logic/api.js"></script>
+    <script src="logic/logic.js"></script>
 </body>
 </html>

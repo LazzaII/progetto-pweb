@@ -1,0 +1,34 @@
+/* LOGIN */
+#form-l{
+    width: 340px;
+    height: 450px;
+    background: var(--snow);
+    border-radius:8px;
+    box-shadow:0 0 40px -10px var(--dark-sienna);
+    padding:20px 30px;
+    box-sizing:border-box;
+    position:relative;
+    margin: auto;
+}
+
+/* REGISTRAZIONE */
+
+#form-r{
+    width: 340px;
+    height: 600px;
+    background: var(--snow);
+    border-radius:8px;
+    box-shadow:0 0 40px -10px var(--dark-sienna);
+    padding:20px 30px;
+    box-sizing:border-box;
+    position:relative;
+    margin: auto;
+}
+
+
+#message-l {
+    text-align: center;
+    color: var(--snow);
+    border-radius: 5px;
+    border-radius:8px;   
+}

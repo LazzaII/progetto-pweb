@@ -7,9 +7,14 @@ error_reporting(E_ALL);
 
 $method = $_SERVER['REQUEST_METHOD'];
 
+foreach ($_COOKIE as $key => $value) { # to clear cookie both side
+    unset($value);
+    setcookie($key, '', time() - 3600);
+}
+
 switch($method) {
     case 'POST':
-        $body = file_get_contents("php://input"); //get the body
+        $body = file_get_contents("php://input"); # get the body
         $decodeBody = json_decode($body);
         $type = $decodeBody->type;
 
@@ -22,11 +27,6 @@ switch($method) {
                 if(!empty($check)){
                     if(password_verify($decodeBody->pwd, $check['hash_pwd'])) {
                         require_once __DIR__ . '/class/City.php';
-
-                        foreach ($_COOKIE as $key => $value) { # to clear cookie both side
-                            unset($value);
-                            setcookie($key, '', time() - 3600);
-                        }
 
                         setcookie('login', 'logged');
                         setcookie('id', $check['_id']);
@@ -53,11 +53,6 @@ switch($method) {
                     if(password_verify($decodeBody->pwd, $check['hash_pwd'])) {
                         require_once __DIR__ . '/class/City.php';
 
-                        foreach ($_COOKIE as $key => $value) { # to clear cookie both side
-                            unset($value);
-                            setcookie($key, '', time() - 3600);
-                        }
-
                         setcookie('login', 'logged');
                         setcookie('id', $check['_id']);
                         setcookie('name', $check['name']);
@@ -82,11 +77,6 @@ switch($method) {
                 if(!empty($check)){
                     if(password_verify($decodeBody->pwd, $check['hash_pwd'])) {
                         require_once __DIR__ . '/class/City.php';
-
-                        foreach ($_COOKIE as $key => $value) { # to clear cookie both side
-                            unset($value);
-                            setcookie($key, '', time() - 3600);
-                        }
 
                         setcookie('login', 'logged');
                         setcookie('id', $check['_id']);

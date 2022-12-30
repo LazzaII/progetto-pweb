@@ -7,7 +7,6 @@ var divs = ['manual', 'why',  'news', 'contacts', 'login'];
 //show why
 function showWhy() {
     if (document.getElementById('why').style.display === 'none' || document.getElementById('why').style.display === ''){
-        console.log('dentro why');
         document.getElementById('why').style.display = 'block';
         for (let i = 0; i < divs.length; i++) {
              if(divs[i] !== 'why')
@@ -18,8 +17,9 @@ function showWhy() {
 
 //show news
 function showNews() {
-    if (document.getElementById('news').style.display === 'none' || document.getElementById('why').style.display === ''){
+    if (document.getElementById('news').style.display === 'none' || document.getElementById('news').style.display === ''){
         document.getElementById('news').style.display = 'block';
+        getNews();  
         for (let i = 0; i < divs.length; i++) {
             if(divs[i] !== 'news')
                 document.getElementById(divs[i]).style.display = 'none';
@@ -29,7 +29,7 @@ function showNews() {
 
 //show contact
 function showContact() {
-    if (document.getElementById('contacts').style.display === 'none' || document.getElementById('why').style.display === ''){
+    if (document.getElementById('contacts').style.display === 'none' || document.getElementById('contacts').style.display === ''){
         document.getElementById('contacts').style.display = 'block';
         for (let i = 0; i < divs.length; i++) {
             if(divs[i] !== 'contacts')
@@ -40,7 +40,7 @@ function showContact() {
 
 //show manual
 function showManual() {
-    if (document.getElementById('manual').style.display === 'none' || document.getElementById('why').style.display === ''){
+    if (document.getElementById('manual').style.display === 'none' || document.getElementById('manual').style.display === ''){
         document.getElementById('manual').style.display = 'block';
         for (let i = 0; i < divs.length; i++) {
             if(divs[i] !== 'manual')
@@ -51,7 +51,7 @@ function showManual() {
 
 //show login
 function showLogin() {
-    if (document.getElementById('login').style.display === 'none' || document.getElementById('why').style.display === ''){
+    if (document.getElementById('login').style.display === 'none' || document.getElementById('login').style.display === ''){
         document.getElementById('login').style.display = 'block';
         for (let i = 0; i < divs.length; i++) {
             if(divs[i] !== 'login')
@@ -60,7 +60,18 @@ function showLogin() {
     }
 }
 
+/*
+SHOW/HIDE LOGIN
+*/
+// function showRegister() {
+//     document.getElementById('form-l').style.display = 'none';
+//     document.getElementById('form-r').style.display = 'block';
+// }
 
+// function showLogin() {
+//     document.getElementById('form-r').style.display = 'none';
+//     document.getElementById('form-l').style.display = 'block';
+// }
 
 //ROBA DEL CROCI
 /*Password*/
@@ -177,34 +188,5 @@ function showLogin() {
 //   document.getElementById('loginForm').style.display = 'block';
 // }
 
-// //permette la registrazione di un nuovo utente
-// function submitRegister() {
-//   let data = JSON.stringify({
-//     action: 'register',
-//     username: document.getElementById('nameInputR').value,
-//     password: document.getElementById('passInputR').value,
-//   });
-
-//   fetch('./php/auth.php', {
-//     method: 'POST',
-//     body: data,
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   })
-//     .then((res) => res.json())
-//     .then((data) => {
-//       if (data.error) {
-//         document.getElementById('registerError').classList.remove('valid');
-//         document.getElementById('registerError').classList.add('invalid');
-//         document.getElementById('registerError').innerText = data.message;
-//       } else {
-//         // da cambiare
-//         document.getElementById('registerError').classList.remove('invalid');
-//         document.getElementById('registerError').classList.add('valid');
-//         document.getElementById('registerError').innerText = 'Registrazione completata!';
-//       }
-//     });
-// }
 
 

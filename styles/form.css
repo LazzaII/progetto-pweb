@@ -1,39 +1,41 @@
-#form{
-    width: 340px;
-    height: 600px;
+#form-c{
+    width: 400px;
+    height: fit-content;
     background: var(--snow);
     border-radius:8px;
     box-shadow:0 0 40px -10px var(--dark-sienna);
-    padding:20px 30px;
+    padding: 3vh 3vw;
     box-sizing:border-box;
     position:relative;
     margin: auto;
 }
 
 #title-contact {
-    margin: 10px 0;
+    margin: 20px  auto;
     padding-bottom: 10px;
-    width:180px;
+    width: 100%;
     color: var(--persian-plum);
     border-bottom:3px solid var(--persian-plum);
+    text-align: center;
 }
 
 .input-text {
     margin-top: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 30px;
     width:100%;
-    padding:10px;
+    padding: 10px;
     box-sizing:border-box;
     background:none;
     outline:none;
     resize:none;
     border-radius: 5px;
-    border:2px solid var(--vivid-burgundy);
-    transition:all .3s
+    border: 0px solid var(--vivid-burgundy);
+    border-bottom: 1px solid var(--vivid-burgundy);
+    transition: all 200ms ease;
 }
 
 .input-text:focus {
-    border:2px solid var(--persian-plum);
+    border-bottom: 2px solid var(--vivid-burgundy);
 }
 
 input[type=button] {
@@ -45,8 +47,8 @@ input[type=button] {
     border:2px solid var(--persian-plum);
     background:0;
     color: var(--vivid-burgundy);
-    cursor:pointer;
-    transition:all .3s
+    cursor: pointer;
+    transition: all 300ms ease-in;
 }
 
 input[type=button]:hover {
@@ -54,20 +56,26 @@ input[type=button]:hover {
     color: var(--snow);
 }
 
+.input-text .body-message{
+    resize: vertical;
+}
+
 #contact-box {
-    content:'Hi';
-    position:absolute;
-    bottom:-15px;
-    right:-20px;
-    background: var(--vivid-burgundy);
-    color: var(--snow);
-    width:320px;
-    padding:16px 4px 16px 0;
-    border-radius:6px;
-    font-size:13px;
-    box-shadow:10px 10px 40px -14px var(--dark-sienna);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
 }
 
 .contact-info {
-    margin:0 5px 0 15px
+    font-size: 12px;
+    margin: 0;
+    color: var(--dark-sienna);
+    text-align: center;
+}
+
+#message {
+    text-align: center;
+    color: var(--snow);
+    border-radius: 5px;
+    border-radius:8px;   
 }

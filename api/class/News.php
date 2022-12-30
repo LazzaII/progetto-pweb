@@ -17,7 +17,9 @@ class News {
     }
 
     public function getAll(){
-        $query = 'select * from `news`';
+        $query = 'select N.*, A.`first_name`, A.`second_name`
+                  from `news` N
+                  join `admin` A on A.`_id` = N.`author_`';
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
