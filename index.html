@@ -8,13 +8,13 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
 
-    <title>PBBP</title>
+    <title>BBL</title>
 </head>
 <body>
     <!-- navbar - static position, not all elements-->
     <nav>
         <div class="nav-item-t">
-            <h1 class="title">Pisa Blood Bank</h1>
+            <h1 class="title">Blood Bank Lab</h1>
         </div>
         <div class="nav-item-ce">
             <ul id="menu">
@@ -106,6 +106,26 @@
         <!-- why page -->
         <section id="why">
             <h2 id="why-title">Perchè donare è importante</h2>
+            <h5>DONARE IL SANGUE È UN GESTO DI SOLIDARIETÀ… 
+                <br> 
+                SIGNIFICA DIRE CON I FATTI CHE LA VITA DI CHI STA SOFFRENDO MI PREOCCUPA.
+            </h5>
+            <p>
+                <span class="litle-title">Per quale motivo dovrei donare il mio sangue?</span><br>
+                Il sangue umano è un prodotto naturale, non riproducibile artificialmente e indispensabile alla vita. 
+                Donare il sangue è un atto volontario e gratuito, è un dovere civico, è una manifestazione concreta di solidarietà 
+                verso gli altri, esalta il valore della vita, abbatte le barriere di razza, religione o ideologia e rappresenta 
+                uno dei pochi momenti di vera medicina preventiva. È un atto di estrema generosità che permette di salvare la vita di altre persone. 
+                Proprio il fatto che il sangue sia raro implica la necessità di metterlo a disposizione di altri individui che 
+                potrebbero trovarsi in situazione di bisogno. Pensa di essere tu al loro posto.
+                <br><br><span class="litle-title">Il sangue non è riproducibile in laboratorio ma è indispensabile alla vita.</span>
+                Indispensabile nei servizi di primo soccorso, in chirurgia nella cura di alcune malattie tra le quali quelle oncologiche e nei trapianti.
+                <br><br><span class="litle-title">Tutti domani potremmo avere bisogno di sangue per qualche motivo. Anche tu.</span>
+                La disponibilità di sangue è un patrimonio collettivo di solidarietà da cui ognuno può attingere nei momenti di necessità.
+                <br><br><span class="litle-title">Le donazioni di donatori periodici, volontari, anonimi, non retribuiti e consapevoli…</span>
+                Rappresentano una garanzia per la salute di chi riceve e di chi dona.
+            </p>
+            <a href="https://avismi.it/perche-donare/" id="source">Testo preso da Avis Milano</a>
         </section>
         
         <!-- news page -->
@@ -165,12 +185,34 @@
                 
                 <input type="button" onclick="login()" value="Invia"/>
                 
-                <span>Se non sei ancora registrato clicca qui</span>
+                <label class="text-l-r" >Se non sei ancora registrato clicca <span onclick="showRegister()">qui</span></label>
                 <div id="message-l">
                     <p ></p>
                 </div>
             </form>
 
+            <form id="form-r">
+                <h2 id="title-contact">REGISTRATI</h2>
+                <div> 
+                    <!-- DA FINIREC CON I DATI E FIXARE SHOW LOGIN CHE ROMPE TUTTO -->
+                    <!-- input -->
+                    <label for="email">Email</label>
+                    <input type="email" class="input-text" name="email-l" id="email-l" placeholder="mario@rossi.it" >
+                    <label for="password">Password</label>
+                    <input type="password" class="input-text" name="passsword-l" id="password-l" placeholder="********">
+                    <input type="radio" id="donatore" name="type" value="D" checked >
+                    <label for="donatore">Donatore</label><br>
+                    <input type="radio" id="so" name="type" value="H">
+                    <label for="so">Struttura Ospedaliera</label><br>
+                </div>
+                
+                <input type="button" onclick="login()" value="Invia"/>
+                
+                <label class="text-l-r" >Hai già un account? Clicca <span onclick="showLogin()">qui</span></label>
+                <div id="message-l">
+                    <p ></p>
+                </div>
+            </form>
         </div>
     </main>
     

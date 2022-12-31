@@ -1,5 +1,35 @@
+#why {
+    background-color: var(--snow);
+    border: 2px solid var(--dark-sienna);
+    border-radius: 8px;
+    width: 55%;
+    margin: auto;
+    background-color: snow;
+    color: #333;
+    text-align: justify;
+    text-justify: inter-word; 
+    margin-bottom: 80px;
+    position: relative;
+    padding: 3vh 3vw;
+}
+
 #why-title {
     text-align: center;
-    margin-bottom: 10px;
-    color: var(--ruby-red);
+    color: var(--dark-sienna);
+    border-bottom: 2px solid var(--dark-sienna);
+    width: 80%;
+    margin: 25px auto;
+    padding: 25px 0px 25px 0px;
+}
+
+.litle-title {
+    font-weight: bolder;
+    color: var(--dark-sienna);
+}
+
+#source {
+    font-size: small;
+    text-decoration: none;
+    color: var(--light-gray);
+    float: right;
 }

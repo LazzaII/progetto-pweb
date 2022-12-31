@@ -7,11 +7,11 @@
 /* system variables */
 :root {
     --snow: #fcf7f8ff;
-    --light-gray: #ced3dcff;
+    --light-gray: rgb(155, 139, 139);
     --vivid-burgundy: #a7333fff;
     --persian-plum: #74121dff;
     --dark-sienna: #580c1fff;
-    --light-green: #6EEB83bb;
+    --light-green: #55d86bbb;
     --light-green-2: #6EEB8344;
 }
 

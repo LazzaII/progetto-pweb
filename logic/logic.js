@@ -63,10 +63,10 @@ function showLogin() {
 /*
 SHOW/HIDE LOGIN
 */
-// function showRegister() {
-//     document.getElementById('form-l').style.display = 'none';
-//     document.getElementById('form-r').style.display = 'block';
-// }
+function showRegister() {
+    document.getElementById('form-l').style.display = 'none';
+    document.getElementById('form-r').style.display = 'block';
+}
 
 // function showLogin() {
 //     document.getElementById('form-r').style.display = 'none';

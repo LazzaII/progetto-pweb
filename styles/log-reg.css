@@ -1,3 +1,11 @@
+/* COMMON */
+.text-l-r {
+    font-size: 14px;
+    bottom: 0;
+    float: right;
+    color: var(--light-gray);
+}
+
 /* LOGIN */
 #form-l{
     width: 340px;
@@ -23,6 +31,7 @@
     box-sizing:border-box;
     position:relative;
     margin: auto;
+    display: none;
 }
 
 
