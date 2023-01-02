@@ -13,7 +13,7 @@ class City {
     }
 
     public function getAll(){
-        $query = 'select * from `city`';
+        $query = 'select * from `city` order by `name`';
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);

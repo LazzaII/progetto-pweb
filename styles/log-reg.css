@@ -23,7 +23,7 @@
 
 #form-r{
     width: 340px;
-    height: 600px;
+    height: 700px;
     background: var(--snow);
     border-radius:8px;
     box-shadow:0 0 40px -10px var(--dark-sienna);
@@ -34,10 +34,30 @@
     display: none;
 }
 
-
 #message-l {
     text-align: center;
     color: var(--snow);
     border-radius: 5px;
     border-radius:8px;   
+}
+
+#button {
+    display: flex;
+    flex-direction: row;
+}
+
+.btn-swtich {
+    font-size: 12px;
+    flex-grow: 1;
+    text-align: center;
+    border-bottom: 1px solid var(--light-gray);
+    margin: 0px 2px 20px;
+    padding: 8px 0 8px;
+    border-radius: 2px;
+}
+
+.selezionato {
+    background-color: var(--vivid-burgundy);
+    color: var(--snow) !important;
+    border-bottom: none !important;
 }

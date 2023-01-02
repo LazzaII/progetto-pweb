@@ -57,21 +57,48 @@ function showLogin() {
             if(divs[i] !== 'login')
                 document.getElementById(divs[i]).style.display = 'none';
         }
+        if(document.getElementById('form-l').style.display === 'none'){
+            document.getElementById('form-l').style.display = 'block';
+            document.getElementById('form-r').style.display = 'none';
+        }
     }
 }
 
 /*
 SHOW/HIDE LOGIN
 */
+
+// show register hide login
 function showRegister() {
     document.getElementById('form-l').style.display = 'none';
     document.getElementById('form-r').style.display = 'block';
 }
 
-// function showLogin() {
-//     document.getElementById('form-r').style.display = 'none';
-//     document.getElementById('form-l').style.display = 'block';
-// }
+// show login hide reister
+function showLoginF() {
+    document.getElementById('form-r').style.display = 'none';
+    document.getElementById('form-l').style.display = 'block';   
+}
+
+// show donator
+function switchDonatore() {
+    document.getElementById('r-so').style.display = 'none';
+    document.getElementById('r-donatore').style.display = 'block';
+
+    document.getElementById('swSo').classList.remove('selezionato');
+    document.getElementById('swDonatore').classList.add('selezionato');
+}
+
+// show so
+function switchSo() {
+    document.getElementById('r-donatore').style.display = 'none';
+    document.getElementById('r-so').style.display = 'block';
+    document.getElementById('city-input').innerText = '';
+    getCity();
+
+    document.getElementById('swDonatore').classList.remove('selezionato');
+    document.getElementById('swSo').classList.add('selezionato');
+}
 
 //ROBA DEL CROCI
 /*Password*/

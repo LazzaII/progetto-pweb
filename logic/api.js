@@ -4,6 +4,23 @@ CHIAMATE API
 
 var url = 'http://localhost/progetto-pweb/api/';
 
+// CITY
+function getCity() {
+  let xhr = new XMLHttpRequest;
+  // call to http://localhost/progetto-pweb/api/city.php to get all news
+  xhr.open('GET', url + 'city.php', true);
+  xhr.onload = function () {
+    let cities = JSON.parse(xhr.response);
+    select = document.getElementById('city-input');
+    for (const city of cities) {
+      opt = document.createElement('option');
+      opt.innerText = city.name;
+      select.append(opt);
+    }
+  }
+  xhr.send(null);
+}
+
 // MESSAGE
 
 // check input value 
@@ -61,35 +78,34 @@ function getNews() {
   let xhr = new XMLHttpRequest();
   xhr.open('GET', url + 'news.php', true);
   xhr.onload = function () {
-    if(xhr.status === '200'){
-      let news = JSON.parse(xhr.responseText);
-      let div = document.getElementById('news');
-      for (const n of news) {
-        // creation of all element
-        let article = document.createElement('article');
-        article.setAttribute('id', 'news-art')
-        let h4 = document.createElement('h4');
-        h4.innerText = n.title;
-        h4.setAttribute('id', 'news-title')
-        let body = document.createElement('p');
-        body.innerText = n.body;
-        body.setAttribute('id', 'news-body');
-        let author = document.createElement('span');
-        author.innerText = n.second_name + ' ' + n.first_name; 
-        h4.setAttribute('id', 'news-author')
-        //mettere immagine solo se c'è tempo [probabilmente non ci sarà]
-        // merge the element in the article and append at div
-        article.append(h4);
-        article.append(body);
-        article.append(author);
-        div.append(article);
-      }
-    }
+    let news = JSON.parse(xhr.response);
+    let div = document.getElementById('news');
+    for (const n of news) {
+      // creation of all element
+      let article = document.createElement('article');
+      article.setAttribute('id', 'news-art')
+      let h4 = document.createElement('h4');
+      h4.innerText = n.title;
+      h4.setAttribute('id', 'news-title')
+      let body = document.createElement('p');
+      body.innerText = n.body;
+      body.setAttribute('id', 'news-body');
+      let author = document.createElement('span');
+      author.innerText = n.second_name + ' ' + n.first_name; 
+      h4.setAttribute('id', 'news-author')
+      //mettere immagine solo se c'è tempo [probabilmente non ci sarà]
+      // merge the element in the article and append at div
+      article.append(h4);
+      article.append(body);
+      article.append(author);
+      div.append(article);
+    } 
   }
   xhr.send(null);
 }
 
 // LOGIN
+
 function checkLogin() {
   if(document.getElementById('email-l').value === '') return 0;
   if(document.getElementById('password-l').value === '') return 0;
@@ -114,9 +130,8 @@ function login() {
     xhr.open('POST', url + 'login.php', true);
     xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
     xhr.onload = function () {
-      console.log(xhr.status);
-      console.log(data);
-      if(xhr.status == '200'){
+      if(xhr.status === '200'){
+        // da modificare con le nuove pagine da visualizzare
         document.getElementById('message').classList.add('corretto');
         document.querySelectorAll('#message p')[0].innerText = 'Loggato';
       } else {
@@ -128,7 +143,7 @@ function login() {
     xhr.open('POST', url + 'login.php', true);
     xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
     xhr.onload = function () {
-      if(xhr.status == '200'){
+      if(xhr.status === '200'){
         // da modificare con le nuove pagine da visualizzare
         document.getElementById('message-l').classList.add('corretto');
         document.querySelectorAll('#message-l p')[0].innerText = 'Loggato';
@@ -139,4 +154,25 @@ function login() {
     }
     xhr.send(data);
   }
+}
+
+// REGISTRATION
+
+function checkRegisterD(){
+  // controllare i dati inseriti
+}
+
+function checkRegisterH(){
+  // controllare dati inseriti
+}
+  
+
+// donator
+function registerDonator() {
+  // chiamata api
+}
+
+// hospital
+function registerSo() {
+  // chiamata api
 }

@@ -193,23 +193,62 @@
 
             <form id="form-r">
                 <h2 id="title-contact">REGISTRATI</h2>
-                <div> 
-                    <!-- DA FINIREC CON I DATI E FIXARE SHOW LOGIN CHE ROMPE TUTTO -->
-                    <!-- input -->
+                <div id="button">
+                    <label for="donatore" class="btn-swtich selezionato" id="swDonatore" onclick="switchDonatore()">DONATORE</label>
+                    <label for="so" class="btn-swtich" id="swSo"  onclick="switchSo()">STRUTTURA OSPEDALIERA</label>
+                </div>
+
+                <!-- register form donatore -->
+                <div id="r-donatore"> 
+                    <label for="fname">Nome</label>
+                    <input type="text" class="input-text" name="fname-r-d" id="fname-r-d" placeholder="mario">
+                    <label for="sname">Cognome</label>
+                    <input type="text" class="input-text" name="sname-r-d" id="sname-r-d" placeholder="rossi">
                     <label for="email">Email</label>
-                    <input type="email" class="input-text" name="email-l" id="email-l" placeholder="mario@rossi.it" >
+                    <input type="email" class="input-text" name="email-r-d" id="email-r-d" placeholder="mario@rossi.it">
+                    <label for="email">Phone</label>
+                    <input type="tel" class="input-text" name="phone-r-d" id="phone-r-d" placeholder="3331234567">
+                    <label for="email">Gruppo sanguigno</label>
+                    <select name="btype" id="btype">
+                        <option value="ab+">AB+</option>
+                        <option value="ab-">AB-</option>
+                        <option value="a+">A+</option>
+                        <option value="a-">A-</option>    
+                        <option value="b+">B+</option>
+                        <option value="b-">B-</option>
+                        <option value="z-">0+</option>
+                        <option value="z+">0-</option>
+                    </select> 
+                    <br> <br>
                     <label for="password">Password</label>
-                    <input type="password" class="input-text" name="passsword-l" id="password-l" placeholder="********">
-                    <input type="radio" id="donatore" name="type" value="D" checked >
-                    <label for="donatore">Donatore</label><br>
-                    <input type="radio" id="so" name="type" value="H">
-                    <label for="so">Struttura Ospedaliera</label><br>
+                    <input type="password" class="input-text" name="passsword-r" id="password-r" placeholder="********">
+                    
+                    <input type="button" onclick="registerDonator()" value="Invia"/>
+                </div>
+
+                <!-- register form donator -->
+                <div id="r-so" hidden>
+                    <label for="so-name">Nome della struttura</label>
+                    <input type="text" class="input-text" name="so-name" id="so-name" placeholder="Careggi">
+                    <label for="email">Email</label>
+                    <input type="email" class="input-text" name="email-h" id="email-h" placeholder="mario@rossi.it">
+                    <label for="email">Phone</label>
+                    <input type="tel" class="input-text" name="phone-h" id="phone-h" placeholder="+3331234567">
+                    <label for="password">Password</label>
+                    <input type="password" class="input-text" name="passsword-h" id="password-h" placeholder="********">
+                    <label for="city">Città</label>
+                    <select name="city" id="city-input">
+                        <!-- added by call to database -->
+                    </select> <br><br>
+                    <label for="address">Indirizzo</label>
+                    <input type="text" class="input-text" name="address" id="address" placeholder="Largo Giovanni Alessandro Brambilla, 3">
+
+                    <input type="button" onclick="registerSo()" value="Invia"/>
                 </div>
                 
-                <input type="button" onclick="login()" value="Invia"/>
                 
-                <label class="text-l-r" >Hai già un account? Clicca <span onclick="showLogin()">qui</span></label>
-                <div id="message-l">
+                <label class="text-l-r" >Hai già un account? Clicca <span onclick="showLoginF()">qui</span></label>
+                <div id="message-r">
                     <p ></p>
                 </div>
             </form>
