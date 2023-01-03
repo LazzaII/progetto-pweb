@@ -50,15 +50,9 @@ create table if not exists `donator` (
     `phone` int not null,
     `hash_pwd` tinytext not null,
     `blood_group` varchar(3) not null,
-    `city_` int default null, -- fk
     `isAuth` tinyint not null default 0 check (`isAuth` in (0,1)), -- 0 not enabled, 1 enable to use account
-    primary key (`_id`),
-    foreign key (`city_`) references `city` (`_id`)
-        on update cascade
-        on delete set null
+    primary key (`_id`)
 ) engine = InnoDB;
-
-create index `index_city_1` ON `donator` (`city_`);
 
 create table if not exists `hospital` (
     `_id` int not null auto_increment,

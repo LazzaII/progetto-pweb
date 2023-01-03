@@ -2,6 +2,8 @@
 CHIAMATE API
 */
 
+// METTERE TIMER AL DIV DEL MESSAGGIO
+
 var url = 'http://localhost/progetto-pweb/api/';
 
 // CITY
@@ -15,6 +17,7 @@ function getCity() {
     for (const city of cities) {
       opt = document.createElement('option');
       opt.innerText = city.name;
+      opt.setAttribute('value', city._id)
       select.append(opt);
     }
   }
@@ -159,20 +162,100 @@ function login() {
 // REGISTRATION
 
 function checkRegisterD(){
-  // controllare i dati inseriti
+  if(document.getElementById('fname-r-d').value === '') return 0;
+  if(document.getElementById('sname-r-d').value === '') return 0;
+  if(document.getElementById('email-r-d').value === '') return 0;
+  if(document.getElementById('phone-r-d').value === '') return 0;
+  if(document.getElementById('password-r-d').value === '') return 0;
 }
 
 function checkRegisterH(){
-  // controllare dati inseriti
+  if(document.getElementById('name-r-so').value === '') return 0;
+  if(document.getElementById('email-r-so').value === '') return 0;
+  if(document.getElementById('phone-r-so').value === '') return 0;
+  if(document.getElementById('address-r-so').value === '') return 0;
+  if(document.getElementById('password-r-so').value === '') return 0;
 }
   
 
 // donator
 function registerDonator() {
-  // chiamata api
+  if(checkRegisterD() === 0) {
+    document.getElementById('message-r').classList.add('errore');
+    document.querySelectorAll('#message-r p')[0].innerText = 'Compila tutti i campi correttamente';
+    return;
+  }
+
+  let data = JSON.stringify({
+    fn : document.getElementById('fname-r-d').value,
+    sn : document.getElementById('sname-r-d').value,
+    email : document.getElementById('email-r-d').value,
+    phone : document.getElementById('phone-r-d').value,
+    pwd : document.getElementById('password-r-d').value,
+    blood : document.getElementById('btype').value,
+    type : 'D'
+  });
+
+  //clear input type
+  document.getElementById('fname-r-d').value = "";
+  document.getElementById('sname-r-d').value = "";
+  document.getElementById('email-r-d').value = "";
+  document.getElementById('phone-r-d').value = "";
+  document.getElementById('password-r-d').value = "";
+
+  // call to http://localhost/progetto-pweb/api/register.php to add new donator
+  let xhr = new XMLHttpRequest();
+  xhr.open('POST', url + 'register.php', true);
+  xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
+  xhr.onload = function () {
+    if(xhr.status = '200'){
+      document.getElementById('message-r').classList.add('corretto');
+      document.querySelectorAll('#message-r p')[0].innerText = 'Account creato, in attesa di conferma';
+    } else {
+      document.getElementById('message-r').classList.add('errore');
+      document.querySelectorAll('#message-r p')[0].innerText = 'Email già in uso';
+    }
+  }
+  xhr.send(data);
 }
 
 // hospital
 function registerSo() {
-  // chiamata api
+  if(checkRegisterH() === 0) {
+    document.getElementById('message-r').classList.add('errore');
+    document.querySelectorAll('#message-r p')[0].innerText = 'Compila tutti i campi correttamente';
+    return;
+  }
+
+  let data = JSON.stringify({
+    name : document.getElementById('name-r-so').value,
+    email : document.getElementById('email-r-so').value,
+    phone : document.getElementById('phone-r-so').value,
+    addr : document.getElementById('address-r-so').value,
+    pwd : document.getElementById('password-r-so').value,
+    city : document.getElementById('city-input').value,
+    type : 'H'
+  });
+
+  //clear input type
+  document.getElementById('name-r-so').value = "";
+  document.getElementById('email-r-so').value = "";
+  document.getElementById('phone-r-so').value = "";
+  document.getElementById('address-r-so').value = "";
+  document.getElementById('password-r-so').value = "";
+
+  // call to http://localhost/progetto-pweb/api/register.php to add new hospital
+  let xhr = new XMLHttpRequest();
+  xhr.open('POST', url + 'register.php', true);
+  xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
+  xhr.onload = function () {
+    if(xhr.status = '200'){
+      document.getElementById('message-r').classList.add('corretto');
+      document.querySelectorAll('#message-r p')[0].innerText = 'Account creato, in attesa di conferma';
+    } else {
+      document.getElementById('message-r').classList.add('errore');
+      document.querySelectorAll('#message-r p')[0].innerText = 'Email già in uso';
+    }
+  }
+  xhr.send(data);
 }

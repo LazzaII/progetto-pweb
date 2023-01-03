@@ -19,7 +19,6 @@ switch($method) {
                 $donator->phone = $decodeBody->phone;
                 $donator->pwd = password_hash($decodeBody->pwd, PASSWORD_DEFAULT);
                 $donator->blood = $decodeBody->blood;
-                $donator->city = $decodeBody->city;
 
                 if($donator->add($donator) == 'ERR') 
                     http_response_code(409); # conflict (email already used)
@@ -31,8 +30,6 @@ switch($method) {
                 setcookie('email', $donator->email);
                 setcookie('pwd', $donator->pwd); # da vedere se serve
                 setcookie('blood_group', $donator->blood);
-                setcookie('city', (new City())->getOne($donator->city)['name']); # city name
-                setcookie('cityId', $donator->city);
                 setcookie('auth', 0);
 
                 break;
@@ -56,9 +53,8 @@ switch($method) {
                 setcookie('email', $hospital->email);
                 setcookie('pwd', $hospital->pwd); # da vedere se serve
                 setcookie('phone', $hospital->phone);
-                setcookie('city', (new City())->getOne($hospital->city)['name']); # city name
                 setcookie('cityId', $hospital->city);
-                setcookie('cityId', $hospital->addr);
+                setcookie('address', $hospital->addr);
                 setcookie('auth', 0);
 
                 break;
