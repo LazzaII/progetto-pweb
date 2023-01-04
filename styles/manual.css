@@ -4,7 +4,7 @@
     width: 55%;
     margin: auto;
     background-color: snow;
-    color: #333;
+    color: var(--text-color);
     text-align: justify;
     text-justify: inter-word; 
     margin-bottom: 80px;
@@ -25,7 +25,7 @@
     padding: 0px 15px 0px;
 }
 
-h4 {
+.man-section {
     margin: 20px auto;
     padding: 20px;
     color: var(--dark-sienna);

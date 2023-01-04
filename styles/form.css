@@ -1,4 +1,5 @@
 #form-c{
+    color: var(--text-color);
     width: 400px;
     height: fit-content;
     background: var(--snow);

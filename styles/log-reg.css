@@ -11,6 +11,7 @@
     width: 340px;
     height: 450px;
     background: var(--snow);
+    color: var(--text-color);
     border-radius:8px;
     box-shadow:0 0 40px -10px var(--dark-sienna);
     padding:20px 30px;
@@ -25,6 +26,7 @@
     width: 340px;
     height: 700px;
     background: var(--snow);
+    color: var(--text-color);
     border-radius:8px;
     box-shadow:0 0 40px -10px var(--dark-sienna);
     padding:20px 30px;

@@ -19,7 +19,6 @@ switch($method) {
                 $donator->email = $decodeBody->email;
                 $donator->phone = $decodeBody->phone;
                 $donator->pwd = password_hash($decodeBody->pwd, PASSWORD_DEFAULT);
-                $donator->city = $decodeBody->city;
                 if($donator->update($donator) == 'ERR')
                     http_response_code(409); # conflict (email already used)
 

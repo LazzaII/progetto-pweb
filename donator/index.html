@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+
+    <title>Donator BBL</title>
+</head>
+<body onload="checkLogin()">
+
+    <nav>
+        <div class="nav-item-t">
+            <h1 class="title">Donator Panel</h1>
+        </div>
+        <div class="nav-item-ce">
+            <ul id="menu">
+                <li onclick="showDonation()"><span>Dona</span></li>
+                <li onclick="showNews()"><span>News</span></li>
+                <li onclick="showContact()"><span>Contatti</span></li>
+            </ul>
+        </div>
+        <div class="nav-item-bt">
+            <img src="../icon/account.svg" onclick="showAccount()"/>
+            <img src="../icon/exit.svg" onclick="exit()"/>
+        </div>
+    </nav>
+
+    <main>
+        <section id="donation" hidden>
+            <!-- lista delle donazioni e bottone per far donare -->
+        </section>
+        
+        <section id="news">
+            
+        </section>
+        
+        <section id="contact">
+            
+        </section>
+        
+        <section id="account">
+            
+        </section>
+        
+    </main>
+        <!-- footer - static position and element -->
+        <footer>
+            <div>
+            <p>2023 © Blood Bank Lab. S.R.L. - P.IVA 19780955632</p>
+        </div>
+    </footer>
+
+    <script src="./logic/api.js"></script>
+    <script src="./logic/logic.js"></script>
+</body>
+</html>

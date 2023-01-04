@@ -23,13 +23,13 @@ switch($method) {
                 if($donator->add($donator) == 'ERR') 
                     http_response_code(409); # conflict (email already used)
 
-                setcookie('login', 'logged');
-                setcookie('id', $donator->findFromEmail($donator->email)[`_id`]);
-                setcookie('first', $donator->fn);
-                setcookie('second', $donator->sn);
-                setcookie('email', $donator->email);
-                setcookie('pwd', $donator->pwd); # da vedere se serve
-                setcookie('blood_group', $donator->blood);
+                setcookie('login', 'logged', time() + 3600, '/');
+                setcookie('id', $donator->findFromEmail($donator->email)[`_id`], time() + 3600, '/');
+                setcookie('first', $donator->fn, time() + 3600, '/');
+                setcookie('second', $donator->sn, time() + 3600, '/');
+                setcookie('email', $donator->email, time() + 3600, '/');
+                setcookie('pwd', $donator->pwd, time() + 3600, '/'); # da vedere se serve
+                setcookie('blood_group', $donator->blood, time() + 3600, '/');
                 setcookie('auth', 0);
 
                 break;
@@ -47,14 +47,14 @@ switch($method) {
                 if($hospital->add($hospital) == 'ERR')
                     http_response_code(409); # conflict (email already used)
 
-                setcookie('login', 'logged');
-                setcookie('id', $hospital->findFromEmail($hospital->email)[`_id`]);
-                setcookie('name', $hospital->name);
-                setcookie('email', $hospital->email);
-                setcookie('pwd', $hospital->pwd); # da vedere se serve
-                setcookie('phone', $hospital->phone);
-                setcookie('cityId', $hospital->city);
-                setcookie('address', $hospital->addr);
+                setcookie('login', 'logged', time() + 3600, '/');
+                setcookie('id', $hospital->findFromEmail($hospital->email)[`_id`], time() + 3600, '/');
+                setcookie('name', $hospital->name, time() + 3600, '/');
+                setcookie('email', $hospital->email, time() + 3600, '/');
+                setcookie('pwd', $hospital->pwd, time() + 3600, '/'); # da vedere se serve
+                setcookie('phone', $hospital->phone, time() + 3600, '/');
+                setcookie('cityId', $hospital->city, time() + 3600, '/');
+                setcookie('address', $hospital->addr, time() + 3600, '/');
                 setcookie('auth', 0);
 
                 break;

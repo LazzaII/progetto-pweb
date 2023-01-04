@@ -63,7 +63,7 @@ function sendMessage() {
   xhr.open('POST', url + 'message.php', true);
   xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
   xhr.onload = function () {
-    if(xhr.status = '200'){
+    if(xhr.status = 200){
       document.getElementById('message').classList.add('corretto');
       document.querySelectorAll('#message p')[0].innerText = 'Messaggio inviato correttamente';
     }
@@ -75,33 +75,33 @@ function sendMessage() {
 
 function getNews() {
   // clear the div
-  document.getElementById('news').textContent = '';
+  document.getElementById('news-container').textContent = '';
 
   // call to http://localhost/progetto-pweb/api/news.php to get all news
   let xhr = new XMLHttpRequest();
   xhr.open('GET', url + 'news.php', true);
   xhr.onload = function () {
     let news = JSON.parse(xhr.response);
-    let div = document.getElementById('news');
+    let sect = document.getElementById('news-container');
     for (const n of news) {
       // creation of all element
       let article = document.createElement('article');
-      article.setAttribute('id', 'news-art')
+      article.setAttribute('class', 'box-news')
       let h4 = document.createElement('h4');
       h4.innerText = n.title;
-      h4.setAttribute('id', 'news-title')
+      h4.setAttribute('class', 'news-title')
       let body = document.createElement('p');
       body.innerText = n.body;
-      body.setAttribute('id', 'news-body');
+      body.setAttribute('class', 'news-body');
       let author = document.createElement('span');
       author.innerText = n.second_name + ' ' + n.first_name; 
-      h4.setAttribute('id', 'news-author')
+      author.setAttribute('class', 'news-author')
       //mettere immagine solo se c'è tempo [probabilmente non ci sarà]
       // merge the element in the article and append at div
       article.append(h4);
       article.append(body);
       article.append(author);
-      div.append(article);
+      sect.append(article);
     } 
   }
   xhr.send(null);
@@ -133,8 +133,8 @@ function login() {
     xhr.open('POST', url + 'login.php', true);
     xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
     xhr.onload = function () {
-      if(xhr.status === '200'){
-        // da modificare con le nuove pagine da visualizzare
+      if(xhr.status === 200){
+        // Mettere il redirect
         document.getElementById('message').classList.add('corretto');
         document.querySelectorAll('#message p')[0].innerText = 'Loggato';
       } else {
@@ -146,10 +146,9 @@ function login() {
     xhr.open('POST', url + 'login.php', true);
     xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
     xhr.onload = function () {
-      if(xhr.status === '200'){
-        // da modificare con le nuove pagine da visualizzare
-        document.getElementById('message-l').classList.add('corretto');
-        document.querySelectorAll('#message-l p')[0].innerText = 'Loggato';
+      console.log(xhr.status);
+      if(xhr.status === 200){
+        document.location.href = 'donator'; // redirect to donator section
       } else {
         document.getElementById('message-l').classList.add('errore');
         document.querySelectorAll('#message-l p')[0].innerText = 'Password Errata';
@@ -208,7 +207,7 @@ function registerDonator() {
   xhr.open('POST', url + 'register.php', true);
   xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
   xhr.onload = function () {
-    if(xhr.status = '200'){
+    if(xhr.status = 200){
       document.getElementById('message-r').classList.add('corretto');
       document.querySelectorAll('#message-r p')[0].innerText = 'Account creato, in attesa di conferma';
     } else {
@@ -249,7 +248,7 @@ function registerSo() {
   xhr.open('POST', url + 'register.php', true);
   xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
   xhr.onload = function () {
-    if(xhr.status = '200'){
+    if(xhr.status = 200){
       document.getElementById('message-r').classList.add('corretto');
       document.querySelectorAll('#message-r p')[0].innerText = 'Account creato, in attesa di conferma';
     } else {

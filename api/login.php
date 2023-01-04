@@ -1,10 +1,4 @@
 <?php
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-
 $method = $_SERVER['REQUEST_METHOD'];
 
 foreach ($_COOKIE as $key => $value) { # to clear cookie both side
@@ -28,16 +22,15 @@ switch($method) {
                     if(password_verify($decodeBody->pwd, $check['hash_pwd'])) {
                         require_once __DIR__ . '/class/City.php';
 
-                        setcookie('login', 'logged');
-                        setcookie('id', $check['_id']);
-                        setcookie('first', $check['first_name']);
-                        setcookie('second', $check['second_name']);
-                        setcookie('email', $check['email']);
-                        setcookie('pwd', $check['hash_pwd']); # da vedere se serve
-                        setcookie('blood_group', $check['blood_group']);
-                        setcookie('city', (new City())->getOne($check['city_'])['name']); # city name
-                        setcookie('cityId', $check['city_']);
-                        setcookie('auth', $check['isAuth']);
+                        setcookie('login', 'logged', time() + 3600, '/');
+                        setcookie('id', $check['_id'], time() + 3600, '/');
+                        setcookie('first', $check['first_name'], time() + 3600, '/');
+                        setcookie('second', $check['second_name'], time() + 3600, '/');
+                        setcookie('email', $check['email'], time() + 3600, '/');
+                        setcookie('pwd', $check['hash_pwd'], time() + 3600, '/'); # da vedere se serve
+                        setcookie('blood_group', $check['blood_group'], time() + 3600, '/');
+                        setcookie('cityId', $check['city_'], time() + 3600, '/');
+                        setcookie('auth', $check['isAuth'], time() + 3600, '/');
                     } 
                     else http_response_code(403); # forbidden (password error)
                 }    
@@ -53,16 +46,16 @@ switch($method) {
                     if(password_verify($decodeBody->pwd, $check['hash_pwd'])) {
                         require_once __DIR__ . '/class/City.php';
 
-                        setcookie('login', 'logged');
-                        setcookie('id', $check['_id']);
-                        setcookie('name', $check['name']);
-                        setcookie('email', $check['email']);
-                        setcookie('phone', $check['phone']);
-                        setcookie('pwd', $check['hash_pwd']); # da vedere se serve    
-                        setcookie('auth', $check['isAuth']);
-                        setcookie('address', $check['address']);
-                        setcookie('city', (new City())->getOne($check['city_'])['name']); # city name
-                        setcookie('cityId', $check['city_']);
+                        setcookie('login', 'logged', time() + 3600, '/');
+                        setcookie('id', $check['_id'], time() + 3600, '/');
+                        setcookie('name', $check['name'], time() + 3600, '/');
+                        setcookie('email', $check['email'], time() + 3600, '/');
+                        setcookie('phone', $check['phone'], time() + 3600, '/');
+                        setcookie('pwd', $check['hash_pwd'], time() + 3600, '/'); # da vedere se serve    
+                        setcookie('auth', $check['isAuth'], time() + 3600, '/');
+                        setcookie('address', $check['address'], time() + 3600, '/');
+                        setcookie('city', (new City())->getOne($check['city_'])['name'], time() + 3600, '/'); # city name
+                        setcookie('cityId', $check['city_'], time() + 3600, '/');
                     } 
                     else http_response_code(403); # forbidden (password error)
                 }    
