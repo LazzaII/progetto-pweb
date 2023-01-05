@@ -1,0 +1,37 @@
+#account {
+    color: var(--text-color);
+    width: 450px;
+    height: fit-content;
+    background: var(--snow);
+    border-radius:8px;
+    box-shadow:0 0 40px -10px var(--dark-sienna);
+    padding: 3vh 3vw;
+    box-sizing:border-box;
+    position:relative;
+    margin: auto;
+}
+
+#title-info {
+    margin: 20px  auto;
+    padding-bottom: 10px;
+    width: 100%;
+    color: var(--persian-plum);
+    border-bottom:3px solid var(--persian-plum);
+    text-align: center;
+}
+
+#bottoni{
+    margin-top: 30px;
+}
+
+td {
+    padding: 10px;
+    margin: 10px;
+    border-bottom: 2px solid var(--dark-sienna);
+}
+
+input:disabled {
+    border: none;
+    background-color: var(--snow);
+    color: var(--text-color);
+}

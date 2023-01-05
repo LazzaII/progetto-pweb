@@ -13,19 +13,19 @@ if($_COOKIE['login'] == 'logged') {// only logged account can delete account
                 case 'D':
                     require_once __DIR__ . '/class/Donator.php';
                     $donator = new Donator();
-                    $donator->delete($decodeBody->id);
+                    $donator->delete($_COOKIE['id']);
                     
                     break;
                 case 'H':
                     require_once __DIR__ . '/class/Hospital.php';
                     $hospital = new Hospital();
-                    $hospital->delete($decodeBody->id);
+                    $hospital->delete($_COOKIE['id']);
                     
                     break;
                 default:
                     require_once __DIR__ . '/class/Admin.php';
                     $admin = new Admin();
-                    $admin->delete($decodeBody->id);
+                    $admin->delete($_COOKIE['id']);
                 }
                     
             break;

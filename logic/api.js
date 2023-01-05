@@ -2,9 +2,19 @@
 CHIAMATE API
 */
 
-// METTERE TIMER AL DIV DEL MESSAGGIO
-
 var url = 'http://localhost/progetto-pweb/api/';
+
+// UTILITIES
+function getCookie(cName) {
+  const name = cName + "=";
+  const cDecoded = decodeURIComponent(document.cookie); //to be careful
+  const cArr = cDecoded.split('; ');
+  let res;
+  cArr.forEach(val => {
+    if (val.indexOf(name) === 0) res = val.substring(name.length);
+  })
+  return res
+}
 
 // CITY
 function getCity() {
@@ -25,7 +35,6 @@ function getCity() {
 }
 
 // MESSAGE
-
 // check input value 
 function checkContact() {
   if(document.getElementById('fname').value === '') return 0;
@@ -41,6 +50,7 @@ function sendMessage() {
   if(checkContact() === 0) {
     document.getElementById('message').classList.add('errore');
     document.querySelectorAll('#message p')[0].innerText = 'Compila tutti i campi correttamente';
+    setInterval( () =>  document.getElementById('message').style.display = 'none' , 3000);
     return;
   }
 
@@ -63,16 +73,16 @@ function sendMessage() {
   xhr.open('POST', url + 'message.php', true);
   xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
   xhr.onload = function () {
-    if(xhr.status = 200){
+    if(xhr.status === 200){
       document.getElementById('message').classList.add('corretto');
       document.querySelectorAll('#message p')[0].innerText = 'Messaggio inviato correttamente';
+      setInterval( () =>  document.getElementById('message').style.display = 'none' , 3000);
     }
   }
   xhr.send(data);
 }
 
 // NEWS
-
 function getNews() {
   // clear the div
   document.getElementById('news-container').textContent = '';
@@ -108,7 +118,6 @@ function getNews() {
 }
 
 // LOGIN
-
 function checkLogin() {
   if(document.getElementById('email-l').value === '') return 0;
   if(document.getElementById('password-l').value === '') return 0;
@@ -119,6 +128,7 @@ function login() {
   if(checkLogin() === 0) {
     document.getElementById('message-l').classList.add('errore');
     document.querySelectorAll('#message-l p')[0].innerText = 'Compila tutti i campi correttamente';
+    setInterval( () =>  document.getElementById('message-l').style.display = 'none' , 4000);
     return; 
   }
 
@@ -134,24 +144,33 @@ function login() {
     xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
     xhr.onload = function () {
       if(xhr.status === 200){
-        // Mettere il redirect
-        document.getElementById('message').classList.add('corretto');
-        document.querySelectorAll('#message p')[0].innerText = 'Loggato';
+        if(getCookie('auth') === '0'){ // if is not authenticated get div message
+          document.getElementById('message-l').classList.add('not-auth');
+          document.querySelectorAll('#message-l p')[0].innerText = 'Account accora non attivo';
+          setInterval( () =>  document.getElementById('message-l').style.display = 'none' , 4000);
+        } else 
+          document.location.href = 'hospital'; // redirect to donator section
       } else {
         document.getElementById('message').classList.add('errore');
         document.querySelectorAll('#message p')[0].innerText = 'Password Errata';
+        setInterval( () =>  document.getElementById('message-l').style.display = 'none' , 4000);
       }
     }
   } else {
     xhr.open('POST', url + 'login.php', true);
     xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
     xhr.onload = function () {
-      console.log(xhr.status);
       if(xhr.status === 200){
-        document.location.href = 'donator'; // redirect to donator section
+        if(getCookie('auth') === '0'){
+          document.getElementById('message-l').classList.add('not-auth');
+          document.querySelectorAll('#message-l p')[0].innerText = 'Account accora non attivo';
+          setInterval( () =>  document.getElementById('message-l').style.display = 'none' , 4000);
+        } else 
+          document.location.href = 'donator'; // redirect to donator section
       } else {
         document.getElementById('message-l').classList.add('errore');
         document.querySelectorAll('#message-l p')[0].innerText = 'Password Errata';
+        setInterval( () =>  document.getElementById('message-l').style.display = 'none' , 4000);
       }
     }
     xhr.send(data);
@@ -159,7 +178,6 @@ function login() {
 }
 
 // REGISTRATION
-
 function checkRegisterD(){
   if(document.getElementById('fname-r-d').value === '') return 0;
   if(document.getElementById('sname-r-d').value === '') return 0;
@@ -182,6 +200,7 @@ function registerDonator() {
   if(checkRegisterD() === 0) {
     document.getElementById('message-r').classList.add('errore');
     document.querySelectorAll('#message-r p')[0].innerText = 'Compila tutti i campi correttamente';
+    setInterval( () =>  document.getElementById('message-r').style.display = 'none' , 4000);
     return;
   }
 
@@ -207,12 +226,14 @@ function registerDonator() {
   xhr.open('POST', url + 'register.php', true);
   xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
   xhr.onload = function () {
-    if(xhr.status = 200){
+    if(xhr.status === 200){
       document.getElementById('message-r').classList.add('corretto');
       document.querySelectorAll('#message-r p')[0].innerText = 'Account creato, in attesa di conferma';
+      setInterval( () =>  document.getElementById('message-r').style.display = 'none' , 4000);
     } else {
       document.getElementById('message-r').classList.add('errore');
       document.querySelectorAll('#message-r p')[0].innerText = 'Email già in uso';
+      setInterval( () =>  document.getElementById('message-r').style.display = 'none' , 4000);
     }
   }
   xhr.send(data);
@@ -223,6 +244,7 @@ function registerSo() {
   if(checkRegisterH() === 0) {
     document.getElementById('message-r').classList.add('errore');
     document.querySelectorAll('#message-r p')[0].innerText = 'Compila tutti i campi correttamente';
+    setInterval( () =>  document.getElementById('message-r').style.display = 'none' , 4000);
     return;
   }
 
@@ -248,12 +270,14 @@ function registerSo() {
   xhr.open('POST', url + 'register.php', true);
   xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
   xhr.onload = function () {
-    if(xhr.status = 200){
+    if(xhr.status === 200){
       document.getElementById('message-r').classList.add('corretto');
       document.querySelectorAll('#message-r p')[0].innerText = 'Account creato, in attesa di conferma';
+      setInterval( () =>  document.getElementById('message-r').style.display = 'none' , 4000);
     } else {
       document.getElementById('message-r').classList.add('errore');
       document.querySelectorAll('#message-r p')[0].innerText = 'Email già in uso';
+      setInterval( () =>  document.getElementById('message-r').style.display = 'none' , 4000);
     }
   }
   xhr.send(data);

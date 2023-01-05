@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
 
     <title>Donator BBL</title>
 </head>
@@ -30,20 +30,91 @@
     </nav>
 
     <main>
-        <section id="donation" hidden>
+        <section id="donation">
             <!-- lista delle donazioni e bottone per far donare -->
+            <h3>Nuova donazione</h3>
+            <button onclick="donate()" disabled="disabled">Dona</button>
+            <p id="date-last">Ultima donazione: </p>
+
+            <h3>Ultime donazioni</h3>
+            <div id="last-d">
+
+            </div>
         </section>
         
-        <section id="news">
-            
+        <section id="news" hidden>
+            <h1 id="title-news">Ultime news</h1>
+            <div id="news-container">
+
+            </div>
         </section>
         
-        <section id="contact">
-            
+        <section id="contacts" hidden>
+            <form id="form-c" class="centered">
+                <h2 id="title-contact">CONTATTACI</h2>
+                <div> 
+                    <!-- contact -->
+                    <label for="fname">Nome</label>
+                    <input type="text" class="input-text" name="fname" id="fname" placeholder="mario" >
+                    <label for="sname">Cognome</label>
+                    <input type="text" class="input-text" name="sname" id="sname" placeholder="rossi" >
+                    <label for="email">Email</label>
+                    <input type="email" class="input-text" name="c-email" id="c-email" placeholder="mario@rossi.it" >
+                </div>
+                <div>
+                    <!-- message -->
+                    <label for="object">Oggetto</label>
+                    <input type="text" class="input-text" name="obg" id="obj" placeholder="oggetto" >
+                    <label for="body">Messaggio</label>
+                    <input type="text" name="body" class="input-text body-message" id="body" cols="30" rows="5" placeholder="..." ></input>
+                </div>
+                <input type="button" onclick="sendMessage()" value="Invia"/>
+
+                <div id="message">
+                    <p></p>
+                </div>
+
+                <div id="contact-box">
+                    <span class="contact-info">055 782 9809</span>
+                    <span class="contact-info">info@bloodbank.com</span>
+                </div>
+            </form>
         </section>
         
-        <section id="account">
-            
+        <section id="account" hidden>
+            <h1 id="title-info">Account info</h1>
+            <table id="account-info">
+                <tr>
+                    <td class="title-info">Nome</td>
+                    <td><input disabled type="text" id="first"></td>
+                </tr>
+                <tr>
+                    <td class="title-info">Cognome</td>
+                    <td><input disabled type="text" id="second"></td>
+                </tr>
+                <tr>
+                    <td class="title-info">Email</td>
+                    <td><input disabled type="text" id="email"></td>
+                </tr>
+                <tr>
+                    <td class="title-info">Phone</td>
+                    <td><input disabled type="text" id="phone"></td>
+                </tr>
+                <tr>
+                    <td class="title-info">Password</td>
+                    <td><input disabled type="text" id="pwd"></td>
+                </tr>
+                <tr>
+                    <td class="title-info">Gruppo Sanguigno</td>
+                    <td><input disabled type="text" id="blood_group"></td>
+                </tr>
+            </table>
+
+            <div id="bottoni">
+                <button>Modifica</button>
+                <button>Conferma</button>
+                <button onclick="deleteAccount()">Elimina</button>
+            </div>
         </section>
         
     </main>

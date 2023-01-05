@@ -53,7 +53,8 @@ class Donation {
                   join `donator` D2 on D2.`_id` = D1.`donator_` 
                   where D2.`blood_type` = :type
                     and D1.`isUsed` = 0
-                  group by D1.`_site_`';
+                  group by D1.`_site_`
+                  order by QTA asc';
         $stmt = $this->pdo->prepare($query);
         $data = [
             'type' => $type
@@ -75,17 +76,21 @@ class Donation {
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
-    public function getAll(){
+    public function getAll($id){
         $query = 'select * 
-                  from `donation`';
+                  from `donation`
+                  where `donator_` = :id';
         $stmt = $this->pdo->prepare($query);
-        $stmt->execute();
+        $data = [
+            'id' => $id
+        ];
+        $stmt->execute($data);
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function add($donation) {
         if(empty(self::canDonate($donation->donator))) {   
-            $query = "insert into `donation` (`_date`, `_donator_`, `_city_`)
+            $query = "insert into `donation` (`_date`, `donator_`, `site_`)
                       values (current_date(), :donator, :site)";
             $stmt = $this->pdo->prepare($query);
             $data = [

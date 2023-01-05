@@ -76,6 +76,12 @@ footer div p {
     margin: 15px 0;
 }
 
+.not-auth {
+    background-color: var(--light-gray);
+    box-shadow:0 0 40px -10px var(--text-color);
+    margin: 15px 0;
+}
+
 /* navbar */
 nav {
     display: flex;

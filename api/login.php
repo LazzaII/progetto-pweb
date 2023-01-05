@@ -27,7 +27,7 @@ switch($method) {
                         setcookie('first', $check['first_name'], time() + 3600, '/');
                         setcookie('second', $check['second_name'], time() + 3600, '/');
                         setcookie('email', $check['email'], time() + 3600, '/');
-                        setcookie('pwd', $check['hash_pwd'], time() + 3600, '/'); # da vedere se serve
+                        setcookie('phone', $check['phone'], time() + 3600, '/');
                         setcookie('blood_group', $check['blood_group'], time() + 3600, '/');
                         setcookie('cityId', $check['city_'], time() + 3600, '/');
                         setcookie('auth', $check['isAuth'], time() + 3600, '/');
@@ -50,8 +50,7 @@ switch($method) {
                         setcookie('id', $check['_id'], time() + 3600, '/');
                         setcookie('name', $check['name'], time() + 3600, '/');
                         setcookie('email', $check['email'], time() + 3600, '/');
-                        setcookie('phone', $check['phone'], time() + 3600, '/');
-                        setcookie('pwd', $check['hash_pwd'], time() + 3600, '/'); # da vedere se serve    
+                        setcookie('phone', $check['phone'], time() + 3600, '/'); 
                         setcookie('auth', $check['isAuth'], time() + 3600, '/');
                         setcookie('address', $check['address'], time() + 3600, '/');
                         setcookie('city', (new City())->getOne($check['city_'])['name'], time() + 3600, '/'); # city name
@@ -71,12 +70,12 @@ switch($method) {
                     if(password_verify($decodeBody->pwd, $check['hash_pwd'])) {
                         require_once __DIR__ . '/class/City.php';
 
-                        setcookie('login', 'logged');
-                        setcookie('id', $check['_id']);
-                        setcookie('first', $check['first_name']);
-                        setcookie('second', $check['second_name']);
-                        setcookie('type', $check['type']);
-                        setcookie('email', $check['email']); # da vedere se serve
+                        setcookie('login', 'logged', time() + 3600, '/');
+                        setcookie('id', $check['_id'], time() + 3600, '/');
+                        setcookie('first', $check['first_name'], time() + 3600, '/');
+                        setcookie('second', $check['second_name'], time() + 3600, '/');
+                        setcookie('type', $check['type'], time() + 3600, '/');
+                        setcookie('email', $check['email'], time() + 3600, '/'); # da vedere se serve
                     } 
                     else http_response_code(403); # forbidden (password error)
                 }    
