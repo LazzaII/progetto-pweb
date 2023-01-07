@@ -149,6 +149,7 @@ function donate() {
 }
 
 //DELETE ACCOUNT
+
 function deleteAccount() {
     if(confirm("Sei sicuro di voler eliminare l'account? Clicca su cancel per annullare")){
         let data = JSON.stringify({
@@ -177,7 +178,6 @@ function checkAccount() {
     if(document.getElementById('second').value === '') return 0;
     if(document.getElementById('email').value === '') return 0;
     if(document.getElementById('phone').value === '') return 0;
-    if(document.getElementById('first').value === '') return 0;
 }
   
 function updateInfo() {

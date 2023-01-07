@@ -19,6 +19,7 @@
         <div class="nav-item-ce">
             <ul id="menu">
                 <li onclick="showRequest()"><span>Richiedi</span></li>
+                <li onclick="showHistory()"><span>Cronologia</span></li>
                 <li onclick="showNews()"><span>News</span></li>
                 <li onclick="showContact()"><span>Contatti</span></li>
             </ul>
@@ -29,5 +30,114 @@
         </div>
     </nav>
     
+    <main>
+        <section id="request">
+            <form>
+                <label for="btype">Scegli il gruppo sanguigno</label>
+                <select name="btype" id="btype" onchange="findSite()">
+                    <option value="ab+">AB+</option>
+                    <option value="ab-">AB-</option>
+                    <option value="a+">A+</option>
+                    <option value="a-">A-</option>    
+                    <option value="b+">B+</option>
+                    <option value="b-">B-</option>
+                    <option value="z-">0+</option>
+                    <option value="z+">0-</option>
+                </select> 
+            </form>
+            
+            <div id="stock-box">
+
+            </div>
+        </section>
+
+        <section id="history" hidden>
+
+        </section>
+
+        <section id="news" hidden>
+            <h1 id="title-news">Ultime news</h1>
+            <div id="news-container">
+
+            </div>
+        </section>
+
+        <section id="contacts" hidden>
+            <form id="form-c" class="centered">
+                <h2 id="title-contact">CONTATTACI</h2>
+                <div> 
+                    <!-- contact -->
+                    <label for="fname">Nome</label>
+                    <input type="text" class="input-text" name="fname" id="fname" placeholder="mario" >
+                    <label for="sname">Cognome</label>
+                    <input type="text" class="input-text" name="sname" id="sname" placeholder="rossi" >
+                    <label for="email">Email</label>
+                    <input type="email" class="input-text" name="c-email" id="c-email" placeholder="mario@rossi.it" >
+                </div>
+                <div>
+                    <!-- message -->
+                    <label for="object">Oggetto</label>
+                    <input type="text" class="input-text" name="obg" id="obj" placeholder="oggetto" >
+                    <label for="body">Messaggio</label>
+                    <input type="text" name="body" class="input-text body-message" id="body" cols="30" rows="5" placeholder="..." ></input>
+                </div>
+                <input type="button" onclick="sendMessage()" value="Invia"/>
+
+                <div id="message">
+                    <p></p>
+                </div>
+
+                <div id="contact-box">
+                    <span class="contact-info">055 782 9809</span>
+                    <span class="contact-info">info@bloodbank.com</span>
+                </div>
+            </form>
+        </section>
+
+        <section id="account" hidden>
+            <h1 id="title-info">Account info</h1>
+            <table id="account-info">
+                <tr>
+                    <td class="title-info">Nome struttura</td>
+                    <td><input disabled type="text" id="name"></td>
+                </tr>
+                <tr>
+                    <td class="title-info">Email</td>
+                    <td><input disabled type="text" id="email"></td>
+                </tr>
+                <tr>
+                    <td class="title-info">Phone</td>
+                    <td><input disabled type="text" id="phone"></td>
+                </tr>
+                <tr>
+                    <td class="title-info">Password</td>
+                    <td><input disabled type="text" id="pwd"></td>
+                </tr>
+                <tr>
+                    <td class="title-info">Indirizzo</td>
+                    <td><input disabled type="text" id="address"></td>
+                </tr>
+                <tr>
+                    <td class="title-info">Città</td>
+                    <td><input disabled type="text" id="city"></td>
+                </tr>
+            </table>
+
+            <div id="message-acc">
+                <p></p>
+            </div>
+
+            <div id="bottoni">
+                <button onclick="activateModify()" id="btn-modify">Modifica</button>
+                <button onclick="deleteAccount()" id="btn-elimina">Elimina</button>
+
+                <button onclick="updateInfo()" id="btn-confirm" hidden>Conferma</button>
+                <button onclick="resetInfo()" id="btn-reset" hidden>Annulla</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="./logic/api.js"></script>
+    <script src="./logic/logic.js"></script>
 </body>
 </html>

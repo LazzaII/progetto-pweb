@@ -1,9 +1,9 @@
 // index url
 var indexUrl = '../';
 
-//fare array con nome dei cookie e array con i div
+//useful arrays
 var divs = ['donation', 'account',  'news', 'contacts'];
-var cookiesName = ['login', 'auth', 'blood_group', 'email', 'first', 'id', 'second', 'phone']
+var cookiesName = ['login', 'auth', 'blood_group', 'email', 'first', 'id', 'second', 'phone'];
 
 //show donation
 function showDonation() {

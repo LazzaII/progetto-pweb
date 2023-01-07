@@ -2,6 +2,7 @@
 SHOW/HIDE SECTION
 */
 
+// useful array
 var divs = ['manual', 'why',  'news', 'contacts', 'login'];
 
 //show why

@@ -1,7 +1,7 @@
 @import '../styles/news.css';
 @import '../styles/form.css';
-@import './style/account.css';
-@import './style/donation.css';
+@import './styles/account.css';
+@import './styles/donation.css';
 
 /* system variables */
 :root {
