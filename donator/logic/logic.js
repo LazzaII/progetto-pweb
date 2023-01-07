@@ -1,5 +1,4 @@
-// FARE GLI SHOW CORRETTI
-
+// index url
 var indexUrl = '../';
 
 //fare array con nome dei cookie e array con i div
@@ -57,13 +56,13 @@ function showAccount() {
 
 function getCookie(cName) {
   const name = cName + "=";
-  const cDecoded = decodeURIComponent(document.cookie); //to be careful
+  const cDecoded = decodeURIComponent(document.cookie); 
   const cArr = cDecoded.split('; ');
   let res;
   cArr.forEach(val => {
     if (val.indexOf(name) === 0) res = val.substring(name.length);
   })
-  return res
+  return res;
 }
 
 function deleteCookie(name) {
@@ -72,11 +71,45 @@ function deleteCookie(name) {
   }
 }
 
-// LOGIN - LOGOUT
+// ACCOUNT
+
+function activateModify() {
+  // activate input 
+  for (const cookie of cookiesName) {
+    if(document.getElementById(cookie) !== null)
+      document.getElementById(cookie).disabled = false;
+  }
+  document.getElementById('pwd').disabled = false;
+  document.getElementById('blood_group').disabled = true;
+
+  // active confirm btn e disabled modify and delete
+  document.getElementById('btn-modify').style.display = 'none';
+  document.getElementById('btn-elimina').style.display = 'none';
+  document.getElementById('btn-confirm').style.display = 'block';
+  document.getElementById('btn-reset').style.display = 'block';
+}
+
+function resetInfo() {
+  info();
+  for (const cookie of cookiesName) {
+    if(document.getElementById(cookie) !== null)
+      document.getElementById(cookie).disabled = true;
+  }
+  document.getElementById('pwd').value = '';
+  document.getElementById('pwd').disabled = true;
+
+  document.getElementById('btn-modify').style.display = 'block';
+  document.getElementById('btn-elimina').style.display = 'block';  
+  document.getElementById('btn-confirm').style.display = 'none';
+  document.getElementById('btn-reset').style.display = 'none';
+}
+
+// login - logout
 
 function checkLogin() {
-  // manca controllo su account verificato
   if(!getCookie('login')) document.location.href = indexUrl;
+
+  getDonation();
 }
 
 function exit() {

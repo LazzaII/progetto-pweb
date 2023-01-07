@@ -10,7 +10,24 @@
 
     <title>Hospital BBL</title>
 </head>
-<body>
+<body onload="checkLogin()">
+
+    <nav>
+        <div class="nav-item-t">
+            <h1 class="title">Hospital Panel</h1>
+        </div>
+        <div class="nav-item-ce">
+            <ul id="menu">
+                <li onclick="showRequest()"><span>Richiedi</span></li>
+                <li onclick="showNews()"><span>News</span></li>
+                <li onclick="showContact()"><span>Contatti</span></li>
+            </ul>
+        </div>
+        <div class="nav-item-bt">
+            <img src="../icon/account.svg" onclick="showAccount()"/>
+            <img src="../icon/exit.svg" onclick="exit()"/>
+        </div>
+    </nav>
     
 </body>
 </html>

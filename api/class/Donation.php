@@ -20,9 +20,10 @@ class Donation {
         $query = 'select count(0) as QTA
                   from `donation` D1
                   join `donator` D2 on D2.`_id` = D1.`donator_` 
-                  where D1.`_site_` = :site 
+                  where D1.`site_` = :site 
                     and D2.`blood_group` = :bt 
-                    and D1.`isUsed` = 0';
+                    and D1.`isUsed` = 0
+                  order by QTA asc';
         $stmt = $this->pdo->prepare($query);
         $data = [
             'site' => $site,
@@ -33,12 +34,13 @@ class Donation {
     }
 
     public function availabilitySite($site) { // to check stock availability of a specific site
-        $query = 'select `blood_type`, count(0) as QTA
-                  from `donation` 
+        $query = 'select D2.`blood_group`, count(0) as QTA
+                  from `donation` D1
                   join `donator` D2 on D2.`_id` = D1.`donator_` 
-                  where D1.`_site_` = :site
+                  where D1.`site_` = :site
                     and D1.`isUsed` = 0
-                  group by D2.`blood_type`';
+                  group by D2.`blood_group`
+                  order by QTA asc';
         $stmt = $this->pdo->prepare($query);
         $data = [
             'site' => $site
@@ -48,12 +50,12 @@ class Donation {
     }
 
     public function availabilityType($type) { // to check stock availability of specific blood type
-        $query = 'select `blood_type`, count(0) as QTA
-                  from `donation` 
+        $query = 'select D1.`site_` as site, count(0) as QTA
+                  from `donation` D1
                   join `donator` D2 on D2.`_id` = D1.`donator_` 
-                  where D2.`blood_type` = :type
+                  where D2.`blood_group` = :type
                     and D1.`isUsed` = 0
-                  group by D1.`_site_`
+                  group by D1.`site_`
                   order by QTA asc';
         $stmt = $this->pdo->prepare($query);
         $data = [
@@ -66,8 +68,8 @@ class Donation {
     public function canDonate($donator){
         $query = 'select 0 
                   from `donation` 
-                  where _donator_ = :donator 
-                    and _date > current_date() - interval 3 month';
+                  where donator_ = :donator 
+                    and date > current_date() - interval 3 month';
         $stmt = $this->pdo->prepare($query);
         $data = [
             'donator' => $donator
@@ -77,9 +79,11 @@ class Donation {
     }
 
     public function getAll($id){
-        $query = 'select * 
-                  from `donation`
-                  where `donator_` = :id';
+        $query = 'select D.`date`, D.`isUsed`, C.`name` as city, S.`_id` as id
+                  from `donation` D
+                  join `site` S on S.`_id` = D.`site_` 
+                  join `city` C on C.`_id` = S.`city_`
+                  where D.`donator_` = :id';
         $stmt = $this->pdo->prepare($query);
         $data = [
             'id' => $id
@@ -90,7 +94,7 @@ class Donation {
 
     public function add($donation) {
         if(empty(self::canDonate($donation->donator))) {   
-            $query = "insert into `donation` (`_date`, `donator_`, `site_`)
+            $query = "insert into `donation` (`date`, `donator_`, `site_`)
                       values (current_date(), :donator, :site)";
             $stmt = $this->pdo->prepare($query);
             $data = [

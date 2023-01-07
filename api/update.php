@@ -18,9 +18,26 @@ switch($method) {
                 $donator->sn = $decodeBody->sn;
                 $donator->email = $decodeBody->email;
                 $donator->phone = $decodeBody->phone;
-                $donator->pwd = password_hash($decodeBody->pwd, PASSWORD_DEFAULT);
-                if($donator->update($donator) == 'ERR')
-                    http_response_code(409); # conflict (email already used)
+                if($decodeBody->pwd == ''){
+                    if($donator->update($donator, false) == 'ERR')
+                        http_response_code(409); # conflict (email already used)
+                    else { # update cookies value
+                        setcookie('first', $decodeBody->fn, time() + 3600, '/');
+                        setcookie('second', $decodeBody->sn, time() + 3600, '/');
+                        setcookie('email', $decodeBody->email, time() + 3600, '/');
+                        setcookie('phone', $decodeBody->phone, time() + 3600, '/');
+                    } 
+                } else {
+                    $donator->pwd = password_hash($decodeBody->pwd, PASSWORD_DEFAULT);
+                    if($donator->update($donator) == 'ERR')
+                        http_response_code(409); # conflict (email already used)
+                    else { # update cookies value
+                        setcookie('first', $decodeBody->fn, time() + 3600, '/');
+                        setcookie('second', $decodeBody->sn, time() + 3600, '/');
+                        setcookie('email', $decodeBody->email, time() + 3600, '/');
+                        setcookie('phone', $decodeBody->phone, time() + 3600, '/');
+                    }
+                }
 
                 break;
             case 'H':

@@ -1,5 +1,9 @@
 <?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require_once __DIR__ . '/class/Donation.php';
 $donation = new Donation();
 
@@ -12,9 +16,13 @@ switch($method) {
         $js_encode = json_encode($allDonation, true);
         header("Content-Type: application/json");
         echo ($js_encode);
+
+        break;
     case 'POST':
-        // cercare sito con meno di quel sangue usare questa funzione availabilityType(type)
-        // prendere il primo perchè è ordinata per il più piccolo e metterlo come dato nella donazione
+        $donation->site = $donation->availabilityType($_COOKIE['blood_group'])[0]['site'];
+        $donation->donator = $_COOKIE['id'];
+        if($donation->add($donation) == 'ERR')
+            http_response_code(409); # conflict (cant donate)
             
         break;
     default:

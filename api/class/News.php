@@ -26,13 +26,12 @@ class News {
     }
 
     public function add($news) {
-        $query = "insert into `news` (`title`, `body`, `img_uri`, `author_`)
-                  values (:title, :body, :img, :author)";
+        $query = "insert into `news` (`title`, `body`, `author_`)
+                  values (:title, :body, :author)";
         $stmt = $this->pdo->prepare($query);
         $data = [
             'title' => $news->title,
             'body' => $news->body,
-            'img' => $news->img,
             'author' => $news->author
         ];
         $stmt->execute($data);
@@ -50,14 +49,13 @@ class News {
 
     public function update($news) {
         $query = 'update `news` 
-                  set `title` = :title, `body` = :body, `img_uri` = :img
+                  set `title` = :title, `body` = :body
                   where `_id` = :id';
         $stmt = $this->pdo->prepare($query);
         $data = [
             'id' => $news->id,
             'title' => $news->title,
-            'body' => $news->body,
-            'img' => $news->img
+            'body' => $news->body
         ];
         $stmt->execute($data);
     }

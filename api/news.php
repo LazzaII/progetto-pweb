@@ -19,11 +19,8 @@ switch($method){
     
             $news->title = $decodeBody->title;
             $news->body = $decodeBody->body;
-            $news->img =  "upload/".$_FILES['file']['name']; //save image location
             $news->author = $decodeBody->author;
             $news->add($news);
-
-            move_uploaded_file($_FILES['file']['tmp_name'], $news->img); //save the images in upload folder
         } else
             http_response_code(401); // Unauthorized 
         
@@ -36,10 +33,7 @@ switch($method){
             $news->id = $decodeBody->id;
             $news->title = $decodeBody->title;
             $news->body = $decodeBody->body;
-            $news->img =  "upload/".$_FILES['file']['name']; //save image location
             $news->update($news);
-
-            move_uploaded_file($_FILES['file']['tmp_name'], $news->img); //save the images in upload folder
         } else
             http_response_code(401); // Unauthorized 
 

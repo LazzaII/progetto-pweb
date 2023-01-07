@@ -3,7 +3,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 foreach ($_COOKIE as $key => $value) { # to clear cookie both side
     unset($value);
-    setcookie($key, '', time() - 3600);
+    setcookie($key, '', time() - 3600, '/');
 }
 
 switch($method) {

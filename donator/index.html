@@ -33,12 +33,23 @@
         <section id="donation">
             <!-- lista delle donazioni e bottone per far donare -->
             <h3>Nuova donazione</h3>
-            <button onclick="donate()" disabled="disabled">Dona</button>
-            <p id="date-last">Ultima donazione: </p>
+            <button onclick="donate()" id="btn-dona">Dona</button>
 
-            <h3>Ultime donazioni</h3>
+            <div id="message-d">
+                <p></p>
+            </div>
+
             <div id="last-d">
-
+                <h3>Ultime donazioni</h3>
+                <table id="donazioni">
+                    <tr>
+                        <th>Data</th>
+                        <th>Numero Magazzino</th>
+                        <th>Città Magazzino</th>
+                        <th>Utilizzato</th>
+                    </tr>
+                    
+                </table>
             </div>
         </section>
         
@@ -110,11 +121,18 @@
                 </tr>
             </table>
 
-            <div id="bottoni">
-                <button>Modifica</button>
-                <button>Conferma</button>
-                <button onclick="deleteAccount()">Elimina</button>
+            <div id="message-acc">
+                <p></p>
             </div>
+
+            <div id="bottoni">
+                <button onclick="activateModify()" id="btn-modify">Modifica</button>
+                <button onclick="deleteAccount()" id="btn-elimina">Elimina</button>
+
+                <button onclick="updateInfo()" id="btn-confirm" hidden>Conferma</button>
+                <button onclick="resetInfo()" id="btn-reset" hidden>Annulla</button>
+            </div>
+
         </section>
         
     </main>

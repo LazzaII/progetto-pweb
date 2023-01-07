@@ -2,12 +2,13 @@
 CHIAMATE API
 */
 
-var url = 'http://localhost/progetto-pweb/api/';
+// url
+var url = './api/';
 
 // UTILITIES
 function getCookie(cName) {
   const name = cName + "=";
-  const cDecoded = decodeURIComponent(document.cookie); //to be careful
+  const cDecoded = decodeURIComponent(document.cookie); 
   const cArr = cDecoded.split('; ');
   let res;
   cArr.forEach(val => {
@@ -139,42 +140,28 @@ function login() {
   });
 
   let xhr = new XMLHttpRequest();
-  if(data.type === 'H') {
-    xhr.open('POST', url + 'login.php', true);
-    xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
-    xhr.onload = function () {
-      if(xhr.status === 200){
-        if(getCookie('auth') === '0'){ // if is not authenticated get div message
-          document.getElementById('message-l').classList.add('not-auth');
-          document.querySelectorAll('#message-l p')[0].innerText = 'Account accora non attivo';
-          setInterval( () =>  document.getElementById('message-l').style.display = 'none' , 4000);
-        } else 
-          document.location.href = 'hospital'; // redirect to donator section
-      } else {
-        document.getElementById('message').classList.add('errore');
-        document.querySelectorAll('#message p')[0].innerText = 'Password Errata';
+  xhr.open('POST', url + 'login.php', true);
+  xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
+  xhr.onload = function () {
+    if(xhr.status === 200){
+
+      if(getCookie('auth') === '0'){ // if is not authenticated get div message
+        document.getElementById('message-l').classList.add('not-auth');
+        document.querySelectorAll('#message-l p')[0].innerText = 'Account accora non attivo';
         setInterval( () =>  document.getElementById('message-l').style.display = 'none' , 4000);
-      }
+      } 
+      else if(document.querySelector('input[name="type"]:checked').value === 'H')
+        document.location.href = 'hospital'; // redirect to hospital section
+      else 
+        document.location.href = 'donator';
+    } 
+    else {
+      document.getElementById('message').classList.add('errore');
+      document.querySelectorAll('#message p')[0].innerText = 'Password Errata';
+      setInterval( () =>  document.getElementById('message-l').style.display = 'none' , 4000);
     }
-  } else {
-    xhr.open('POST', url + 'login.php', true);
-    xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
-    xhr.onload = function () {
-      if(xhr.status === 200){
-        if(getCookie('auth') === '0'){
-          document.getElementById('message-l').classList.add('not-auth');
-          document.querySelectorAll('#message-l p')[0].innerText = 'Account accora non attivo';
-          setInterval( () =>  document.getElementById('message-l').style.display = 'none' , 4000);
-        } else 
-          document.location.href = 'donator'; // redirect to donator section
-      } else {
-        document.getElementById('message-l').classList.add('errore');
-        document.querySelectorAll('#message-l p')[0].innerText = 'Password Errata';
-        setInterval( () =>  document.getElementById('message-l').style.display = 'none' , 4000);
-      }
-    }
-    xhr.send(data);
   }
+  xhr.send(data);
 }
 
 // REGISTRATION
@@ -230,7 +217,8 @@ function registerDonator() {
       document.getElementById('message-r').classList.add('corretto');
       document.querySelectorAll('#message-r p')[0].innerText = 'Account creato, in attesa di conferma';
       setInterval( () =>  document.getElementById('message-r').style.display = 'none' , 4000);
-    } else {
+    } 
+    else {
       document.getElementById('message-r').classList.add('errore');
       document.querySelectorAll('#message-r p')[0].innerText = 'Email già in uso';
       setInterval( () =>  document.getElementById('message-r').style.display = 'none' , 4000);
@@ -274,7 +262,8 @@ function registerSo() {
       document.getElementById('message-r').classList.add('corretto');
       document.querySelectorAll('#message-r p')[0].innerText = 'Account creato, in attesa di conferma';
       setInterval( () =>  document.getElementById('message-r').style.display = 'none' , 4000);
-    } else {
+    } 
+    else {
       document.getElementById('message-r').classList.add('errore');
       document.querySelectorAll('#message-r p')[0].innerText = 'Email già in uso';
       setInterval( () =>  document.getElementById('message-r').style.display = 'none' , 4000);

@@ -81,21 +81,36 @@ class Donator {
         return 'OK';
     }
 
-    public function update($donator) {
+    public function update($donator, $isPassword = true) {
         if (empty(self::findFromEmail($donator->email, $donator->id))) {
-            $query = 'update `donator` 
-                      set `first_name` = :fn, `second_name` = :sn, `email` = :email, `phone` = :phone, 
-                          `hash_pwd` = :pwd
-                      where `_id` = :id';
-            $stmt = $this->pdo->prepare($query);
-            $data = [
-                'id' => $donator->id,
-                'fn' => $donator->fn,
-                'sn' => $donator->sn,
-                'email' => $donator->email,
-                'phone' => $donator->phone,
-                'pwd' => $donator->pwd,
-            ];
+            if($isPassword) {
+                $query = 'update `donator` 
+                          set `first_name` = :fn, `second_name` = :sn, `email` = :email, `phone` = :phone, 
+                              `hash_pwd` = :pwd
+                          where `_id` = :id';
+                $stmt = $this->pdo->prepare($query);
+                $data = [
+                    'id' => $donator->id,
+                    'fn' => $donator->fn,
+                    'sn' => $donator->sn,
+                    'email' => $donator->email,
+                    'phone' => $donator->phone,
+                    'pwd' => $donator->pwd,
+                ];
+            } else {
+                $query = 'update `donator` 
+                          set `first_name` = :fn, `second_name` = :sn, `email` = :email, `phone` = :phone
+                          where `_id` = :id';
+                $stmt = $this->pdo->prepare($query);
+                $data = [
+                    'id' => $donator->id,
+                    'fn' => $donator->fn,
+                    'sn' => $donator->sn,
+                    'email' => $donator->email,
+                    'phone' => $donator->phone
+                ];
+            }   
+            
             $stmt->execute($data);
             return 'OK';
         }
