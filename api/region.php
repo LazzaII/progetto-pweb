@@ -1,15 +1,15 @@
 <?php
 
-require_once __DIR__ . '/class/City.php';
-$city = new City();
+require_once __DIR__ . '/class/Region.php';
+$region = new Region();
 
 $method = $_SERVER['REQUEST_METHOD'];
 
 
 switch($method) {
     case 'GET':
-        $allCity = $city->getFromRegion($_GET['region']);
-        $js_encode = json_encode($allCity, true);
+        $allRegion = $region->getAll();
+        $js_encode = json_encode($allRegion, true);
         header("Content-Type: application/json");
         echo($js_encode);
             

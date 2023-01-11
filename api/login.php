@@ -1,4 +1,5 @@
 <?php
+
 $method = $_SERVER['REQUEST_METHOD'];
 
 foreach ($_COOKIE as $key => $value) { # to clear cookie both side

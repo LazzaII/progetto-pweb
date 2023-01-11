@@ -22,7 +22,7 @@
 
 #bottoni{
     margin-top: 30px;
-    display: inline;
+    display: flex;
 }
 
 #account-info tr td {

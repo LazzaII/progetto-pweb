@@ -18,7 +18,7 @@ class City {
         $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
-
+    
     public function getOne($id) {
         $query = 'select * 
                   from `city`
@@ -29,5 +29,17 @@ class City {
         ];
         $stmt->execute($data);
         return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    public function getFromRegion($region) {
+        $query = 'select * 
+                  from `city`
+                  where `region_` = :region';
+        $stmt = $this->pdo->prepare($query);
+        $data = [
+            'region' => $region
+        ];
+        $stmt->execute($data);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 }

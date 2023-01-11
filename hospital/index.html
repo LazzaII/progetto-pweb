@@ -18,14 +18,14 @@
         </div>
         <div class="nav-item-ce">
             <ul id="menu">
-                <li onclick="showRequest()"><span>Richiedi</span></li>
-                <li onclick="showHistory()"><span>Cronologia</span></li>
-                <li onclick="showNews()"><span>News</span></li>
-                <li onclick="showContact()"><span>Contatti</span></li>
+                <li onclick="showDiv('request')"><span>Richiedi</span></li>
+                <li onclick="showDiv('history')"><span>Cronologia</span></li>
+                <li onclick="showDiv('news')"><span>News</span></li>
+                <li onclick="showDiv('contacts')"><span>Contatti</span></li>
             </ul>
         </div>
         <div class="nav-item-bt">
-            <img src="../icon/account.svg" onclick="showAccount()"/>
+            <img src="../icon/account.svg" onclick="showDiv('account')"/>
             <img src="../icon/exit.svg" onclick="exit()"/>
         </div>
     </nav>
@@ -137,7 +137,9 @@
         </section>
     </main>
 
+    <script src="../common/utilities.js"></script>
     <script src="./logic/api.js"></script>
     <script src="./logic/logic.js"></script>
+    <script src="../common/api.js"></script>
 </body>
 </html>

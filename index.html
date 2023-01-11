@@ -18,13 +18,13 @@
         </div>
         <div class="nav-item-ce">
             <ul id="menu">
-                <li onclick="showWhy()"><span>Perchè donare</span></li>
-                <li onclick="showNews()"><span>News</span></li>
-                <li onclick="showContact()"><span>Contatti</span></li>
+                <li onclick="showDiv('why')"><span>Perchè donare</span></li>
+                <li onclick="showDiv('news')"><span>News</span></li>
+                <li onclick="showDiv('contacts')"><span>Contatti</span></li>
             </ul>
         </div>
         <div class="nav-item-bt">
-            <img src="icon/manual.svg" onclick="showManual()"/>
+            <img src="icon/manual.svg" onclick="showDiv('manual')"/>
             <img src="icon/account.svg" onclick="showLogin()"/>
         </div>
     </nav>
@@ -147,7 +147,7 @@
                     <label for="sname">Cognome</label>
                     <input type="text" class="input-text" name="sname" id="sname" placeholder="rossi" >
                     <label for="email">Email</label>
-                    <input type="email" class="input-text" name="email" id="email" placeholder="mario@rossi.it" >
+                    <input type="email" class="input-text" name="c-email" id="c-email" placeholder="mario@rossi.it" >
                 </div>
                 <div>
                     <!-- message -->
@@ -239,6 +239,10 @@
                     <input type="tel" class="input-text" name="phone-r-so" id="phone-r-so" placeholder="+3331234567">
                     <label for="address">Indirizzo</label>
                     <input type="text" class="input-text" name="address-r-so" id="address-r-so" placeholder="Largo Giovanni Alessandro Brambilla, 3">
+                    <label for="region">Regione</label>
+                    <select name="region" id="region-input" onchange="getCity()">
+                        <!-- added by call to database -->
+                    </select> <br>
                     <label for="city">Città</label>
                     <select name="city" id="city-input">
                         <!-- added by call to database -->
@@ -265,7 +269,9 @@
         </div>
     </footer>
 
+    <script src="common/utilities.js"></script>
     <script src="logic/api.js"></script>
     <script src="logic/logic.js"></script>
+    <script src="common/api.js"></script>
 </body>
 </html>
