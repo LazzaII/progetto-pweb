@@ -11,6 +11,7 @@ class Request {
     public $quantity;
     public $hospital;
     public $site;
+    public $time;
     public $isPending;
     
     public function __construct(){
@@ -22,6 +23,20 @@ class Request {
         $query = 'select * from `blood_request`';
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function getFromHospital($hospital){
+        $query = 'select B.*, C.`name`
+                  from `blood_request` B
+                  join `site` S on S.`_id` = B.`site_`
+                  join `city` C ON C.`_id` = S.`city_`
+                  where `hospital_` = :hospital';
+        $stmt = $this->pdo->prepare($query);
+        $data = [
+            'hospital' => $hospital
+        ];
+        $stmt->execute($data);
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
@@ -48,6 +63,8 @@ class Request {
         ];
         $stmt->execute($data);
         return 'OK';
+
+        // MANCA DA LIBERARE SACCHE DI SANGUE
     }
 
     // vedere se implementarla perchè c`è da fare check su disponibità

@@ -5,8 +5,10 @@ var indexUrl = '../';
 var divs = ['request', 'history', 'account',  'news', 'contacts'];
 var cookiesName = ['login', 'auth', 'address', 'email', 'name', 'id', 'city', 'cityId', 'phone', 'region', 'regionId'];
 
-// ACCOUNT
-
+/*
+ ACCOUNT
+*/
+// attiva bottoni modifica 
 function activateModify() {
   // attiva input 
   for (const cookie of cookiesName) {
@@ -17,6 +19,7 @@ function activateModify() {
   document.getElementById('city-input').disabled = false;
   document.getElementById('region-input').disabled = false;
 
+  // setta l'option predefinita del select
   document.getElementById('region-input').innerText = '' // svuoto la regione attuale
   getRegions();
   document.getElementById('region-input').value = getCookie('regionId');
@@ -32,6 +35,7 @@ function activateModify() {
   document.getElementById('btn-reset').style.display = 'block';
 }
 
+// reset delle informazioni
 function resetInfo() {
   for (const cookie of cookiesName) {
     if(document.getElementById(cookie) !== null)
@@ -52,11 +56,12 @@ function resetInfo() {
   document.getElementById('btn-reset').style.display = 'none';
 }
 
-// login - logout
-
+// controllo del login
 function checkLogin() {
   if(!getCookie('login')) document.location.href = indexUrl;
 
+  findSite();
+  history();
   info();
   infoCityRegion();
 }

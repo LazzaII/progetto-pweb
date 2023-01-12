@@ -2,7 +2,7 @@ drop database if exists bloodbank;
 create schema bloodbank default character set utf8;
 use bloodbank;
 
-set foreign_key_checks = 0; -- to remove fk check
+set foreign_key_checks = 0; -- per rimuovere il controllo sulle fk
 
 --  ----------------- --
 --  CITY              --
@@ -50,7 +50,7 @@ create table if not exists `donator` (
     `phone` int not null,
     `hash_pwd` tinytext not null,
     `blood_group` varchar(3) not null,
-    `isAuth` tinyint not null default 0 check (`isAuth` in (0,1)), -- 0 not enabled, 1 enable to use account
+    `isAuth` tinyint not null default 0 check (`isAuth` in (0,1)), -- 0 non attivato, 1 attivato
     primary key (`_id`)
 ) engine = InnoDB;
 
@@ -62,7 +62,7 @@ create table if not exists `hospital` (
     `hash_pwd` tinytext not null,
     `address` varchar(45) not null,
     `city_` int default null, -- fk
-    `isAuth` tinyint not null default 0 check (`isAuth` in (0,1)), -- 0 not enabled, 1 enable to use account
+    `isAuth` tinyint not null default 0 check (`isAuth` in (0,1)), -- 0 non attivato, 1 attivato
     primary key (`_id`),
     foreign key (`city_`) references `city` (`_id`)
         on update cascade
@@ -82,7 +82,7 @@ create table if not exists `site` (
     primary key (`_id`),
     foreign key (`city_`) references `city` (`_id`)
         on update cascade
-        on delete set null -- fare qualcosa per riassegnare
+        on delete set null
 ) engine = InnoDB;
 
 create index `index_city_3` ON `site` (`city_`);
@@ -96,9 +96,10 @@ create table if not exists `blood_request` (
     `date` date not null,
     `blood_type` varchar(3) not null,
     `quantity` int not null,
+    `deliveryTime` int not null, -- tempo di arrivo espresso in minuti
     `hospital_` int not null, -- fk
     `site_` int default null, -- fk
-    `isPending` tinyint default 0 check (`isPending` in (0,1,2,3)), -- 0 pending, 1 accepted, 2 not accepted by admin
+    `isPending` tinyint default 0 check (`isPending` in (0,1,2,3)), -- 0 in attesa, 1 accettat, 2 non accettato da un admin
     primary key (`_id`),
     foreign key (`hospital_`) references `hospital` (`_id`)
         on update cascade
@@ -116,7 +117,7 @@ create table if not exists `donation` (
     `date` date not null, --  data della donazione perchè non può donare entro tot mesi controllare ultima data e bloccare tasto dona
     `donator_` int not null, -- fk
     `site_` int not null, -- fk
-    `isUsed` tinyint default 0 check (`isUsed` in (0, 1)), -- 0 blood not used, 1 blood used
+    `isUsed` tinyint default 0 check (`isUsed` in (0, 1)), -- 0 non usato, 1 usato
     primary key (`_id`),
     foreign key (`donator_`) references `donator` (`_id`)
         on update cascade

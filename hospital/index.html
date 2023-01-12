@@ -18,8 +18,8 @@
         </div>
         <div class="nav-item-ce">
             <ul id="menu">
-                <li onclick="showDiv('request')"><span>Richiedi</span></li>
                 <li onclick="showDiv('history')"><span>Cronologia</span></li>
+                <li onclick="showDiv('request')"><span>Richiedi</span></li>
                 <li onclick="showDiv('news')"><span>News</span></li>
                 <li onclick="showDiv('contacts')"><span>Contatti</span></li>
             </ul>
@@ -31,28 +31,39 @@
     </nav>
     
     <main>
-        <section id="request">
+        <section id="history">
+            <!-- FARE LEGENDA PER SPIEGARE SIGNFICATO DI X, U, N -->
+            <h1>ORDINI</h1>
+            <table id="ordini">
+                <tr>
+                    <th>Data</th>
+                    <th>Gruppo sanguigno</th>
+                    <th>Quantità</th>
+                    <th>Città magazzino di spedizione</th>
+                    <th>Tempo di arrivo</th>
+                    <th>Approvato</th>
+                </tr>
+            </table>
+        </section>
+
+        <section id="request" hidden>
             <form>
                 <label for="btype">Scegli il gruppo sanguigno</label>
                 <select name="btype" id="btype" onchange="findSite()">
-                    <option value="ab+">AB+</option>
+                    <option value="ab+" selected>AB+</option>
                     <option value="ab-">AB-</option>
                     <option value="a+">A+</option>
                     <option value="a-">A-</option>    
                     <option value="b+">B+</option>
                     <option value="b-">B-</option>
-                    <option value="z-">0+</option>
-                    <option value="z+">0-</option>
+                    <option value="z+">0+</option>
+                    <option value="z-">0-</option>
                 </select> 
             </form>
             
             <div id="stock-box">
 
             </div>
-        </section>
-
-        <section id="history" hidden>
-
         </section>
 
         <section id="news" hidden>
@@ -103,15 +114,15 @@
                 </tr>
                 <tr>
                     <td class="title-info">Email</td>
-                    <td><input disabled type="text" id="email"></td>
+                    <td><input disabled type="email" id="email"></td>
                 </tr>
                 <tr>
                     <td class="title-info">Phone</td>
-                    <td><input disabled type="text" id="phone"></td>
+                    <td><input disabled type="tel" id="phone"></td>
                 </tr>
                 <tr>
                     <td class="title-info">Password</td>
-                    <td><input disabled type="text" id="pwd"></td>
+                    <td><input disabled type="password" id="pwd"></td>
                 </tr>
                 <tr>
                     <td class="title-info">Indirizzo</td>

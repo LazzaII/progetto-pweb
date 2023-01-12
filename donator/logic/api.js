@@ -26,15 +26,16 @@ function getDonation() {
             for (const d of donations) {
                 let tr = document.createElement('tr');
                 let data = document.createElement('td');
+                let num = document.createElement('td');
+                let city = document.createElement('td');
+                let used = document.createElement('td');
+                
                 data.innerText = d.date;
                 tr.append(data);
-                let num = document.createElement('td');
                 num.innerText = d.id;
                 tr.append(num);
-                let city = document.createElement('td');
                 city.innerText = d.city;
                 tr.append(city);
-                let used = document.createElement('td');
                 if(d.isUsed === '0')
                     used.innerText = 'in magazzino';
                 else 
