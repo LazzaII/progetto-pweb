@@ -43,9 +43,11 @@ switch($method) {
                 $hospital = new Hospital();
 
                 $check = $hospital->findFromEmail($decodeBody->email);
+                        
                 if(!empty($check)){
                     if(password_verify($decodeBody->pwd, $check['hash_pwd'])) {
                         require_once __DIR__ . '/class/City.php';
+                        require_once __DIR__ . '/class/Region.php';
 
                         setcookie('login', 'logged', time() + 3600, '/');
                         setcookie('id', $check['_id'], time() + 3600, '/');
@@ -56,6 +58,8 @@ switch($method) {
                         setcookie('address', $check['address'], time() + 3600, '/');
                         setcookie('city', (new City())->getOne($check['city_'])['name'], time() + 3600, '/'); # city name
                         setcookie('cityId', $check['city_'], time() + 3600, '/');
+                        setcookie('regionId', (new City())->getOne($check['city_'])['region_'], time() + 3600, '/');
+                        setcookie('region', (new Region())->getOne((new City())->getOne($check['city_'])['region_'])['name'], time() + 3600, '/');
                     } 
                     else http_response_code(403); # forbidden (password error)
                 }    

@@ -23,15 +23,6 @@ switch($method) {
                 if($donator->add($donator) == 'ERR') 
                     http_response_code(409); # conflict (email already used)
 
-                setcookie('login', 'logged', time() + 3600, '/');
-                setcookie('id', $donator->findFromEmail($donator->email)[`_id`], time() + 3600, '/');
-                setcookie('first', $donator->fn, time() + 3600, '/');
-                setcookie('second', $donator->sn, time() + 3600, '/');
-                setcookie('email', $donator->email, time() + 3600, '/');
-                setcookie('pwd', $donator->pwd, time() + 3600, '/'); # da vedere se serve
-                setcookie('blood_group', $donator->blood, time() + 3600, '/');
-                setcookie('auth', 0);
-
                 break;
             case 'H':
                 require_once __DIR__ . '/class/Hospital.php';
@@ -47,16 +38,6 @@ switch($method) {
                 if($hospital->add($hospital) == 'ERR')
                     http_response_code(409); # conflict (email already used)
 
-                setcookie('login', 'logged', time() + 3600, '/');
-                setcookie('id', $hospital->findFromEmail($hospital->email)[`_id`], time() + 3600, '/');
-                setcookie('name', $hospital->name, time() + 3600, '/');
-                setcookie('email', $hospital->email, time() + 3600, '/');
-                setcookie('pwd', $hospital->pwd, time() + 3600, '/'); # da vedere se serve
-                setcookie('phone', $hospital->phone, time() + 3600, '/');
-                setcookie('cityId', $hospital->city, time() + 3600, '/');
-                setcookie('address', $hospital->addr, time() + 3600, '/');
-                setcookie('auth', 0);
-
                 break;
             default: # if is not a donator or hospital is an admin
                 require_once __DIR__ . '/class/Admin.php';
@@ -70,7 +51,6 @@ switch($method) {
                 if($admin->add($admin) == 'ERR')
                     http_response_code(409); # conflict (email already used)
                 
-                # no cookie output because only super admin can create admin so is incorrect to set cookie
                 break;
         }
 

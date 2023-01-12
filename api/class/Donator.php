@@ -24,7 +24,7 @@ class Donator {
         if($id == null){
             $query = 'select * 
                       from `donator` 
-                        where `email` = :email';
+                      where `email` = :email';
             $stmt = $this->pdo->prepare($query);
             $data = [
                 'email' => $email

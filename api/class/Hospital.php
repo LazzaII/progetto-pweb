@@ -23,7 +23,7 @@ class Hospital {
         if($id == null){
             $query = 'select * 
                       from `hospital` 
-                        where `email` = :email';
+                      where `email` = :email';
             $stmt = $this->pdo->prepare($query);
             $data = [
                 'email' => $email
@@ -80,21 +80,37 @@ class Hospital {
         return 'ERR';
     }
 
-    public function update($hospital) {
+    public function update($hospital, $isPassword = true) {
         if (empty(self::findFromEmail($hospital->email, $hospital->id))) {
-            $query = 'update `hospital` 
-                      set `name` = :name, `email` = :email, `phone` = :phone, `hash_pwd` = :pwd, `address` = :addr, `city_` = :city
-                      where `_id` = :id';
-            $stmt = $this->pdo->prepare($query);
-            $data = [
-                'id' => $hospital->id,
-                'name' => $hospital->name,
-                'email' => $hospital->email,
-                'phone' => $hospital->phone,
-                'pwd' => $hospital->pwd,
-                'addr' => $hospital->addr,
-                'city' => $hospital->city,
-            ];
+            if($isPassword) {
+                $query = 'update `hospital` 
+                          set `name` = :name, `email` = :email, `phone` = :phone, `hash_pwd` = :pwd, `address` = :addr, `city_` = :city
+                          where `_id` = :id';
+                $stmt = $this->pdo->prepare($query);
+                $data = [
+                    'id' => $hospital->id,
+                    'name' => $hospital->name,
+                    'email' => $hospital->email,
+                    'phone' => $hospital->phone,
+                    'pwd' => $hospital->pwd,
+                    'addr' => $hospital->addr,
+                    'city' => $hospital->city,
+                ];
+            } 
+            else {
+                $query = 'update `hospital` 
+                          set `name` = :name, `email` = :email, `phone` = :phone, `address` = :addr, `city_` = :city
+                          where `_id` = :id';
+                $stmt = $this->pdo->prepare($query);
+                $data = [
+                    'id' => $hospital->id,
+                    'name' => $hospital->name,
+                    'email' => $hospital->email,
+                    'phone' => $hospital->phone,
+                    'addr' => $hospital->addr,
+                    'city' => $hospital->city,
+                ];
+            }
             $stmt->execute($data);
             return 'OK';
         }

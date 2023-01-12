@@ -7,10 +7,10 @@ var url = '../api/';
 
 function findSite() {
     // find site from blood type
-    console.log(document.getElementById('btype').value)
+    //console.log(document.getElementById('btype').value)
 }
 
-//DELETE ACCOUNT
+//ELIMINA ACCOUNT
 
 function deleteAccount() {
     if(confirm("Sei sicuro di voler eliminare l'account? Clicca su cancel per annullare")){
@@ -61,7 +61,7 @@ function updateInfo() {
             phone : document.getElementById('phone').value,
             pwd : document.getElementById('pwd').value,
             address : document.getElementById('address').value,
-            city : document.getElementById('city').value,
+            city : document.getElementById('city-input').value,
             type : 'H'
         })
 

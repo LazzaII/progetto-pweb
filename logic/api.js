@@ -4,8 +4,6 @@ CHIAMATE API
 
 // url
 var url = './api/';
-// interval
-var interval;
 
 // LOGIN
 function checkLogin() {
@@ -65,14 +63,19 @@ function login() {
   }
   xhr.send(data);
 }
-
-// REGISTRATION
+/*
+  Registrazione donatore e so
+*/
+// controlli input
 function checkRegisterD(){
   if(document.getElementById('fname-r-d').value === '') return 0;
   if(document.getElementById('sname-r-d').value === '') return 0;
   if(document.getElementById('email-r-d').value === '') return 0;
   if(document.getElementById('phone-r-d').value === '') return 0;
   if(document.getElementById('password-r-d').value === '') return 0;
+  if(!validateEmail(document.getElementById('email-r-d').value)) return 0;
+  if(!validateNumber(document.getElementById('phone-r-d').value)) return 0;
+  return 1;
 }
 
 function checkRegisterH(){
@@ -81,13 +84,16 @@ function checkRegisterH(){
   if(document.getElementById('phone-r-so').value === '') return 0;
   if(document.getElementById('address-r-so').value === '') return 0;
   if(document.getElementById('password-r-so').value === '') return 0;
+  if(!validateEmail(document.getElementById('email-r-so').value)) return 0;
+  if(!validateNumber(document.getElementById('phone-r-so').value)) return 0;
+  return 1;
 }
-  
 
-// donator
+// registrazione donatore
 function registerDonator() {
   if(checkRegisterD() === 0) {
     document.getElementById('message-r').classList.add('errore');
+    document.getElementById('message-r').style.display = 'block';
     document.querySelectorAll('#message-r p')[0].innerText = 'Compila tutti i campi correttamente';
     interval = setInterval(() =>  {
       document.getElementById('message-r').style.display = 'none';
@@ -107,20 +113,21 @@ function registerDonator() {
     type : 'D'
   });
 
-  //clear input type
+  // pullisce i campi
   document.getElementById('fname-r-d').value = "";
   document.getElementById('sname-r-d').value = "";
   document.getElementById('email-r-d').value = "";
   document.getElementById('phone-r-d').value = "";
   document.getElementById('password-r-d').value = "";
 
-  // call to http://localhost/progetto-pweb/api/register.php to add new donator
+  // chiamata a http://localhost/progetto-pweb/api/register.php per aggiungere il nuovo donatore
   let xhr = new XMLHttpRequest();
   xhr.open('POST', url + 'register.php', true);
   xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
   xhr.onload = function () {
     if(xhr.status === 200){
       document.getElementById('message-r').classList.add('corretto');
+      document.getElementById('message-r').style.display = 'block';
       document.querySelectorAll('#message-r p')[0].innerText = 'Account creato, in attesa di conferma';
       interval = setInterval(() =>  {
         document.getElementById('message-r').style.display = 'none';
@@ -128,8 +135,9 @@ function registerDonator() {
         clearInterval(interval);
       }, 4000);
     } 
-    else {
+    else { // possibili errori di ritorno: 409 (conflitto -> email già in uso)
       document.getElementById('message-r').classList.add('errore');
+      document.getElementById('message-r').style.display = 'block';
       document.querySelectorAll('#message-r p')[0].innerText = 'Email già in uso';
       interval = setInterval(() =>  {
         document.getElementById('message-r').style.display = 'none';
@@ -141,10 +149,11 @@ function registerDonator() {
   xhr.send(data);
 }
 
-// hospital
+// struttura ospedaliera
 function registerSo() {
   if(checkRegisterH() === 0) {
     document.getElementById('message-r').classList.add('errore');
+    document.getElementById('message-r').style.display = 'block';
     document.querySelectorAll('#message-r p')[0].innerText = 'Compila tutti i campi correttamente';
     interval = setInterval(() =>  {
       document.getElementById('message-r').style.display = 'none';
@@ -164,20 +173,21 @@ function registerSo() {
     type : 'H'
   });
 
-  //clear input type
+  // pullisce i campi
   document.getElementById('name-r-so').value = "";
   document.getElementById('email-r-so').value = "";
   document.getElementById('phone-r-so').value = "";
   document.getElementById('address-r-so').value = "";
   document.getElementById('password-r-so').value = "";
 
-  // call to http://localhost/progetto-pweb/api/register.php to add new hospital
+  // chiamata a http://localhost/progetto-pweb/api/register.php per aggiungere una nuova so
   let xhr = new XMLHttpRequest();
   xhr.open('POST', url + 'register.php', true);
   xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
   xhr.onload = function () {
     if(xhr.status === 200){
       document.getElementById('message-r').classList.add('corretto');
+      document.getElementById('message-r').style.display = 'block';
       document.querySelectorAll('#message-r p')[0].innerText = 'Account creato, in attesa di conferma';
       interval = setInterval(() =>  {
         document.getElementById('message-r').style.display = 'none';
@@ -185,8 +195,9 @@ function registerSo() {
         clearInterval(interval);
       }, 4000);
     } 
-    else {
+    else { // possibili errori di ritorno: 409 (conflitto -> email già in uso)
       document.getElementById('message-r').classList.add('errore');
+      document.getElementById('message-r').style.display = 'block';
       document.querySelectorAll('#message-r p')[0].innerText = 'Email già in uso';
       interval = setInterval(() =>  {
         document.getElementById('message-r').style.display = 'none';

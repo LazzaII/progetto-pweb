@@ -118,8 +118,20 @@
                     <td><input disabled type="text" id="address"></td>
                 </tr>
                 <tr>
-                    <td class="title-info">Città</td>
-                    <td><input disabled type="text" id="city"></td>
+                    <td class="title-info">Regione</td>
+                    <td>
+                        <select name="region" id="region-input" onchange="getCity()" disabled>
+                        <!-- added by call to database -->
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="title-info">Citta</td>
+                    <td>
+                        <select name="city" id="city-input" disabled>
+                        <!-- added by call to database -->
+                        </select>
+                    </td>
                 </tr>
             </table>
 

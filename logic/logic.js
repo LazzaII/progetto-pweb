@@ -2,10 +2,10 @@
 SHOW/HIDE SECTION
 */
 
-// useful array
+// Array utili
 var divs = ['manual', 'why',  'news', 'contacts', 'login'];
 
-//show login
+// Mostra login
 function showLogin() {
     if (document.getElementById('login').style.display === 'none' || document.getElementById('login').style.display === ''){
         document.getElementById('login').style.display = 'block';
@@ -21,22 +21,22 @@ function showLogin() {
 }
 
 /*
-SHOW/HIDE LOGIN
+Mostra/nasconde registraizione-login
 */
 
-// show register hide login
+// mostra registrazione nasconde login
 function showRegister() {
     document.getElementById('form-l').style.display = 'none';
     document.getElementById('form-r').style.display = 'block';
 }
 
-// show login hide register
+// mostra login nasconde registrazione
 function showLoginF() {
     document.getElementById('form-r').style.display = 'none';
     document.getElementById('form-l').style.display = 'block';   
 }
 
-// show donator
+// mostra registrazione donatore
 function switchDonatore() {
     document.getElementById('r-so').style.display = 'none';
     document.getElementById('r-donatore').style.display = 'block';
@@ -45,7 +45,7 @@ function switchDonatore() {
     document.getElementById('swDonatore').classList.add('selezionato');
 }
 
-// show so
+// mostra registrazione struttura ospedaliera
 function switchSo() {
     document.getElementById('r-donatore').style.display = 'none';
     document.getElementById('r-so').style.display = 'block';

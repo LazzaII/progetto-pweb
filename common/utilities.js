@@ -1,3 +1,6 @@
+// interval used in all pages
+var interval;
+
 // get cookie [mettere da chi è preso il codice]
 function getCookie(cName) {
     const name = cName + "=";
@@ -33,7 +36,7 @@ function showDiv(divName) {
 function info() {
     for (const cookie of cookiesName) {
         if(document.getElementById(cookie) !== null)
-        document.getElementById(cookie).value = getCookie(cookie);
+            document.getElementById(cookie).value = getCookie(cookie);
     }
 }
 
@@ -41,5 +44,19 @@ function exit() {
     for (const cookie of cookiesName) // delete al cookie
         deleteCookie(cookie);
     document.location.href = indexUrl; // back to index
-  }
-    
+}
+
+// validazione email
+const emailRegex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}')  
+// qualsiasi carattere fino alla chiocciola stessa cosa per la parte dopo la chioccola tranne per i caratteri speciali
+
+function validateEmail(email) {
+    return emailRegex.test(email);
+}
+
+// validazione numero di telefono
+const numberRegex = new RegExp('^[0-9]+$');
+
+function validateNumber(number) {
+    return numberRegex.test(number)
+}
