@@ -97,7 +97,7 @@ class Request {
         $stmt->execute($data);
         
         if($value == 2) { //liberare le sacche se viene annullato l'ordine
-            require_once __DIR__ . '/class/Donation.php';
+            require_once __DIR__ . '/Donation.php';
             $donation = new Donation();
             
             $req = self::getOne($id);

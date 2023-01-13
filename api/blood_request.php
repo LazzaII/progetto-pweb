@@ -1,5 +1,9 @@
 <?php
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require_once __DIR__ . '/class/Request.php';
 $request = new Request();
 $method = $_SERVER['REQUEST_METHOD'];
@@ -39,12 +43,14 @@ switch($method){
 
         break;
 
-    case 'POST':
+    case 'PUT':
         $body = file_get_contents("php://input"); // prende il body
         $decodeBody = json_decode($body);
 
         //admin che accetta, o no, una richiesta
         $request->accept($decodeBody->id, $decodeBody->value);
+
+        print_r($decodeBody);
 
         break;
     case 'DELETE':
