@@ -42,7 +42,9 @@ class Admin {
     }
 
     public function getAll(){
-        $query = 'select * from `admin`';
+        $query = 'select * 
+                  from `admin`
+                  where `type` <> 0';
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);

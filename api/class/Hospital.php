@@ -44,7 +44,10 @@ class Hospital {
     }
     
     public function getAll(){
-        $query = 'select * from `hospital`';
+        $query = 'select H.*, C.`name` as cName, R.`name` as rName 
+                  from `hospital` H
+                  join `city` C on C.`_id` = H.`city_`
+                  join `region` R on R.`_id` = C.`region_`';
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
@@ -117,12 +120,15 @@ class Hospital {
         return 'ERR';
     }
 
-    public function authetication() {
+    public function authetication($id) {
         $query = 'update `hospital`
                   set `isAuth` = 1
                   where `_id` = :id';
         $stmt = $this->pdo->prepare($query);
-        $stmt->execute();
+        $data = [
+            'id' => $id,
+        ];
+        $stmt->execute($data);
         return 'OK';
     }
 }

@@ -117,12 +117,15 @@ class Donator {
         return 'ERR';
     }
 
-    public function authetication() {
+    public function authetication($id) {
         $query = 'update `donator` 
                   set `isAuth` = 1
                   where `_id` = :id';
         $stmt = $this->pdo->prepare($query);
-        $stmt->execute();
+        $data = [
+            'id' => $id
+        ];
+        $stmt->execute($data);
         return 'OK';
     }
 }

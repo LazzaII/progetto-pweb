@@ -75,7 +75,7 @@ function donate() {
             }, 4000);
         }
     }
-    xhr.send(null);
+    xhr.send();
 }
 
 //ELIMINAZIONE ACCOUNT

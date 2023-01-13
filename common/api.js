@@ -77,7 +77,7 @@ function getNews() {
       sect.append(article);
     } 
   }
-  xhr.send(null);
+  xhr.send();
 }
 
 /*

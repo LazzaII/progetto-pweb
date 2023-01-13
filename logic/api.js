@@ -53,7 +53,7 @@ function login() {
     else {
       document.getElementById('message-l').classList.add('errore');
       document.getElementById('message-l').style.display = 'block';
-      document.querySelectorAll('#message-l p')[0].innerText = 'Password Errata';
+      document.querySelectorAll('#message-l p')[0].innerText = 'Password e/o email errati';
       interval = setInterval(() =>  {
         document.getElementById('message-l').style.display = 'none';
         document.getElementById('message-l').classList.remove('errore');
@@ -63,6 +63,7 @@ function login() {
   }
   xhr.send(data);
 }
+
 /*
   Registrazione donatore e so
 */

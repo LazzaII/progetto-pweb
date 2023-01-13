@@ -6,19 +6,127 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="style.css">
 
     <title>Admin BBL</title>
 </head>
-<body>
-    <!-- LOGIN SECTION -->
-
+<body onload="checkLogged()">
+        <!-- LOGIN SECTION -->
+    <div id="sec-login" hidden>
+        <form id="form-l">
+            <h2 id="title-contact">LOGIN</h2>
+            <div> 
+                <!-- input -->
+                <label for="email">Email</label>
+                <input type="email" class="input-text" name="email-l" id="email-l" placeholder="mario@rossi.it" >
+                <label for="password">Password</label>
+                <input type="password" class="input-text" name="passsword-l" id="password-l" placeholder="********">
+            </div>
+            
+            <input type="button" onclick="login()" value="Invia"/>
+            
+            <div id="message-l">
+                <p ></p>
+            </div>
+        </form>
+    </div>
+    
     <!-- ADMIN SECTION -->
-    <nav>
-        <div>
-        </div>
-        <div>
-        </div>
-    </nav>
+    <div id="admin-section" hidden>
+        <nav>
+            <div class="nav-item-t">
+                <h1 class="title">Admin Panel</h1>
+            </div>
+            <div class="nav-item-ce">
+                <ul id="menu">
+                    <li onclick="showDiv('dashboard'), dashboard()"><span>Statistiche</span></li>
+                    <li onclick="showDiv('users'), getUsers()"><span>Users</span></li> 
+                    <!-- dentro user mettere anche la creazione di utenti admin -->
+                    <li onclick="showDiv('request'), getRequest()"><span>Richieste</span></li>
+                    <li onclick="showDiv('news'), getNews()"><span>Scrivi News</span></li>
+                    <li onclick="showDiv('mex'), getMex()"><span>Messaggi</span></li>
+                </ul>
+            </div>
+            <div class="nav-item-bt">
+                <img src="../icon/account.svg" onclick="showDiv('account')"/>
+                <img src="../icon/exit.svg" onclick="exitAdmin()"/>
+            </div>
+        </nav>
+
+        <main>
+            <section id="dashboard">
+                <h1>Statistiche</h1>
+            </section>
+
+            <section id="users" hidden>
+                <div>
+                    <h3>Donatori</h3>
+                    <table id="tbl-donator">
+                        <tr>
+                            <th>Nome</th>
+                            <th>Cognome</th>
+                            <th>Email</th>
+                            <th>Telefono</th>
+                            <th>Gruppo sanguigno</th>
+                            <th>Azioni</th>
+                        </tr>
+                    </table>
+                </div>
+
+                <div>
+                    <h3>Strutture ospedaliere</h3>
+                    <table id="tbl-so">
+                        <tr>
+                            <th>Nome Struttura</th>
+                            <th>Email</th>
+                            <th>Telefono</th>
+                            <th>Indirizzo</th>
+                            <th>Città</th>
+                            <th>Regione</th>
+                            <th>Azioni</th>
+                        </tr>
+                    </table>
+                </div>
+
+                <div>
+                    <h3>Admin</h3>
+                    <table id="tbl-admin">
+                        <tr>
+                            <th>Nome</th>
+                            <th>Cognome</th>
+                            <th>Email</th>
+                            <th>Azioni</th>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+
+            <section id="request" hidden>
+
+            </section>
+
+            <section id="news" hidden>
+
+            </section>
+
+            <section id="mex" hidden>
+
+            </section>
+
+            <section id="account" hidden>
+
+            </section>
+        </main>
+    </div>
+
+    <script src="../common/utilities.js"></script>
+    <script src="../common/api.js"></script>
+    <script src="./logic/api-users.js"></script>
+    <script src="./logic/api-request.js"></script>
+    <script src="./logic/api-news.js"></script>
+    <script src="./logic/api-login.js"></script>
+    <script src="./logic/api-mex.js"></script>
+    <script src="./logic/api-dashboard.js"></script>
+    <script src="./logic/logic-admin.js"></script>
 </body>
 </html>

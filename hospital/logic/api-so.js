@@ -86,6 +86,9 @@ function findSite() {
                 else if(dt < 30) time = Math.floor(dt/vm1 * 60);
                 else if(dt < 150) time = Math.floor(dt/vm2 * 60);
                 else time = Math.floor(dt/vm3 * 60);
+
+                time = time * 0.1; // 10% per imprevisti
+                // VEDERE SE FARE LA COSA DELLE 48 ORE NEL CASO RIMUOVERLA DAL MANUALE
                 tempoArr.innerText = 'Tempo stimato:' + time + ' minuti';
                 
                 btnAdd.addEventListener('click', () => sendRequest(s.site, time, Math.floor(dt)));

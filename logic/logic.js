@@ -1,7 +1,3 @@
-/*
-SHOW/HIDE SECTION
-*/
-
 // Array utili
 var divs = ['manual', 'why',  'news', 'contacts', 'login'];
 
