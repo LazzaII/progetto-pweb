@@ -5,6 +5,19 @@ var indexUrl = '../';
 var divs = ['request', 'history', 'account',  'news', 'contacts'];
 var cookiesName = ['login', 'auth', 'address', 'email', 'name', 'id', 'city', 'cityId', 'phone', 'region', 'regionId'];
 
+// velocità medie 
+var vm1 = 45; // entro in 30 km {si presume non venga presa l'autostrada}
+var vm2 = 90; // entro i 150 km {si presume strade extraurbane secondarie}
+var vm3 = 120; // sopra i 150 km {si presume l'utilizzo principalmente di autostrade}
+              // è una stima per cui le isole non vengono considerate come tali ma come terra tutta unità
+
+
+// tempo standard stessa citta
+var timeS = 40;
+
+// raggio della terra
+var R = 6373;
+
 /*
  ACCOUNT
 */
@@ -21,12 +34,7 @@ function activateModify() {
 
   // setta l'option predefinita del select
   document.getElementById('region-input').innerText = '' // svuoto la regione attuale
-  getRegions();
-  document.getElementById('region-input').value = getCookie('regionId');
-
-  document.getElementById('city-input').innerText = '' // svuoto la citt attuale
-  getCity();
-  document.getElementById('city-input').value = getCookie('cityId');
+  getRegions(getCookie('regionId'));
 
   // mostra bottoni di conerma e annulla - nascone bottoni di modifica e eliminazione account
   document.getElementById('btn-modify').style.display = 'none';
@@ -45,10 +53,10 @@ function resetInfo() {
   document.getElementById('pwd').disabled = true;
   document.getElementById('city-input').disabled = true;
   document.getElementById('region-input').disabled = true;
-
   
   info();
   infoCityRegion();
+  getCityInfo();
 
   document.getElementById('btn-modify').style.display = 'block';
   document.getElementById('btn-elimina').style.display = 'block';  
@@ -60,10 +68,10 @@ function resetInfo() {
 function checkLogin() {
   if(!getCookie('login')) document.location.href = indexUrl;
 
-  findSite();
   history();
   info();
   infoCityRegion();
+  getCityInfo();
 }
 
 // visto che la funzione info è standard non popola i select

@@ -97,6 +97,7 @@ create table if not exists `blood_request` (
     `blood_type` varchar(3) not null,
     `quantity` int not null,
     `deliveryTime` int not null, -- tempo di arrivo espresso in minuti
+    `cost` int,
     `hospital_` int not null, -- fk
     `site_` int default null, -- fk
     `isPending` tinyint default 0 check (`isPending` in (0,1,2,3)), -- 0 in attesa, 1 accettat, 2 non accettato da un admin

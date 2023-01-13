@@ -42,6 +42,8 @@ switch($method) {
                 break;
             case 'H':
                 require_once __DIR__ . '/class/Hospital.php';
+                require_once __DIR__ . '/class/City.php';
+                require_once __DIR__ . '/class/Region.php';
                 $hospital = new Hospital();
 
                 $hospital->id = $decodeBody->id;
@@ -51,20 +53,17 @@ switch($method) {
                 $hospital->addr = $decodeBody->address;
                 $hospital->city = $decodeBody->city;
                 if($decodeBody->pwd == ''){
-                    require_once __DIR__ . '/class/City.php';
-                    require_once __DIR__ . '/class/Region.php';
-
                     if($hospital->update($hospital, false) == 'ERR')
                         http_response_code(409); # conflitto (email già in uso)
                     else { # aggiorna il valore dei cookie
                         setcookie('name', $decodeBody->name, time() + 3600, '/');
-                        setcookie('city', (new City())->getOne($check['city_'])['name'], time() + 3600, '/'); # nome della città
+                        setcookie('city', (new City())->getOne($decodeBody->city)['name'], time() + 3600, '/'); # nome della città
                         setcookie('email', $decodeBody->email, time() + 3600, '/');
                         setcookie('phone', $decodeBody->phone, time() + 3600, '/');
-                        setcookie('cityId', $check['city_'], time() + 3600, '/');
-                        setcookie('address', $check['address'], time() + 3600, '/');
-                        setcookie('regionId', (new City())->getOne($check['city_'])['region_'], time() + 3600, '/');
-                        setcookie('region',  (new Region())->getOne((new City())->getOne($check['city_'])['region_'])['name'], time() + 3600, '/');
+                        setcookie('cityId', $decodeBody->city, time() + 3600, '/');
+                        setcookie('address', $decodeBody->address, time() + 3600, '/');
+                        setcookie('regionId', (new City())->getOne($decodeBody->city)['region_'], time() + 3600, '/');
+                        setcookie('region',  (new Region())->getOne((new City())->getOne($decodeBody->city)['region_'])['name'], time() + 3600, '/');
                     } 
                 } else {
                     $donator->pwd = password_hash($decodeBody->pwd, PASSWORD_DEFAULT);
@@ -72,13 +71,13 @@ switch($method) {
                         http_response_code(409); # conflitto (email già in uso)
                     else { # aggiorna il valore dei cookie
                         setcookie('name', $decodeBody->name, time() + 3600, '/');
-                        setcookie('city', (new City())->getOne($check['city_'])['name'], time() + 3600, '/'); # nome della città
+                        setcookie('city', (new City())->getOne($decodeBody->city)['name'], time() + 3600, '/'); # nome della città
                         setcookie('email', $decodeBody->email, time() + 3600, '/');
                         setcookie('phone', $decodeBody->phone, time() + 3600, '/');
-                        setcookie('cityId', $check['city_'], time() + 3600, '/');
-                        setcookie('address', $check['address'], time() + 3600, '/');
-                        setcookie('regionId', (new City())->getOne($check['city_'])['region_'], time() + 3600, '/');
-                        setcookie('region',  (new Region())->getOne((new City())->getOne($check['city_'])['region_'])['name'], time() + 3600, '/');
+                        setcookie('cityId', $decodeBody->city, time() + 3600, '/');
+                        setcookie('address', $decodeBody->address, time() + 3600, '/');
+                        setcookie('regionId', (new City())->getOne($decodeBody->city)['region_'], time() + 3600, '/');
+                        setcookie('region',  (new Region())->getOne((new City())->getOne($decodeBody->city)['region_'])['name'], time() + 3600, '/');
                     }
                 }    
 

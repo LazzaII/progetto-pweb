@@ -8,9 +8,13 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 switch($method) {
     case 'GET':
-        $allCity = $city->getFromRegion($_GET['region']);
-        $js_encode = json_encode($allCity, true);
         header("Content-Type: application/json");
+        if(isset($_GET['id'])) {
+            $js_encode = json_encode($city->getOne($_GET['id']), true);
+        } else {
+            $allCity = $city->getFromRegion($_GET['region']);
+            $js_encode = json_encode($allCity, true);
+        }
         echo($js_encode);
             
         break;

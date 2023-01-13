@@ -50,9 +50,12 @@ class Donation {
     }
 
     public function availabilityType($type) { // to check stock availability of specific blood type
-        $query = 'select D1.`site_` as site, count(0) as QTA
+        $query = 'select D1.`site_` as site, count(0) as QTA, C.`_id` as cId, C.`name` as cName, C.`lat`, C.`lng`, R.`_id` as rId, R.`name` as rName
                   from `donation` D1
                   join `donator` D2 on D2.`_id` = D1.`donator_` 
+                  join `site` S on S.`_id` = D1.`site_`
+                  join `city` C on C.`_id` = S.`city_`
+                  join `region` R on R.`_id` = C.`region_`
                   where D2.`blood_group` = :type
                     and D1.`isUsed` = 0
                   group by D1.`site_`
@@ -107,27 +110,60 @@ class Donation {
         return 'ERR';
     }
 
-    public function getFirstFree($site) {
-        $query = 'select `_id`
-                  from `donation` 
+    public function getFirstFree($site, $type) {
+        $query = 'select D1.`_id`
+                  from `donation` D1
+                  join `donator` D2 on D2.`_id` = D1.`donator_`
                   where `isUsed` = 0
                     and `site_` = :site
-                  order by `date` asc';
+                    and `blood_group` = :type
+                  order by `date` asc
+                  limit 1';
         $stmt = $this->pdo->prepare($query);
         $data = [
-            'site' => $site
+            'site' => $site,
+            'type' => $type
         ];
         $stmt->execute($data);
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
-    public function use($site) {
+    public function use($site, $type) {
         $query = 'update `donation`
                   set `isUsed` = 1
                   where `_id` = :id';
         $stmt = $this->pdo->prepare($query);
         $data = [
-            'id' => self::getFirstFree($site) // use the first available to donate
+            'id' => self::getFirstFree($site, $type)['_id'] // prende la prima donazione non usata
+        ];
+        $stmt->execute($data);
+    }
+
+    public function getFirstUsed($site, $type) {
+        $query = 'select D1.`_id`
+                  from `donation` D1
+                  join `donator` D2 on D2.`_id` = D1.`donator_`
+                  where `isUsed` = 1
+                    and `site_` = :site
+                    and `blood_group` = :type
+                  order by `date` asc
+                  limit 1';
+        $stmt = $this->pdo->prepare($query);
+        $data = [
+            'site' => $site,
+            'type' => $type
+        ];
+        $stmt->execute($data);
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    public function deUse($site, $type) {
+        $query = 'update `donation`
+                  set `isUsed` = 0
+                  where `_id` = :id';
+        $stmt = $this->pdo->prepare($query);
+        $data = [
+            'id' => self::getFirstUsed($site, $type)['_id'] // prende la prima donazione usata
         ];
         $stmt->execute($data);
     }

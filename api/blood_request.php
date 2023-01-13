@@ -18,6 +18,9 @@ switch($method){
         
         break;
     case 'POST':
+        require_once __DIR__ . '/class/Donation.php';
+        $donation = new Donation();
+
         $body = file_get_contents("php://input"); // prende il body
         $decodeBody = json_decode($body);
 
@@ -25,32 +28,35 @@ switch($method){
         $request->quantity =  $decodeBody->qta;
         $request->hospital = $decodeBody->hospital;
         $request->site = $decodeBody->site;
+        $request->time = $decodeBody->time;
+        $request->cost = $decodeBody->cost;
         $request->add($request);
-
-        require_once __DIR__ . '/class/Donation.php';
-        $donation = new Donation();
 
         // "blocca" la quantità di sacche di sangue richiesta (modifica in usato le donazioni)
         for ($i = 0; $i < $decodeBody->qta; $i++) 
-            $donation->use($decodeBody->site);
+            $donation->use($decodeBody->site, $decodeBody->type);
+        
 
         break;
-    case 'PUT':
+
+    case 'POST':
         $body = file_get_contents("php://input"); // prende il body
         $decodeBody = json_decode($body);
 
-        $request->id = $decodeBody->id;
-        $request->blood_type = $decodeBody->type;
-        $request->quantity =  $decodeBody->qta;
-        $request->update($request);
+        //admin che accetta, o no, una richiesta
+        $request->accept($decodeBody->id, $decodeBody->value);
 
-        //manca la parte per il controllo della quantità, se la quantità precedente
-        // era maggiore vanno liberate delle sacchè, sennò vanno lockate altre
-        
         break;
     case 'DELETE':
-        $substringedURI = explode('/', $_SERVER["REQUEST_URI"]); // to get the id of the request  
-        print_r($substringedURI[count($substringedURI) - 1]);
+        require_once __DIR__ . '/class/Donation.php';
+        $donation = new Donation();
+
+        $substringedURI = explode('/', $_SERVER["REQUEST_URI"]); // per prendere l'id della richiesta  
+        $req = $request->getOne($substringedURI[count($substringedURI) - 1]); // prende i dati della richiesta da eliminare così da 'sbloccare' le sache
+        // "sblocca" la quantità di sacche di sangue richiesta (modifica in usato le donazioni)
+        for ($i = 0; $i < $req['quantity']; $i++) 
+            $donation->deUse($req['site_'], $req['blood_type']);
+        
         $request->delete($substringedURI[count($substringedURI)-1]);
         
         break;

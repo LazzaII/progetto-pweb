@@ -1,1 +1,12 @@
-/* request css page here */
+#stock-box {
+    display: flex;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--snow);
+    width: fit-content;
+    height: fit-content;
+    margin: auto;
+}

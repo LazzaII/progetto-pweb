@@ -1,5 +1,5 @@
 // Regioni
-function getRegions() {
+function getRegions(setDef = null) {
   // chiamata a http://localhost/progetto-pweb/api/region.php per prendere tutte le regioni
   let xhr = new XMLHttpRequest;
   xhr.open('GET', url + 'region.php', true);
@@ -12,16 +12,23 @@ function getRegions() {
       opt.setAttribute('value', region._id);
       select.append(opt);
     }
+    // nella registrazione non ci sono cookie quindi va bene qualsiasi regione
+    // nelle info degli account invece serve settare come default quella dei cookie
+    if(setDef !== null) {
+      document.getElementById('region-input').value = setDef;
+      document.getElementById('city-input').innerText = '' // svuoto la citt attuale
+      getCity(getCookie('cityId'));
+    }
   }
-  xhr.send(null);
+  xhr.send();
 }
   
 // Città
-function getCity() {
+function getCity(setDef = null) {
   // chiamata a http://localhost/progetto-pweb/api/city.php per prendere tutte le città di una regione
   let xhr = new XMLHttpRequest;
   let region = document.getElementById('region-input').value;
-  if(!region) region = 1;
+  if(!region) region = 1; // serve solo per settare le città default nella registazione dato che la prima regione è il Lazio
   xhr.open('GET', url + 'city.php?region=' + region, true);
   xhr.onload = function () {
     let cities = JSON.parse(xhr.response);
@@ -33,8 +40,10 @@ function getCity() {
       opt.setAttribute('value', city._id)
       select.append(opt);
     }
+    // stessa cosa delle regioni
+    if(setDef !== null) document.getElementById('city-input').value = setDef;
   }
-  xhr.send(null);
+  xhr.send();
 }
 
 // News

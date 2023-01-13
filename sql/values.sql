@@ -3389,3 +3389,12 @@ INSERT INTO `city` (`_id`, `city`, `lat`, `lng`, `region_`) VALUES
 (3372, 'Revere', 45.0572, 11.1302, '2'),
 (3373, 'Rive d’Arcano', 46.1333, 13.0333, '11');
 
+insert into `site` (`address`, `city`) values 
+('Via Nicola Pisano', 5),
+('Via Roma', 145),
+('Piazza della Libertà', 8),
+('Via Modigliani', 2),
+('Piazza Garibaldi', 4),
+('Via Bovio', 2),
+('Via Diotisalvi', 3),
+

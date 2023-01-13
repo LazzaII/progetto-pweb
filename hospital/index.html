@@ -18,9 +18,9 @@
         </div>
         <div class="nav-item-ce">
             <ul id="menu">
-                <li onclick="showDiv('history')"><span>Cronologia</span></li>
-                <li onclick="showDiv('request')"><span>Richiedi</span></li>
-                <li onclick="showDiv('news')"><span>News</span></li>
+                <li onclick="showDiv('history'), history()"><span>Cronologia</span></li>
+                <li onclick="showDiv('request'), findSite()"><span>Richiedi</span></li>
+                <li onclick="showDiv('news'), getNews()"><span>News</span></li>
                 <li onclick="showDiv('contacts')"><span>Contatti</span></li>
             </ul>
         </div>
@@ -41,6 +41,7 @@
                     <th>Quantità</th>
                     <th>Città magazzino di spedizione</th>
                     <th>Tempo di arrivo</th>
+                    <th>Costo</th>
                     <th>Approvato</th>
                 </tr>
             </table>
@@ -61,7 +62,16 @@
                 </select> 
             </form>
             
-            <div id="stock-box">
+            <h3>In città</h3>
+            <div id="stock-box-ci">
+
+            </div>
+            <h3>Fuori città</h3>
+            <div id="stock-box-re">
+
+            </div>
+            <h3>Fuori regione</h3>
+            <div id="stock-box-it">
 
             </div>
         </section>
@@ -161,8 +171,8 @@
     </main>
 
     <script src="../common/utilities.js"></script>
-    <script src="./logic/api.js"></script>
-    <script src="./logic/logic.js"></script>
     <script src="../common/api.js"></script>
+    <script src="./logic/api-so.js"></script>
+    <script src="./logic/logic-so.js"></script>
 </body>
 </html>

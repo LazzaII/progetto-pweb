@@ -1,4 +1,4 @@
-// interval used in all pages
+// interval usato in tutte le pagine per far apparire e sparire i messaggi di errore o conferma
 var interval;
 
 // get cookie [mettere da chi è preso il codice]
@@ -23,8 +23,7 @@ function deleteCookie(name) {
 // show div
 function showDiv(divName) {
     if (document.getElementById(divName).style.display === 'none' || document.getElementById(divName).style.display === ''){
-        document.getElementById(divName).style.display = 'block';
-        getNews();  
+        document.getElementById(divName).style.display = 'block'; 
         for (let i = 0; i < divs.length; i++) {
             if(divs[i] !== divName)
                 document.getElementById(divs[i]).style.display = 'none';
@@ -59,4 +58,14 @@ const numberRegex = new RegExp('^[0-9]+$');
 
 function validateNumber(number) {
     return numberRegex.test(number)
+}
+
+// funzione per calolcare la distanza tra due città
+// formula di Haversine per il calcolo della distanza terrestre
+function distance(lat1, lon1, lat2, lon2) {
+    lat1 = Math.PI * lat1/180;
+    lon1 = Math.PI * lon1/180;
+    lat2 = Math.PI * lat2/180;
+    lon2 = Math.PI * lon2/180;
+    return R * Math.acos((Math.sin(lat1) * Math.sin(lat2)) + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon2-lon1));
 }
