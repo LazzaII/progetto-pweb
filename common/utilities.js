@@ -69,3 +69,11 @@ function distance(lat1, lon1, lat2, lon2) {
     lon2 = Math.PI * lon2/180;
     return R * Math.acos((Math.sin(lat1) * Math.sin(lat2)) + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon2-lon1));
 }
+
+// TROVARE LE FUNZIONI CHE LO UTILIZZANO E METTERCELO
+// funzione per pulire le tablle
+function clearTBody(id) {
+    let prevTr = document.querySelectorAll('#' + id +' tr');
+    for (let i = 1; i < prevTr.length; i++) // il primo viene saltato perchè è l'header della tabella
+        prevTr[i].remove();
+}

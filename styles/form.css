@@ -20,24 +20,6 @@
     text-align: center;
 }
 
-.input-text {
-    margin-top: 5px;
-    margin-bottom: 30px;
-    width:100%;
-    padding: 10px;
-    box-sizing:border-box;
-    background:none;
-    outline:none;
-    resize:none;
-    border-radius: 5px;
-    border: 0px solid var(--vivid-burgundy);
-    border-bottom: 1px solid var(--vivid-burgundy);
-    transition: all 200ms ease;
-}
-
-.input-text:focus {
-    border-bottom: 2px solid var(--vivid-burgundy);
-}
 
 input[type=button] {
     font-weight: bold;

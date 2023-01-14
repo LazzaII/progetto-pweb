@@ -78,19 +78,33 @@ class Admin {
         return 'OK';
     }
 
-    public function update($admin) {
+    public function update($admin, $isPassword = false) {
         if (empty(self::findFromEmail($admin->email, $admin->id))) {
-            $query = 'update `admin` 
-                      set `first_name` = :fn, `second_name` = :sn, `email` = :email, `hash_pwd` = :pwd
-                      where `_id` = :id';
-            $stmt = $this->pdo->prepare($query);
-            $data = [
-                'id' => $admin->id,
-                'fn' => $admin->fn,
-                'sn' => $admin->sn,
-                'email' => $admin->email,
-                'pwd' => $admin->pwd
-            ];
+            if($isPassword){
+                $query = 'update `admin` 
+                          set `first_name` = :fn, `second_name` = :sn, `email` = :email, `hash_pwd` = :pwd
+                          where `_id` = :id';
+                $stmt = $this->pdo->prepare($query);
+                $data = [
+                    'id' => $admin->id,
+                    'fn' => $admin->fn,
+                    'sn' => $admin->sn,
+                    'email' => $admin->email,
+                    'pwd' => $admin->pwd
+                ];
+            }
+            else {
+                $query = 'update `admin` 
+                          set `first_name` = :fn, `second_name` = :sn, `email` = :email
+                          where `_id` = :id';
+                $stmt = $this->pdo->prepare($query);
+                $data = [
+                    'id' => $admin->id,
+                    'fn' => $admin->fn,
+                    'sn' => $admin->sn,
+                    'email' => $admin->email
+                ];
+            }
             $stmt->execute($data);
             return 'OK';
         }

@@ -13,7 +13,7 @@ switch($method){
         
         break;
     case 'POST':
-        if($_COOKIE['login'] == 'logged'){ // only admin can create message
+        if($_COOKIE['login'] == 'logged-a'){ // only admin can create message
             $body = file_get_contents("php://input"); //get the body
             $decodeBody = json_decode($body);
     
@@ -24,22 +24,10 @@ switch($method){
         } else
             http_response_code(401); // Unauthorized 
         
-        break;
-    case 'PUT':
-        if($_COOKIE['login'] == 'logged'){ // only admin can update message
-            $body = file_get_contents("php://input"); //get the body
-            $decodeBody = json_decode($body);
-    
-            $news->id = $decodeBody->id;
-            $news->title = $decodeBody->title;
-            $news->body = $decodeBody->body;
-            $news->update($news);
-        } else
-            http_response_code(401); // Unauthorized 
 
         break;
     case 'DELETE':
-        if($_COOKIE['login'] == 'logged'){ // only admin can delete message
+        if($_COOKIE['login'] == 'logged-a'){ // only admin can delete message
             $substringedURI = explode('/', $_SERVER["REQUEST_URI"]); //To get the id of the news  
             $news->delete($substringedURI[count($substringedURI)-1]);
         } else

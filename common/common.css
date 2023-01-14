@@ -1,0 +1,167 @@
+/* css comune a tutte le pagine*/
+
+/* system variables */
+:root {
+    --snow: #fcf7f8ff;
+    --light-gray: rgb(155, 139, 139);
+    --vivid-burgundy: #a7333fff;
+    --persian-plum: #74121dff;
+    --dark-sienna: #580c1fff;
+    --light-green: #55d86bbb;
+    --light-green-2: #6EEB8344;
+    --text-color: #333;
+}
+
+
+.centered{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    padding: 20px;
+}
+
+.errore {
+    background-color: var(--vivid-burgundy);
+    box-shadow:0 0 30px -10px var(--dark-sienna);
+    margin: 15px 0;
+}
+
+.corretto {
+    background-color: var(--light-green);
+    box-shadow:0 0 40px -10px var(--light-green-2);
+    margin: 15px 0;
+}
+
+#form-l, #news-form{
+    width: 400px;
+    height: fit-content;
+    background: var(--snow);
+    color: var(--text-color);
+    border-radius:8px;
+    box-shadow:0 0 40px -10px var(--dark-sienna);
+    padding:20px 30px;
+    box-sizing:border-box;
+    position:relative;
+    margin: auto;
+}
+
+
+.input-text {
+    margin-top: 5px;
+    margin-bottom: 30px;
+    width:100%;
+    padding: 10px;
+    box-sizing:border-box;
+    background:none;
+    outline:none;
+    resize:none;
+    border-radius: 5px;
+    border: 0px solid var(--vivid-burgundy);
+    border-bottom: 1px solid var(--vivid-burgundy);
+    transition: all 200ms ease;
+}
+
+.input-text:focus {
+    border-bottom: 2px solid var(--vivid-burgundy);
+}
+
+
+.full-width-btn{
+    width: 100%;
+}
+
+
+input[type=button] {
+    font-weight: bold;
+    float:right;
+    padding:8px 12px;
+    margin:8px 0 0;
+    border-radius: 5px;
+    border:2px solid var(--persian-plum);
+    background:0;
+    color: var(--vivid-burgundy);
+    cursor: pointer;
+    transition: all 300ms ease-in;
+}
+
+input[type=button]:hover {
+    background: var(--persian-plum);
+    color: var(--snow);
+}
+
+#message-l, #message-r, #message-new, #message {
+    text-align: center;
+    color: var(--snow);
+    padding: 5px 5px;
+    border-radius:8px;   
+    margin-top: 70px;
+}
+
+
+#history, #request, #users, #mex, #news-list{
+    width: 80vw;
+    margin: auto;
+    background-color: white;
+    padding: 30px 0;
+    border-radius: 10px;
+    margin-top: 100px;
+}
+
+#history h1, #request h3, #request h1, #users h1, #users h3, #mex h3, #mex h1, #news-list h1, #news-list h3, #form-new-admin h1{
+    text-align: center;
+    width: 100%;
+    font-size: 2rem;
+    color: var(--dark-sienna);
+}
+
+#users h1, #users h3, #mex h3, #mex h1, #form-new-admin h1{
+    font-size: 1.5rem;
+}
+
+#ordini, .ordini{
+    margin:  30px auto;
+    width: 90%;
+    text-align: center;
+    border-spacing: 15px;
+}
+
+#ordini th, #ordini td, .ordini th, .ordini td{
+    color: var(--dark-sienna);
+}
+
+#ordini th, .ordini th{
+    border-bottom: solid 1px var(--dark-sienna);
+    margin: 10px;
+}
+
+#bottoni{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+#btn-modify, #btn-elimina, #btn-reset, #btn-confirm{
+ margin: 0;
+ padding: 10px 15px;
+ border-radius: 5px;
+ color: white;
+ border: none;
+ transition: all 200ms ease-in-out;
+}
+
+#btn-modify, #btn-confirm{
+    background-color: var(--light-green);
+}
+
+#btn-elimina, #btn-reset{
+    background-color: red;
+}
+
+#btn-modify:hover, #btn-confirm:hover{
+    background-color: green;
+}
+
+#btn-elimina:hover, #btn-reset:hover{
+    background-color:brown;
+}

@@ -53,6 +53,15 @@ class Hospital {
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public function getTot(){
+        $query = 'select count(0) as QTA 
+                  from `hospital`
+                  where `isAuth` = 1';
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
     public function add($hospital) {
         if(empty(self::findFromEmail($hospital->email))) {
             $query = "insert into `hospital` (`name`, `email`, `phone`, `hash_pwd`, `address`, `city_`)

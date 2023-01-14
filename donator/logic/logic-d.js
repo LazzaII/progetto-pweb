@@ -8,7 +8,7 @@ var cookiesName = ['login', 'auth', 'blood_group', 'email', 'first', 'id', 'seco
 // ACCOUNT
 
 function activateModify() {
-  // activate input 
+  // attiva gli input
   for (const cookie of cookiesName) {
     if(document.getElementById(cookie) !== null)
       document.getElementById(cookie).disabled = false;
@@ -16,7 +16,7 @@ function activateModify() {
   document.getElementById('pwd').disabled = false;
   document.getElementById('blood_group').disabled = true;
 
-  // active confirm btn e disabled modify and delete
+  // mostra bottone di conferma e annulla e nasconde bottone di modifica e eliminazione
   document.getElementById('btn-modify').style.display = 'none';
   document.getElementById('btn-elimina').style.display = 'none';
   document.getElementById('btn-confirm').style.display = 'block';

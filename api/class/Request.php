@@ -21,8 +21,12 @@ class Request {
     }
 
     // funzione per prendere tutte le richieste
-    public function getAll(){
-        $query = 'select * from `blood_request`';
+    public function getAll() {
+        $query = 'select B.*, C.`name` as cName, H.`name` as hName
+                  from `blood_request` B
+                  join `site` S on S.`_id` = B.`site_`
+                  join `city` C on C.`_id` = S.`city_`
+                  join `hospital` H on H.`_id` = B.`hospital_`';
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
@@ -41,7 +45,7 @@ class Request {
     }
 
     //funzione per prendere le richieste di una sola SO
-    public function getFromHospital($hospital){
+    public function getFromHospital($hospital) {
         $query = 'select B.*, C.`name`
                   from `blood_request` B
                   join `site` S on S.`_id` = B.`site_`
@@ -55,6 +59,23 @@ class Request {
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public function getUrgent() {
+        $query = 'select count(0) as QTA
+                  from `blood_request` B
+                  where `cost` = 0'; 
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function getNotUrgent() {
+        $query = 'select count(0) as QTA
+                  from `blood_request` B
+                  where `cost` <> 0'; 
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
     // funzione per aggiungere una richiesta di sangue
     public function add($request) {
         $query = "insert into `blood_request` (`date`, `blood_type`, `quantity`, `hospital_`, `site_`, `deliveryTime`, `cost`)

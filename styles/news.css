@@ -1,8 +1,22 @@
+#news{
+    width: 80vw;
+    margin: auto;
+}
+
 #news-container {
     color: var(--text-color);
-    display: flex !important;
-    flex-direction: row !important;
+    display: flex;
+    flex-direction: row;
     text-align: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+#main-title-news{
+    color: white;
+    font-size: 2rem;
+    text-align: center;
+    width: 100%;
 }
 
 
@@ -11,9 +25,10 @@
     background: var(--snow);
     border-radius: 8px;
     box-shadow: 0 0 40px -10px var(--dark-sienna);
-    padding: 15px;
-    margin: 20px;
-    width: 33%;
+    padding: 20px 0;
+    margin: 20px 0;
+    width: 32%;
+    overflow: hidden;
 }
 
 .news-title {
@@ -26,7 +41,11 @@
 
 .news-body {
     text-align: justify;
-    text-justify: inter-word; 
+    width: 70%;
+    margin:auto;
+    min-height: 150px;
+    overflow-wrap: break-word;
+    line-height: 1.5;
 }
 
 .news-author {
@@ -34,4 +53,5 @@
     text-align: right;
     float: right;
     font-size: 14px;
+    margin-right: 10px;
 }

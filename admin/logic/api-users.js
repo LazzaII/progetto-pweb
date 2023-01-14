@@ -2,26 +2,39 @@
     tutti gli utenti
 */
 
+// funzione di caricamento di tutti gli utenti
 function getUsers() {
     getDonator();
     getSo();
     getAdmin();
 }
 
-function removeUsers(id, type) {
-    // da fare
-}
+// funzione per eliminare o autenticare l'utente
+function actionUsers(id, type, METHOD) {
+    let data = JSON.stringify({
+        id : id,
+        type : type
+    });
 
-function confirmUsers(id, type) {
-    // da fare
+    // chiamata a http://localhost/progetto-pweb/api/users.php per eliminare o autenticare l'utente
+    let xhr = new XMLHttpRequest();
+    xhr.open(METHOD, url + 'users.php?type=' + type, true);
+    xhr.onload = function () {
+        if(xhr.status === 200) {
+            if(METHOD === 'DELETE') alert("Account eliminato con successo");
+            else alert("Account abilitato")
+            getUsers();
+        }
+    }
+    xhr.send(data);
 }
 
 // prende i donatori
 function getDonator() {
-    let table = document.getElementById('tbl-donator');
+    let tbody = document.getElementById('tbody-donator');
 
     // pulisce il contenuto della tabella per poi ripopolarla sotto
-    let prevTr = document.querySelectorAll('#table-donator tr');
+    let prevTr = document.querySelectorAll('#tbody-donator tr');
     for (let i = 1; i < prevTr.length; i++) // il primo viene saltato perchè è l'header della tabella
         prevTr[i].remove();
 
@@ -48,12 +61,12 @@ function getDonator() {
                 phone.innerText = d.phone;
                 btype.innerText = d.blood_group;
                 btnE.innerText = 'E';
-                btnE.addEventListener('click', () => { removeUsers(d._id, 'D') })
+                btnE.addEventListener('click', () => { actionUsers(d._id, 'D', 'DELETE') })
                 azioni.append(btnE);
                 if(d.isAuth === '0') {
                     btnC = document.createElement('button')
                     btnC.innerText = 'C';
-                    btnC.addEventListener('click', () => { confirmUsers(d._id, 'D') })
+                    btnC.addEventListener('click', () => { actionUsers(d._id, 'D', 'PUT') })
                     azioni.append(btnC);
                 }
                 tr.append(fname);
@@ -62,7 +75,7 @@ function getDonator() {
                 tr.append(phone);
                 tr.append(btype);
                 tr.append(azioni);
-                table.append(tr);
+                tbody.append(tr);
             }
         }
     }
@@ -71,10 +84,10 @@ function getDonator() {
 
 // prende le strutture ospedaliera
 function getSo() {
-    let table = document.getElementById('tbl-so');
+    let tbody = document.getElementById('tbody-so');
 
     // pulisce il contenuto della tabella per poi ripopolarla sotto
-    let prevTr = document.querySelectorAll('#table-so tr');
+    let prevTr = document.querySelectorAll('#tbody-so tr');
     for (let i = 1; i < prevTr.length; i++) // il primo viene saltato perchè è l'header della tabella
         prevTr[i].remove();
 
@@ -103,12 +116,12 @@ function getSo() {
                 city.innerText = h.cName;
                 region.innerText = h.rName;
                 btnE.innerText = 'E';
-                btnE.addEventListener('click', () => { removeUsers(h._id, 'D') })
+                btnE.addEventListener('click', () => { actionUsers(h._id, 'H', 'DELETE') })
                 azioni.append(btnE);
                 if(h.isAuth === '0') {
                     btnC = document.createElement('button')
                     btnC.innerText = 'C';
-                    btnC.addEventListener('click', () => { confirmUsers(h._id, 'D') })
+                    btnC.addEventListener('click', () => { actionUsers(h._id, 'H', 'PUT') })
                     azioni.append(btnC);
                 }
                 tr.append(name);
@@ -118,7 +131,7 @@ function getSo() {
                 tr.append(city);
                 tr.append(region);
                 tr.append(azioni);
-                table.append(tr);
+                tbody.append(tr);
             }
         }
     }
@@ -127,10 +140,10 @@ function getSo() {
 
 // prende gli admin
 function getAdmin() {
-    let table = document.getElementById('tbl-admin');
+    let tbody = document.getElementById('tbody-admin');
 
     // pulisce il contenuto della tabella per poi ripopolarla sotto
-    let prevTr = document.querySelectorAll('#table-admin tr');
+    let prevTr = document.querySelectorAll('#tbody-admin tr');
     for (let i = 1; i < prevTr.length; i++) // il primo viene saltato perchè è l'header della tabella
         prevTr[i].remove();
 
@@ -153,13 +166,13 @@ function getAdmin() {
                 sname.innerText = a.second_name;
                 email.innerText = a.email;
                 btnE.innerText = 'E';
-                btnE.addEventListener('click', () => { removeUsers(d._id, 'D') })
+                btnE.addEventListener('click', () => { actionUsers(a._id, 'A', 'DELETE') })
                 azioni.append(btnE);
                 tr.append(fname);
                 tr.append(sname);
                 tr.append(email);
                 tr.append(azioni);
-                table.append(tr);
+                tbody.append(tr);
             }
         }
     }

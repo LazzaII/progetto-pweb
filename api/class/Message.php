@@ -18,7 +18,9 @@ class Message {
     }
 
     public function getAll(){
-        $query = 'select * from `message`';
+        $query = 'select * 
+                  from `message`
+                  order by `_id` desc';
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);

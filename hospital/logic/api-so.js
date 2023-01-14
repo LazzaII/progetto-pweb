@@ -19,7 +19,6 @@ function getCityInfo() {
         if(xhr.status === 200 ){
             lng = request.lng;
             ltn = request.lat;
-            findSite();
         }
     }
     xhr.send();
@@ -27,13 +26,8 @@ function getCityInfo() {
 
 // ricerca di tutti i siti (viene richiamata quando si sceglie unta tipologia di sangue)
 function findSite() {
-    // prende e pulisce il div che contiene i vari magazzini
-    let divc = document.getElementById('stock-box-ci');
-    divc.innerText = '';
-    let divre = document.getElementById('stock-box-re');
-    divre.innerText = '';
-    let divit = document.getElementById('stock-box-it');
-    divit.innerText = '';
+    // pulisce il corpo
+    clearTBody('tbody-city'); clearTBody('tbody-region'); clearTBody('tbody-it');
 
     let data = JSON.stringify({
         type : document.getElementById('btype').value
@@ -47,15 +41,18 @@ function findSite() {
         let stocks = JSON.parse(xhr.response);
         if(xhr.status === 200 ){
             for (const s of stocks) {
-                let art = document.createElement('article');
-                let citta = document.createElement('label');
-                let regione = document.createElement('label');
+                let tr = document.createElement('tr');
+                let citta = document.createElement('td');
+                let regione = document.createElement('td');
+                let tdqta = document.createElement('td');
                 let qta = document.createElement('select'); 
-                let distanza = document.createElement('label');
-                let tempoArr = document.createElement('label');
-                let btnAdd = document.createElement('button');
-                let urgente = document.createElement('label');
+                let distanza = document.createElement('td');
+                let tempoArr = document.createElement('td');
+                let tdBtnU = document.createElement('td');
                 let btnU = document.createElement('input')
+                let tdBtn = document.createElement('td');
+                let btnAdd = document.createElement('button');
+
                 let dt = distance(ltn, lng, s.lat, s.lng); // calcolo della distanza terrestre (linea d'aria)
 
                 // si crea il menù per selezionare la quantità desiderata
@@ -65,49 +62,49 @@ function findSite() {
                     opt.innerText = i+1;
                     qta.append(opt);
                 }
+                tdqta.append(qta);
 
                 // set degli attributi
-                art.setAttribute('id', s.site);
-                art.setAttribute('class', 'box');
+                tr.setAttribute('id', s.site);
                 citta.setAttribute('id', s.cId);
-                regione.setAttribute('id', s.nId);
+                regione.setAttribute('id', s.rId);
                 tempoArr.setAttribute('class', 'time');
                 qta.setAttribute('class', 'qta-r');
                 btnU.setAttribute('class', 'urgente')
                 btnU.type = 'checkbox';
+                tdBtnU.append(btnU)
                 
                 // set del testo
-                urgente.innerText = 'Urgenza'
                 btnAdd.innerText = 'Richiedi';
-                citta.innerText = 'Citta:' + s.cName;
-                regione.innerText = 'Regione:' + s.rName;
-                distanza.innerText = 'Distanza:' + Math.floor(dt) + ' Km';
+                citta.innerText = s.cName;
+                regione.innerText = s.rName;
+                distanza.innerText = Math.floor(dt) + ' Km';
                 if(dt === 0) time = timeS;
                 else if(dt < 30) time = Math.floor(dt/vm1 * 60);
                 else if(dt < 150) time = Math.floor(dt/vm2 * 60);
                 else time = Math.floor(dt/vm3 * 60);
 
-                time = time * 0.1; // 10% per imprevisti
+                time += time*0.1; // 10% per imprevisti
                 // VEDERE SE FARE LA COSA DELLE 48 ORE NEL CASO RIMUOVERLA DAL MANUALE
-                tempoArr.innerText = 'Tempo stimato:' + time + ' minuti';
+                tempoArr.innerText = time + ' minuti';
                 
                 btnAdd.addEventListener('click', () => sendRequest(s.site, time, Math.floor(dt)));
+                tdBtn.append(btnAdd)
 
-                art.append(citta);
-                art.append(regione);
-                art.append(tempoArr);
-                art.append(distanza);
-                art.append(urgente);
-                art.append(btnU);
-                art.append(qta);
-                art.append(btnAdd);
+                tr.append(citta);
+                tr.append(regione);
+                tr.append(tempoArr);
+                tr.append(distanza);
+                tr.append(tdBtnU);
+                tr.append(tdqta);
+                tr.append(tdBtn);
 
                 if(s.cId === getCookie('cityId'))
-                    divc.append(art);
+                    document.getElementById('tbody-city').append(tr);
                 else if(s.rId === getCookie('regionId'))
-                    divre.append(art);
+                    document.getElementById('tbody-region').append(tr);
                 else 
-                    divit.append(art);
+                    document.getElementById('tbody-it').append(tr);
             }
         }
     }
@@ -145,12 +142,8 @@ function sendRequest(id, tempo, km) {
 
 // Cronologia
 function history() {
-    let table = document.getElementById('ordini');
-
     // pulisce il contenuto della tabella per poi ripopolarla sotto
-    let prevTr = document.querySelectorAll('#ordini tr');
-    for (let i = 1; i < prevTr.length; i++) // il primo viene saltato perchè è l'header della tabella
-        prevTr[i].remove();
+    clearTBody('ordini');
 
     // chiamata a http://localhost/progetto-pweb/api/blood_request.php per caricare le vecchie richieste
     let xhr = new XMLHttpRequest();
@@ -191,7 +184,7 @@ function history() {
                 else
                     pending.innerText = 'Approvato' 
                 tr.append(pending);
-                table.append(tr);
+                document.getElementById('ordini').append(tr);
             }
         }
     }

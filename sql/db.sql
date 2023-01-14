@@ -104,10 +104,10 @@ create table if not exists `blood_request` (
     primary key (`_id`),
     foreign key (`hospital_`) references `hospital` (`_id`)
         on update cascade
-        on delete no action,
+        on delete set null,
     foreign key (`site_`) references `site` (`_id`)
         on update cascade
-        on delete no action
+        on delete set null
 ) engine = InnoDB;
 
 create index `index_hospital` ON `blood_request` (`hospital_`);
@@ -122,10 +122,10 @@ create table if not exists `donation` (
     primary key (`_id`),
     foreign key (`donator_`) references `donator` (`_id`)
         on update cascade
-        on delete no action,
+        on delete set null,
     foreign key (`site_`) references `site` (`_id`)
         on update cascade
-        on delete no action
+        on delete set null
 ) engine = InnoDB;
 
 create index `index_donator` ON `donation` (`donator_`);
@@ -157,7 +157,7 @@ create table if not exists `news` (
     primary key (`_id`),
     foreign key (`author_`) references `admin` (`_id`)
         on update cascade
-        on delete no action
+        on delete set null
 ) engine = InnoDB;
 
 create index `index_author` ON `news` (`author_`);

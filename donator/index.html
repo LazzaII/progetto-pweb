@@ -7,6 +7,7 @@
     
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../common/common.css">
 
     <title>Donator BBL</title>
 </head>
@@ -32,29 +33,26 @@
     <main>
         <section id="donation">
             <!-- lista delle donazioni e bottone per far donare -->
+            <h3>Ultime donazioni</h3>
+            <table id="donazioni">
+                <tr>
+                    <th>Data</th>
+                    <th>Numero Magazzino</th>
+                    <th>Città Magazzino</th>
+                    <th>Utilizzato</th>
+                </tr>
+            </table>
+
             <h3>Nuova donazione</h3>
             <button onclick="donate()" id="btn-dona">Dona</button>
 
             <div id="message-d">
                 <p></p>
             </div>
-
-            <div id="last-d">
-                <h3>Ultime donazioni</h3>
-                <table id="donazioni">
-                    <tr>
-                        <th>Data</th>
-                        <th>Numero Magazzino</th>
-                        <th>Città Magazzino</th>
-                        <th>Utilizzato</th>
-                    </tr>
-                    
-                </table>
-            </div>
         </section>
         
         <section id="news" hidden>
-            <h1 id="title-news">Ultime news</h1>
+            <h1 id="main-title-news">Ultime news</h1>
             <div id="news-container">
 
             </div>

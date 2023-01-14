@@ -63,22 +63,9 @@ footer div p {
     display: none;
 }
 
-/* common class */
-.errore {
-    background-color: var(--vivid-burgundy);
-    box-shadow:0 0 30px -10px var(--dark-sienna);
-    margin: 15px 0;
-}
-
-.corretto {
-    background-color: var(--light-green);
-    box-shadow:0 0 40px -10px var(--light-green-2);
-    margin: 15px 0;
-}
-
 .not-auth {
     background-color: var(--light-gray);
-    box-shadow:0 0 40px -10px var(--text-color);
+    box-shadow:0 0 30px -10px var(--text-color);
     margin: 15px 0;
 }
 

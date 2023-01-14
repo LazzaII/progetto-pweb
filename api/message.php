@@ -14,7 +14,7 @@ switch($method){
         
         break;
     case 'POST':
-        $body = file_get_contents("php://input"); //get the body
+        $body = file_get_contents("php://input"); // prende contenuto del body
         $decodeBody = json_decode($body);
   
         $mex->obj = $decodeBody->obj;
@@ -26,13 +26,14 @@ switch($method){
         break;
 
     case 'DELETE':
-        if($_COOKIE['login'] == 'logged'){ // only admin can delete message
-            $substringedURI = explode('/', $_SERVER["REQUEST_URI"]); //To get the id of the mex  
+        if($_COOKIE['login'] == 'logged-a'){ // solo gli admin possono eliminare i messaggi
+            // per perendere l'id del messagio 
+            $substringedURI = explode('/', $_SERVER["REQUEST_URI"]);
             $mex->delete($substringedURI[count($substringedURI)-1]);
         } else
-            http_response_code(401); // Unauthorized
+            http_response_code(401); // non autorizzato
         
         break;
     default:
-        http_response_code(405); // method error
+        http_response_code(405); // metodo non riconosciuto per questa API
 }

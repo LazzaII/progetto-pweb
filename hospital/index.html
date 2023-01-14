@@ -7,6 +7,8 @@
 
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../common/common.css">
+
 
     <title>Hospital BBL</title>
 </head>
@@ -32,7 +34,6 @@
     
     <main>
         <section id="history">
-            <!-- FARE LEGENDA PER SPIEGARE SIGNFICATO DI X, U, N -->
             <h1>ORDINI</h1>
             <table id="ordini">
                 <tr>
@@ -63,21 +64,51 @@
             </form>
             
             <h3>In città</h3>
-            <div id="stock-box-ci">
-
-            </div>
+            <table>
+                <tbody id="tbody-city">
+                    <tr>
+                        <th>Città</th>
+                        <th>Regione</th>
+                        <th>Quantità</th>
+                        <th>Distanza</th>
+                        <th>Tempo stimato</th>
+                        <th>Urgenza</th>
+                        <th>Azione</th>
+                    </tr>
+                </tbody>
+            </table>
             <h3>Fuori città</h3>
-            <div id="stock-box-re">
-
-            </div>
+            <table>
+                <tbody id="tbody-region">
+                    <tr>
+                        <th>Città</th>
+                        <th>Regione</th>
+                        <th>Quantità</th>
+                        <th>Distanza</th>
+                        <th>Tempo stimato</th>
+                        <th>Urgenza</th>
+                        <th>Azione</th>
+                    </tr>
+                </tbody>
+            </table>
             <h3>Fuori regione</h3>
-            <div id="stock-box-it">
-
-            </div>
+            <table>
+                <tbody id="tbody-it">
+                    <tr>
+                        <th>Città</th>
+                        <th>Regione</th>
+                        <th>Quantità</th>
+                        <th>Distanza</th>
+                        <th>Tempo stimato</th>
+                        <th>Urgenza</th>
+                        <th>Azione</th>
+                    </tr>
+                </tbody>
+            </table>
         </section>
 
         <section id="news" hidden>
-            <h1 id="title-news">Ultime news</h1>
+            <h1 id="main-title-news">Ultime news</h1>
             <div id="news-container">
 
             </div>
@@ -102,7 +133,7 @@
                     <label for="body">Messaggio</label>
                     <input type="text" name="body" class="input-text body-message" id="body" cols="30" rows="5" placeholder="..." ></input>
                 </div>
-                <input type="button" onclick="sendMessage()" value="Invia"/>
+                <input type="button" onclick="sendMessage()" value="Invia" class="full-width-btn"/>
 
                 <div id="message">
                     <p></p>
@@ -169,6 +200,13 @@
             </div>
         </section>
     </main>
+
+    <!-- footer - posizione statica -->
+    <footer>
+        <div>
+            <p>2023 © Blood Bank Lab. S.R.L. - P.IVA 19780955632</p>
+        </div>
+    </footer>
 
     <script src="../common/utilities.js"></script>
     <script src="../common/api.js"></script>

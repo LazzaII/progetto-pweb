@@ -44,6 +44,15 @@ class Donator {
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
+    public function getTot(){
+        $query = 'select count(0) as QTA 
+                  from `donator`
+                  where `isAuth` = 1';
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
     public function getAll(){
         $query = 'select * from `donator`';
         $stmt = $this->pdo->prepare($query);
@@ -109,8 +118,7 @@ class Donator {
                     'email' => $donator->email,
                     'phone' => $donator->phone
                 ];
-            }   
-            
+            }  
             $stmt->execute($data);
             return 'OK';
         }

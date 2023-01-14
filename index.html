@@ -7,11 +7,12 @@
 
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="common/common.css">
 
     <title>BBL</title>
 </head>
 <body>
-    <!-- navbar - static position, not all elements-->
+    <!-- navbar - posizione statica-->
     <nav>
         <div class="nav-item-t">
             <h1 class="title">Blood Bank Lab</h1>
@@ -31,7 +32,7 @@
 
     <!-- main -->
     <main class="centered">
-        <!-- manual page [LANDING] -->
+        <!-- Manuale [LANDING PAGE] -->
         <section id="manual" class="manual-section">
             <h2 id="man-title">Manuale d'uso</h2>
             <p>
@@ -105,7 +106,7 @@
             </p>
         </section>
 
-        <!-- why page -->
+        <!-- pagina perchè -->
         <section id="why">
             <h2 id="why-title">Perchè donare è importante</h2>
             <h5>DONARE IL SANGUE È UN GESTO DI SOLIDARIETÀ… 
@@ -130,29 +131,25 @@
             <a href="https://avismi.it/perche-donare/" target="_blank" id="source">Testo preso da Avis Milano</a>
         </section>
         
-        <!-- news page -->
+        <!-- pagina delle news -->
         <section id="news" hidden>
-            <h1 id="title-news">Ultime news</h1>
+            <h1 id="main-title-news">Ultime news</h1>
             <div id="news-container">
 
             </div>
         </section>
 
-        <!-- contact page -->
+        <!-- pagina di contatti -->
         <section id="contacts">
             <form id="form-c" class="centered">
                 <h2 id="title-contact">CONTATTACI</h2>
                 <div> 
-                    <!-- contact -->
                     <label for="fname">Nome</label>
                     <input type="text" class="input-text" name="fname" id="fname" placeholder="mario" />
                     <label for="sname">Cognome</label>
                     <input type="text" class="input-text" name="sname" id="sname" placeholder="rossi" />
                     <label for="email">Email</label>
                     <input type="email" class="input-text" name="c-email" id="c-email" placeholder="mario@rossi.it" />
-                </div>
-                <div>
-                    <!-- message -->
                     <label for="object">Oggetto</label>
                     <input type="text" class="input-text" name="obg" id="obj" placeholder="oggetto" />
                     <label for="body">Messaggio</label>
@@ -171,13 +168,12 @@
             </form>
         </section>
 
-        <!-- login page -->
+        <!-- pagina di login -->
         <div id="login" hidden>
-            <!-- login form [DEFAULT] -->
-            <form id="form-l">
+            <!-- form login [DEFAULT] -->
+            <form id="form-l" class="centered">
                 <h2 id="title-contact">LOGIN</h2>
                 <div> 
-                    <!-- input -->
                     <label for="email">Email</label>
                     <input type="email" class="input-text" name="email-l" id="email-l" placeholder="mario@rossi.it" >
                     <label for="password">Password</label>
@@ -196,14 +192,14 @@
                 </div>
             </form>
 
-            <form id="form-r">
+            <form id="form-r" class="centered">
                 <h2 id="title-contact">REGISTRATI</h2>
                 <div id="button">
                     <label for="donatore" class="btn-swtich selezionato" id="swDonatore" onclick="switchDonatore()">DONATORE</label>
                     <label for="so" class="btn-swtich" id="swSo"  onclick="switchSo()">STRUTTURA OSPEDALIERA</label>
                 </div>
 
-                <!-- register form donatore -->
+                <!-- form registrazione donatore -->
                 <div id="r-donatore"> 
                     <label for="fname">Nome</label>
                     <input type="text" class="input-text" name="fname-r-d" id="fname-r-d" placeholder="mario">
@@ -227,11 +223,10 @@
                     <br> <br>
                     <label for="password">Password</label>
                     <input type="password" class="input-text" name="passsword-r-d" id="password-r-d" placeholder="********">
-                    
-                    <input type="button" onclick="registerDonator()" value="Invia"/>
+                    <input type="button" onclick="registerDonator()" value="Invia" class="full-width-btn"/>
                 </div>
 
-                <!-- register form hospital -->
+                <!-- form registrazione struttura ospedaliera -->
                 <div id="r-so" hidden>
                     <label for="so-name">Nome della struttura</label>
                     <input type="text" class="input-text" name="name-r-so" id="name-r-so" placeholder="Careggi">
@@ -243,11 +238,11 @@
                     <input type="text" class="input-text" name="address-r-so" id="address-r-so" placeholder="Largo Giovanni Alessandro Brambilla, 3">
                     <label for="region">Regione</label>
                     <select name="region" id="region-input" onchange="getCity()">
-                        <!-- added by call to database -->
+                        <!-- aggiunte con chiamata al db -->
                     </select> <br>
                     <label for="city">Città</label>
                     <select name="city" id="city-input">
-                        <!-- added by call to database -->
+                        <!-- aggiunte con chiamata al db-->
                     </select> <br><br>
                     <label for="password">Password</label>
                     <input type="password" class="input-text" name="passsword-r-so" id="password-r-so" placeholder="********">
@@ -264,7 +259,7 @@
         </div>
     </main>
     
-    <!-- footer - static position and element -->
+    <!-- footer - posizione statica -->
     <footer>
         <div>
             <p>2023 © Blood Bank Lab. S.R.L. - P.IVA 19780955632</p>

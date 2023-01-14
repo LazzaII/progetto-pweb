@@ -33,11 +33,3 @@
     text-align: center;
     border-bottom: 1px solid var(--dark-sienna);
 }
-
-.centered{
-    display: grid;
-    align-items: center;
-    justify-content: center;
-    align-self: center;
-    padding: 20px;
-}

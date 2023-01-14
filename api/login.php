@@ -21,8 +21,6 @@ switch($method) {
                 $check = $donator->findFromEmail($decodeBody->email);
                 if(!empty($check)){
                     if(password_verify($decodeBody->pwd, $check['hash_pwd'])) {
-                        require_once __DIR__ . '/class/City.php';
-
                         setcookie('login', 'logged', time() + 3600, '/');
                         setcookie('id', $check['_id'], time() + 3600, '/');
                         setcookie('first', $check['first_name'], time() + 3600, '/');
@@ -73,14 +71,12 @@ switch($method) {
                 $check = $admin->findFromEmail($decodeBody->email);
                 if(!empty($check)){
                     if(password_verify($decodeBody->pwd, $check['hash_pwd'])) {
-                        require_once __DIR__ . '/class/City.php';
-
-                        setcookie('login', 'logged', time() + 3600, '/');
+                        setcookie('login', 'logged-a', time() + 3600, '/');
                         setcookie('id', $check['_id'], time() + 3600, '/');
                         setcookie('first', $check['first_name'], time() + 3600, '/');
                         setcookie('second', $check['second_name'], time() + 3600, '/');
                         setcookie('type', $check['type'], time() + 3600, '/');
-                        setcookie('email', $check['email'], time() + 3600, '/'); # da vedere se serve
+                        setcookie('email', $check['email'], time() + 3600, '/'); 
                     } 
                     else http_response_code(403); # forbidden (password error)
                 }    

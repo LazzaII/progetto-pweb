@@ -90,9 +90,24 @@ switch($method) {
                 $admin->fn = $decodeBody->fn;
                 $admin->sn = $decodeBody->sn;
                 $admin->email = $decodeBody->email;
-                $admin->pwd = password_hash($decodeBody->pwd, PASSWORD_DEFAULT);
-                if($admin->update($admin) == 'ERR')
-                    http_response_code(409); # conflitto (email già in uso)
+                if ($decodeBody->pwd == '') {
+                    if($admin->update($admin, false) == 'ERR')
+                        http_response_code(409); # conflitto (email già in uso)
+                    else { #aggiorna il valore dei cookie
+                        setcookie('first', $decodeBody->fn, time() + 3600, '/');
+                        setcookie('second', $decodeBody->sn, time() + 3600, '/');
+                        setcookie('email', $decodeBody->email, time() + 3600, '/'); 
+                    }
+                } else {
+                    $admin->pwd = password_hash($decodeBody->pwd, PASSWORD_DEFAULT);
+                    if($admin->update($admin) == 'ERR')
+                        http_response_code(409); # conflitto (email già in uso)
+                    else { #aggiorna il valore dei cookie
+                        setcookie('first', $decodeBody->fn, time() + 3600, '/');
+                        setcookie('second', $decodeBody->sn, time() + 3600, '/');
+                        setcookie('email', $decodeBody->email, time() + 3600, '/'); 
+                    }    
+                }
         }
 
         break;

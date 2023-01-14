@@ -95,6 +95,24 @@ class Donation {
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public function getTotUsed(){
+        $query = 'select count(0) as QTA 
+                  from `donation`
+                  where `isUsed` = 1';
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function getTotNotUsed(){
+        $query = 'select count(0) as QTA 
+                  from `donation`
+                  where `isUsed` = 0';
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
     public function add($donation) {
         if(empty(self::canDonate($donation->donator))) {   
             $query = "insert into `donation` (`date`, `donator_`, `site_`)

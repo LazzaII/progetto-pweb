@@ -31,15 +31,27 @@
     border-bottom: 2px solid var(--dark-sienna);
 }
 
-input:enabled {
-    border: 1px solid var(--dark-sienna);
-    border-radius: 4px;
-    background-color: var(--snow-gray);
-    color: var(--text-color);
-}
-
 input:disabled {
     border: none;
     background-color: var(--snow);
     color: var(--text-color);
+}
+
+#message-acc{
+    text-align: center;
+    color: var(--snow);
+    border-radius: 5px;
+    border-radius:8px; 
+    padding: 10px 5px;
+}
+
+#account-info{
+    margin: auto;
+}
+
+.box{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
 }

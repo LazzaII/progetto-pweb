@@ -1,30 +1,22 @@
 /* COMMON */
 .text-l-r {
+    padding: 10px 0;
     font-size: 14px;
     bottom: 0;
     float: right;
     color: var(--light-gray);
+    text-align: center;
 }
 
+
+
 /* LOGIN */
-#form-l{
-    width: 340px;
-    height: 450px;
-    background: var(--snow);
-    color: var(--text-color);
-    border-radius:8px;
-    box-shadow:0 0 40px -10px var(--dark-sienna);
-    padding:20px 30px;
-    box-sizing:border-box;
-    position:relative;
-    margin: auto;
-}
 
 /* REGISTRAZIONE */
 
 #form-r{
-    width: 340px;
-    height: 700px;
+    width: 400px;
+    height: fit-content;
     background: var(--snow);
     color: var(--text-color);
     border-radius:8px;
@@ -34,13 +26,6 @@
     position:relative;
     margin: auto;
     display: none;
-}
-
-#message-l {
-    text-align: center;
-    color: var(--snow);
-    border-radius: 5px;
-    border-radius:8px;   
 }
 
 #button {

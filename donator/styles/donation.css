@@ -32,9 +32,19 @@
     margin: auto;
     border: 2px solid var(--vivid-burgundy);
     border-radius: 8px;
+    padding: 20px 10px;
 }
 
 th {
     font-weight: bold;
 }
 
+#message-d{
+    text-align: center;
+    color: var(--snow);
+    border-radius: 8px;
+    margin:  10px auto 0 auto;
+    padding: 20px 5px;
+    /* va a capo dopo 50 caratteri */
+    width: 50ch;
+}

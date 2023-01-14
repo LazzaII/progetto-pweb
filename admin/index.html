@@ -7,13 +7,14 @@
     
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../common/common.css">
 
     <title>Admin BBL</title>
 </head>
 <body onload="checkLogged()">
         <!-- LOGIN SECTION -->
     <div id="sec-login" hidden>
-        <form id="form-l">
+        <form id="form-l" class="centered mid-center">
             <h2 id="title-contact">LOGIN</h2>
             <div> 
                 <!-- input -->
@@ -23,7 +24,7 @@
                 <input type="password" class="input-text" name="passsword-l" id="password-l" placeholder="********">
             </div>
             
-            <input type="button" onclick="login()" value="Invia"/>
+            <input type="button" onclick="login()" value="Invia" class="full-width-btn"/>
             
             <div id="message-l">
                 <p ></p>
@@ -41,90 +42,240 @@
                 <ul id="menu">
                     <li onclick="showDiv('dashboard'), dashboard()"><span>Statistiche</span></li>
                     <li onclick="showDiv('users'), getUsers()"><span>Users</span></li> 
-                    <!-- dentro user mettere anche la creazione di utenti admin -->
                     <li onclick="showDiv('request'), getRequest()"><span>Richieste</span></li>
-                    <li onclick="showDiv('news'), getNews()"><span>Scrivi News</span></li>
+                    <li onclick="showDiv('news'), getNews()"><span>News</span></li>
                     <li onclick="showDiv('mex'), getMex()"><span>Messaggi</span></li>
                 </ul>
             </div>
             <div class="nav-item-bt">
-                <img src="../icon/account.svg" onclick="showDiv('account')"/>
+                <img src="../icon/account.svg" onclick="showDiv('account'), showForm()"/>
                 <img src="../icon/exit.svg" onclick="exitAdmin()"/>
             </div>
         </nav>
 
         <main>
             <section id="dashboard">
-                <h1>Statistiche</h1>
+                <h1 id="dashboard-title">Statistiche</h1>
+                <div>
+                    <h3>Utenti</h3>
+                    <div id="total-user">
+
+                    </div>
+                    <div id="donators">
+
+                    </div>
+                    <div id="hospitals">
+
+                    </div>
+                    <h3>Donazioni</h3>
+                    <div id="total-donations">
+                       
+                    </div>
+                    <div id="donations-used">
+                        
+                    </div>
+                    <div id="not-used">
+                        
+                    </div>
+                    <h3>Richieste</h3>
+                    <div id="total-req">
+
+                    </div>
+                    <div id="req-urg">
+
+                    </div>
+                    <div id="not-urg">
+
+                    </div>
+                </div>
             </section>
 
             <section id="users" hidden>
+                <h1>Lista Utenti</h1>
                 <div>
                     <h3>Donatori</h3>
-                    <table id="tbl-donator">
-                        <tr>
-                            <th>Nome</th>
-                            <th>Cognome</th>
-                            <th>Email</th>
-                            <th>Telefono</th>
-                            <th>Gruppo sanguigno</th>
-                            <th>Azioni</th>
-                        </tr>
+                    <table class="ordini">
+                        <tbody id="tbody-donator">
+                            <tr>
+                                <th>Nome</th>
+                                <th>Cognome</th>
+                                <th>Email</th>
+                                <th>Telefono</th>
+                                <th>Gruppo sanguigno</th>
+                                <th>Azioni</th>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
 
                 <div>
                     <h3>Strutture ospedaliere</h3>
-                    <table id="tbl-so">
-                        <tr>
-                            <th>Nome Struttura</th>
-                            <th>Email</th>
-                            <th>Telefono</th>
-                            <th>Indirizzo</th>
-                            <th>Città</th>
-                            <th>Regione</th>
-                            <th>Azioni</th>
-                        </tr>
+                    <table class="ordini">
+                        <tbody id="tbody-so">
+                            <tr>
+                                <th>Nome Struttura</th>
+                                <th>Email</th>
+                                <th>Telefono</th>
+                                <th>Indirizzo</th>
+                                <th>Città</th>
+                                <th>Regione</th>
+                                <th>Azioni</th>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
 
                 <div>
                     <h3>Admin</h3>
-                    <table id="tbl-admin">
-                        <tr>
-                            <th>Nome</th>
-                            <th>Cognome</th>
-                            <th>Email</th>
-                            <th>Azioni</th>
-                        </tr>
+                    <table class="ordini">
+                        <tbody id="tbody-admin">
+                            <tr>
+                                <th>Nome</th>
+                                <th>Cognome</th>
+                                <th>Email</th>
+                                <th>Azioni</th>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
             </section>
 
             <section id="request" hidden>
-
+                <h1>Richieste di sangue</h1>
+                <table class="ordini"> 
+                    <tbody id="tbody-request">
+                        <tr>
+                            <th>Data</th>
+                            <th>Struttura richiedente</th>
+                            <th>Magazzino inivio</th>
+                            <th>Gruppo sanguigno</th>
+                            <th>Quantità</th>
+                            <th>Costo</th>
+                            <th>Azioni</th>
+                        </tr>
+                    </tbody>
+                </table>
             </section>
 
             <section id="news" hidden>
+                <div id="news-form" class="centered">
+                    <h1>Inserisci una nuova news</h1>
+                    <form>
+                        <label for="title">Inserisci titolo</label>
+                        <input type="text" class="input-text" name="obg" id="title-news" placeholder="oggetto" >
+                        <label for="body">Inserisci la notizia</label>
+                        <input type="text" name="body" class="input-text body-message" id="body-news" cols="35" rows="7" placeholder="..." ></input>
+                    
+                        <input type="button" onclick="sendNews()" value="Invia" class="full-width-btn"/>
 
+                        <div id="message">
+                            <p></p>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="news-list">
+                    <h1>News precedenti</h1>
+                    <table class="ordini">
+                        <tbody id="tbody-news">
+                            <tr>
+                                <th>Titolo</th>
+                                <th>Corpo</th>
+                                <th>Autore</th>
+                                <th>Azioni</th>
+                            </tr>      
+                        </tbody>
+                    </table>
+                </div>
             </section>
 
-            <section id="mex" hidden>
-
+            <section id="mex" hidden >
+                <h1>Messaggi ricevuti</h1>
+                <table class="ordini">
+                    <tbody id="tbody-mex">
+                        <tr>
+                            <th>Nome</th>
+                            <th>Cognome</th>
+                            <th>Email</th>
+                            <th>Oggetto</th>
+                            <th>Messaggio</th>
+                            <th>Azioni</th>
+                        </tr>
+                    </tbody>
+                </table>
             </section>
 
             <section id="account" hidden>
+                <div>
+                    <h1 id="title-info">Account info</h1>
+                    <table id="account-info">
+                        <tr>
+                            <td class="title-info">Nome</td>
+                            <td><input disabled type="text" id="first"></td>
+                        </tr>
+                        <tr>
+                            <td class="title-info">Cognome</td>
+                            <td><input disabled type="text" id="second"></td>
+                        </tr>
+                        <tr>
+                            <td class="title-info">Email</td>
+                            <td><input disabled type="email" id="email"></td>
+                        </tr>
+                        <tr>
+                            <td class="title-info">Password</td>
+                            <td><input disabled type="password" id="pwd"></td>
+                        </tr>
+                    </table>
+    
+                    <div id="message-acc">
+                        <p></p>
+                    </div>
+    
+                    <div id="bottoni">
+                        <button onclick="activateModify()" id="btn-modify">Modifica</button>
+                        <button onclick="deleteAccount()" id="btn-elimina">Elimina</button>
+    
+                        <button onclick="resetInfo()" id="btn-reset" hidden>Annulla</button>
+                        <button onclick="updateInfo()" id="btn-confirm" hidden>Conferma</button>
+                    </div>
+                </div>
+                <div id="form-new-admin" hidden>
+                <h1>Aggiungi un nuovo admin</h1>
+                <form>
+                    <label for="fname">Nome</label>
+                    <input type="text" class="input-text" name="fname" id="fname" placeholder="mario">
+                    <label for="sname">Cognome</label>
+                    <input type="text" class="input-text" name="sname" id="sname" placeholder="rossi">
+                    <label for="email">Email</label>
+                    <input type="email" class="input-text" name="n-email" id="n-email" placeholder="mario@rossi.it">
+                    <label for="password">Password</label>
+                    <input type="password" class="input-text" name="n-passsword" id="n-password" placeholder="********">
 
+                    <input type="button" onclick="registerAdmin()" value="Invia" class="full-width-btn"/>
+                </form>
+
+                <div id="message-new">
+                    <p></p>
+                </div>
+                
+                </div>
             </section>
         </main>
     </div>
+
+    <!-- footer - posizione statica -->
+    <footer>
+        <div>
+            <p>2023 © Blood Bank Lab. S.R.L. - P.IVA 19780955632</p>
+        </div>
+    </footer>
 
     <script src="../common/utilities.js"></script>
     <script src="../common/api.js"></script>
     <script src="./logic/api-users.js"></script>
     <script src="./logic/api-request.js"></script>
     <script src="./logic/api-news.js"></script>
-    <script src="./logic/api-login.js"></script>
+    <script src="./logic/api-account.js"></script>
     <script src="./logic/api-mex.js"></script>
     <script src="./logic/api-dashboard.js"></script>
     <script src="./logic/logic-admin.js"></script>

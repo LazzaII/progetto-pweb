@@ -1,8 +1,6 @@
 @import '../styles/news.css';
 @import '../styles/form.css';
-@import './styles/account.css';
-@import './styles/request.css';
-
+@import '../common/account.css';
 /* system variables */
 :root {
     --snow: #fcf7f8ff;
@@ -42,20 +40,6 @@ footer {
 footer div p {
     text-align: center;
     margin: 0;
-}
-
-
-/* common class */
-.errore {
-    background-color: var(--vivid-burgundy);
-    box-shadow:0 0 30px -10px var(--dark-sienna);
-    margin: 15px 0;
-}
-
-.corretto {
-    background-color: var(--light-green);
-    box-shadow:0 0 40px -10px var(--light-green-2);
-    margin: 15px 0;
 }
 
 /* navbar */
@@ -135,4 +119,6 @@ nav img:hover{
     font-size: 2.8rem;
     margin: 0;
 }
+
+
 

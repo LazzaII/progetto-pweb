@@ -15,6 +15,7 @@ function checkLogin() {
 function login() {
   if(checkLogin() === 0) {
     document.getElementById('message-l').classList.add('errore');
+    document.getElementById('message-l').style.display = 'block';
     document.querySelectorAll('#message-l p')[0].innerText = 'Compila tutti i campi correttamente';
     interval = setInterval(() =>  {
       document.getElementById('message-l').style.display = 'none';
