@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="common/common.css">
 
     <title>BBL</title>
@@ -86,15 +86,14 @@
             </p>
             <h4 class="man-section">AMMINISTRATORE</h4>
             <p>
-                L’utente admin è il gestore della piattaforma, per accedere al pannello di amministrazione bisogna recarsi a bloodbank/admin 
+                L’utente admin è il gestore della piattaforma, per accedere al pannello di amministrazione bisogna recarsi a <a href="http://localhost/lazzarelli_635366/admin">http://localhost/lazzarelli_635366/admin</a> 
                 <br>L’amministratore della piattaforma può accedere ad alcune sezioni tra cui:
                 <ul>
                     <li>Dashboard con statistiche.</li>
                     <li>Accettare donatori/SO</li>
                     <li>Visualizzare messaggi.</li>
-                    <li>Scrivere, modificare, eliminare news.</li>
+                    <li>Scrivere nuove news - Eliminare le vecchie news.</li>
                     <li>Accettare richieste di sangue</li>
-                    <li>Aggiungere magazzini.</li>
                 </ul>
             </p>
             <p>
@@ -103,6 +102,14 @@
                 Questo è l’unico modo per creare account amministratori. 
                 <br>user: mario@rossi.It
                 <br>psw: Prova123
+            </p>
+            <h4 class="man-section">LEGENDA</h4>
+            <p>
+                <button disabled>X</button> Elimina richiesta (SO) <br>
+                <button disabled>A</button> Accetta richiesta (Admin) <br>
+                <button disabled>R</button> Rigetta richiesta (Admin) <br>
+                <button disabled>C</button> Conferma utente (Admin) <br>
+                <button disabled>E</button> Elimina utente (Admin)
             </p>
         </section>
 
@@ -186,7 +193,7 @@
                 
                 <input type="button" onclick="login()" value="Invia"/>
                 
-                <label class="text-l-r" >Se non sei ancora registrato clicca <span onclick="showRegister()">qui</span></label>
+                <label class="text-l-r" >Se non sei ancora registrato clicca <span onclick="showRegLog()">qui</span></label>
                 <div id="message-l">
                     <p ></p>
                 </div>
@@ -195,8 +202,8 @@
             <form id="form-r" class="centered">
                 <h2 id="title-contact">REGISTRATI</h2>
                 <div id="button">
-                    <label for="donatore" class="btn-swtich selezionato" id="swDonatore" onclick="switchDonatore()">DONATORE</label>
-                    <label for="so" class="btn-swtich" id="swSo"  onclick="switchSo()">STRUTTURA OSPEDALIERA</label>
+                    <label for="donatore" class="btn-swtich selezionato" id="swDonatore" onclick="showDonatorSo()">DONATORE</label>
+                    <label for="so" class="btn-swtich" id="swSo"  onclick="showDonatorSo()">STRUTTURA OSPEDALIERA</label>
                 </div>
 
                 <!-- form registrazione donatore -->
@@ -223,7 +230,8 @@
                     <br> <br>
                     <label for="password">Password</label>
                     <input type="password" class="input-text" name="passsword-r-d" id="password-r-d" placeholder="********">
-                    <input type="button" onclick="registerDonator()" value="Invia" class="full-width-btn"/>
+                    <label class="text-l-r" >La password deve contenere almeno una lettere maiuscola, minuscola un numero e un carattere speciale</label>
+                    <input type="button" onclick="register('D')" value="Invia" class="full-width-btn"/>
                 </div>
 
                 <!-- form registrazione struttura ospedaliera -->
@@ -246,12 +254,11 @@
                     </select> <br><br>
                     <label for="password">Password</label>
                     <input type="password" class="input-text" name="passsword-r-so" id="password-r-so" placeholder="********">
-
-                    <input type="button" onclick="registerSo()" value="Invia"/>
+                    <label class="text-l-r" >La password deve contenere almeno una lettere maiuscola, minuscola un numero e un carattere speciale</label>
+                    <input type="button" onclick="register('H')" value="Invia"/>
                 </div>
                 
-                
-                <label class="text-l-r" >Hai già un account? Clicca <span onclick="showLoginF()">qui</span></label>
+                <label class="text-l-r" >Hai già un account? Clicca <span onclick="showRegLog()">qui</span></label>
                 <div id="message-r">
                     <p ></p>
                 </div>

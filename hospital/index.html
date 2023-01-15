@@ -50,7 +50,7 @@
 
         <section id="request" hidden>
             <form>
-                <label for="btype">Scegli il gruppo sanguigno</label>
+                <label for="btype">Gruppo sanguigno</label>
                 <select name="btype" id="btype" onchange="findSite()">
                     <option value="ab+" selected>AB+</option>
                     <option value="ab-">AB-</option>
@@ -64,42 +64,42 @@
             </form>
             
             <h3>In città</h3>
-            <table>
+            <table class="ordini">
                 <tbody id="tbody-city">
                     <tr>
                         <th>Città</th>
                         <th>Regione</th>
-                        <th>Quantità</th>
-                        <th>Distanza</th>
                         <th>Tempo stimato</th>
+                        <th>Distanza</th>
+                        <th>Quantità</th>
                         <th>Urgenza</th>
                         <th>Azione</th>
                     </tr>
                 </tbody>
             </table>
             <h3>Fuori città</h3>
-            <table>
+            <table class="ordini">
                 <tbody id="tbody-region">
                     <tr>
                         <th>Città</th>
                         <th>Regione</th>
-                        <th>Quantità</th>
-                        <th>Distanza</th>
                         <th>Tempo stimato</th>
+                        <th>Distanza</th>
+                        <th>Quantità</th>
                         <th>Urgenza</th>
                         <th>Azione</th>
                     </tr>
                 </tbody>
             </table>
             <h3>Fuori regione</h3>
-            <table>
+            <table class="ordini">
                 <tbody id="tbody-it">
                     <tr>
                         <th>Città</th>
                         <th>Regione</th>
-                        <th>Quantità</th>
-                        <th>Distanza</th>
                         <th>Tempo stimato</th>
+                        <th>Distanza</th>
+                        <th>Quantità</th>
                         <th>Urgenza</th>
                         <th>Azione</th>
                     </tr>
@@ -148,44 +148,47 @@
 
         <section id="account" hidden>
             <h1 id="title-info">Account info</h1>
-            <table id="account-info">
-                <tr>
-                    <td class="title-info">Nome struttura</td>
-                    <td><input disabled type="text" id="name"></td>
-                </tr>
-                <tr>
-                    <td class="title-info">Email</td>
-                    <td><input disabled type="email" id="email"></td>
-                </tr>
-                <tr>
-                    <td class="title-info">Phone</td>
-                    <td><input disabled type="tel" id="phone"></td>
-                </tr>
-                <tr>
-                    <td class="title-info">Password</td>
-                    <td><input disabled type="password" id="pwd"></td>
-                </tr>
-                <tr>
-                    <td class="title-info">Indirizzo</td>
-                    <td><input disabled type="text" id="address"></td>
-                </tr>
-                <tr>
-                    <td class="title-info">Regione</td>
-                    <td>
-                        <select name="region" id="region-input" onchange="getCity()" disabled>
-                        <!-- added by call to database -->
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="title-info">Citta</td>
-                    <td>
-                        <select name="city" id="city-input" disabled>
-                        <!-- added by call to database -->
-                        </select>
-                    </td>
-                </tr>
-            </table>
+            <form>
+
+                <table id="account-info">
+                    <tr>
+                        <td class="title-info">Nome struttura</td>
+                        <td><input disabled type="text" id="name"></td>
+                    </tr>
+                    <tr>
+                        <td class="title-info">Email</td>
+                        <td><input disabled type="email" id="email"></td>
+                    </tr>
+                    <tr>
+                        <td class="title-info">Phone</td>
+                        <td><input disabled type="tel" id="phone"></td>
+                    </tr>
+                    <tr>
+                        <td class="title-info">Password</td>
+                        <td><input disabled type="password" id="pwd"></td>
+                    </tr>
+                    <tr>
+                        <td class="title-info">Indirizzo</td>
+                        <td><input disabled type="text" id="address"></td>
+                    </tr>
+                    <tr>
+                        <td class="title-info">Regione</td>
+                        <td>
+                            <select name="region" id="region-input" onchange="getCity()" disabled>
+                            <!-- added by call to database -->
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="title-info">Citta</td>
+                        <td>
+                            <select name="city" id="city-input" disabled>
+                            <!-- added by call to database -->
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </form>
 
             <div id="message-acc">
                 <p></p>
@@ -211,6 +214,7 @@
     <script src="../common/utilities.js"></script>
     <script src="../common/api.js"></script>
     <script src="./logic/api-so.js"></script>
+    <script src="./logic/api-account.js"></script>
     <script src="./logic/logic-so.js"></script>
 </body>
 </html>

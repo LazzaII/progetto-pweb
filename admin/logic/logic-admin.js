@@ -5,14 +5,18 @@ var cookiesName = ['email', 'first', 'second', 'login', 'id', 'type']
 //url
 var url = '../api/';
 
-// esce dall'account
+/**
+ * Funzione per uscire dall'account
+ */
 function exitAdmin() {
     for (const cookie of cookiesName) // cancella tutti i cookie
         deleteCookie(cookie);
     checkLogged(); // richiama la funzione per mostrare il form di login
 }
 
-// controlla se già loggato 
+/**
+ * Funzione per controllare se è già loggato, sennò mostra login
+ */
 function checkLogged() {
     if(getCookie('login')) {
         document.getElementById('sec-login').style.display = 'none';
@@ -21,6 +25,7 @@ function checkLogged() {
         dashboard();
         if(getCookie('type') === '0') document.getElementById('btn-elimina').disabled = true;
         // il super admin non può eliminare il proprio account
+        showForm();
     }
     else {
         document.getElementById('sec-login').style.display = 'block';
@@ -28,7 +33,9 @@ function checkLogged() {
     }
 }
 
-// attiva le modifiche delle info dell'account
+/**
+ * Funzione per attivare modifiche dell'account
+ */
 function activateModify() {
     for (const cookie of cookiesName) {
         if(document.getElementById(cookie) !== null)
@@ -44,7 +51,9 @@ function activateModify() {
     
 }
 
-// resetta le informazione dai cookie
+/**
+ * Funzione per resettare le informazioni degli account
+ */
 function resetInfo() {
     for (const cookie of cookiesName) {
       if(document.getElementById(cookie) !== null)
@@ -62,8 +71,11 @@ function resetInfo() {
 }
 
 
-// funzione che mostra il form se l'admin è un super admin
+/**
+ * Funzione che mostra il form solo se è super admin
+ */
 function showForm() {
+    console.log(getCookie('type'));
     if(getCookie('type') === '0') document.getElementById('form-new-admin').style.display = 'block';
 }
 

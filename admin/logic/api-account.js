@@ -1,25 +1,14 @@
-/*
-  API  LOGIN
-*/
+/* API LOGIN PAGINA ADMIN*/
 
-// controllo validità degli input
-function checkLogin() {
-    if(document.getElementById('email-l').value === '') return 0;
-    if(document.getElementById('password-l').value === '') return 0;
-    return 1;
-}
-  
-// funzione di login
+const loginInfo = ['email-l', 'password-l'];
+/**
+ * Funzione per il controllo del login
+ * @returns solo per uscire in caso di errore
+ */
 function login() {
-    if(checkLogin() === 0) {
-      document.getElementById('message-l').classList.add('errore');
-      document.getElementById('message-l').style.display = 'block';
-      document.querySelectorAll('#message-l p')[0].innerText = 'Compila tutti i campi correttamente';
-      interval = setInterval(() =>  {
-        document.getElementById('message-l').style.display = 'none';
-        document.getElementById('message-l').classList.remove('errore');
-        clearInterval(interval);
-      }, 4000);
+    if(!checkInput(loginInfo)) {
+      console.log('qui dentro');
+      showMessage('message-l', 'Compila tutti i campi correttamente', 'errore');
       return; 
     }
   
@@ -29,7 +18,7 @@ function login() {
       type: 'A'
     });
   
-    // chiamata a
+    // chiamata a http://localhost/progetto-pweb/api/login.php per fare il login 
     let xhr = new XMLHttpRequest();
     xhr.open('POST', url + 'login.php', true);
     xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
@@ -37,52 +26,37 @@ function login() {
       if(xhr.status === 200){
         document.getElementById('sec-login').style.display = 'none';
         document.getElementById('admin-section').style.display = 'block';
+        info();
+        dashboard();
+        if(getCookie('type') === '0') document.getElementById('btn-elimina').disabled = true;
+        // il super admin non può eliminare il proprio account
+        showForm();
       } 
-      else {
-        document.getElementById('message-l').classList.add('errore');
-        document.getElementById('message-l').style.display = 'block';
-        document.querySelectorAll('#message-l p')[0].innerText = 'Password e/o email errati';
-        interval = setInterval(() =>  {
-          document.getElementById('message-l').style.display = 'none';
-          document.getElementById('message-l').classList.remove('errore');
-          clearInterval(interval);
-        }, 4000);
-      }
+      else
+        showMessage('message-l', 'Password e/o email errati', 'errore');
     }
     xhr.send(data);
 }
 
-//AGGIORNA INFO 
-// controlla la validità degli input
-function checkAccount() {
-  if(document.getElementById('first').value === '') return 0;
-  if(document.getElementById('second').value === '') return 0;
-  if(document.getElementById('email').value === '') return 0;
-  if(!validateEmail(document.getElementById('email').value)) return 0;
-  return 1;
-}
-
+const adminInfo = ['first', 'second', 'email'];
+/**
+ * Funzione per aggiornare le informazioni dell'account
+ * @returns solo per uscire in caso di errore
+ */
 function updateInfo() {
-  if(checkAccount() === 0) {
-    document.getElementById('message-acc').classList.add('errore');
-    document.getElementById('message-acc').style.display = 'block';
-    document.querySelectorAll('#message-acc p')[0].innerText = 'Compila tutti i campi correttamente';
-    interval = setInterval(() =>  {
-      document.getElementById('message-acc').style.display = 'none';
-      document.getElementById('message-acc').classList.remove('errore');
-      clearInterval(interval);
-    }, 4000);
+  if(!checkInput(adminInfo, 2)) {
+    showMessage('message-acc', 'Compila tutti i campi correttamente', 'errore');
     resetInfo();
     return;
   }
 
   let data = JSON.stringify({
-      id : getCookie('id'),
-      fn : document.getElementById('first').value,
-      sn : document.getElementById('second').value,
-      email : document.getElementById('email').value,
-      pwd : document.getElementById('pwd').value,
-      type : 'A'
+    id : getCookie('id'),
+    fn : document.getElementById('first').value,
+    sn : document.getElementById('second').value,
+    email : document.getElementById('email').value,
+    pwd : document.getElementById('pwd').value,
+    type : 'A'
   })
 
   // chiamata a http://localhost/progetto-pweb/api/update.php per aggiornare l'account
@@ -90,56 +64,27 @@ function updateInfo() {
   xhr.open('PUT', url + 'update.php', true)
   xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
   xhr.onload = function () {
-      if(xhr.status === 200 ){
-          document.getElementById('message-acc').classList.add('corretto');
-          document.getElementById('message-acc').style.display = 'block';
-          document.querySelectorAll('#message-acc p')[0].innerText = 'Informazioni aggiornate';
-          interval = setInterval(() =>  {
-              document.getElementById('message-acc').style.display = 'none';
-              document.getElementById('message-acc').classList.remove('corretto');
-              clearInterval(interval);
-          }, 4000);
-          resetInfo();
-      } else { 
-          document.getElementById('message-acc').classList.add('errore');
-          document.getElementById('message-acc').style.display = 'block';
-          document.querySelectorAll('#message-acc p')[0].innerText = 'Email inserita già in uso';
-          interval = setInterval(() =>  {
-              document.getElementById('message-acc').style.display = 'none';
-              document.getElementById('message-acc').classList.remove('errore');
-              clearInterval(interval);
-          }, 4000);
-          resetInfo();
-      }
+    if(xhr.status === 200 ){
+      showMessage('message-acc', 'Informazioni aggiornate', 'corretto');
+      resetInfo();
+    } else { 
+      showMessage('message-acc', 'Email inserita già in uso', 'errore');
+      resetInfo();
+    }
   }
   xhr.send(data);
 }
 
-// controllo validità degli input
-function checkFormAdmin() {
-  if(document.getElementById('fname').value === '') return 0;
-  if(document.getElementById('sname').value === '') return 0;
-  if(document.getElementById('n-email').value === '') return 0;
-  if(document.getElementById('n-password').value === '') return 0;
-  if(!validateEmail(document.getElementById('n-email').value)) return 0;
-  return 1;
-}
-
-// registrazione nuovo utente admin
+const adminNew = ['fname', 'sname', 'n-email', 'n-password'];
+/**
+ * Funzione per registrare il nuovo utente admin
+ * @returns solo per uscire in caso di errore
+ */
 function registerAdmin() {
-  if(checkFormAdmin() === 0){
-    document.getElementById('message-new').classList.add('errore');
-    document.getElementById('message-new').style.display = 'block';
-    document.querySelectorAll('#message-new p')[0].innerText = 'Compila tutti i campi correttamente';
-    interval = setInterval(() =>  {
-      document.getElementById('message-new').style.display = 'none';
-      document.getElementById('message-new').classList.remove('errore');
-      clearInterval(interval);
-    }, 4000);
-    resetInfo();
+  if(!checkInput(adminNew, 2, false, 3)){
+    showMessage('message-new', 'Compila tutti i campi correttamente', 'errore');
     return;
   }
-
   let data = JSON.stringify({
     id : getCookie('id'),
     fn : document.getElementById('fname').value,
@@ -149,35 +94,34 @@ function registerAdmin() {
     type : 'A'
   })
 
-  // chiamata a http://localhost/progetto-pweb/api/register.php per aggiornare l'account
+  clearValue(adminNew);
+  // chiamata a http://localhost/progetto-pweb/api/register.php per agggiungere il nuovo account
   let xhr = new XMLHttpRequest();
   xhr.open('POST', url + 'register.php', true)
   xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
   xhr.onload = function () {
-      if(xhr.status === 200 ){
-          document.getElementById('message-new').classList.add('corretto');
-          document.getElementById('message-new').style.display = 'block';
-          document.querySelectorAll('#message-new p')[0].innerText = 'Informazioni aggiornate';
-          interval = setInterval(() =>  {
-              document.getElementById('message-new').style.display = 'none';
-              document.getElementById('message-new').classList.remove('corretto');
-              clearInterval(interval);
-          }, 4000);
-          resetInfo();
-      } else { 
-          document.getElementById('message-new').classList.add('errore');
-          document.getElementById('message-new').style.display = 'block';
-          document.querySelectorAll('#message-new p')[0].innerText = 'Email inserita già in uso';
-          interval = setInterval(() =>  {
-              document.getElementById('message-new').style.display = 'none';
-              document.getElementById('message-new').classList.remove('errore');
-              clearInterval(interval);
-          }, 4000);
-          resetInfo();
-      }
+    if(xhr.status === 200 )
+      showMessage('message-new', 'Account inserito', 'corretto'); 
+    else
+      showMessage('message-new', 'Email inserita già in uso', 'errore');
   }
   xhr.send(data);
 }
 
+/**
+ * Funzione per eliminare l'account, non disponibile per il super admin
+ */
+function deleteAccount() {
+  // chiamata a http://localhost/progetto-pweb/api/delete.php per eliminare
+  let xhr = new XMLHttpRequest();
+  xhr.open('DELETE', url + 'delete.php', true);
+  xhr.onload = function () {
+    if(xhr.status === 200) {
+      alert("Account eliminato con successo");
+      exitAdmin();
+    }
+  }
+  xhr.send();
+}
 
 

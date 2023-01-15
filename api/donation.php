@@ -24,15 +24,17 @@ switch($method) {
             echo ($js_encode);
         }
         else {
-            $donation->site = $donation->availabilityType($_COOKIE['blood_group'])[0]['site'];
+            if(empty($donation->availabilityType($_COOKIE['blood_group'])))
+                $donation->site = $donation->empyByType($_COOKIE['blood_group'])[0]['site'];
+            else 
+                $donation->site = $donation->availabilityType($_COOKIE['blood_group'])[0]['site'];    
             $donation->donator = $_COOKIE['id'];
             if($donation->add($donation) == 'ERR')
-                http_response_code(409); # conflict (cant donate)
+                http_response_code(409); # conflitto (non può donare)
         }
-
-            
+  
         break;
     default:
-        http_response_code(405); // method error
+        http_response_code(405); // metodo non riconosciuto
 }
 

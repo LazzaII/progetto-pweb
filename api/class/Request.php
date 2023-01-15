@@ -14,13 +14,18 @@ class Request {
     public $cost;
     public $isPending;
     
-    //costruttore
+    /**
+     * Costruttore
+     */
     public function __construct(){
         $this->pdo = new Database();
         $this->pdo = $this->pdo->getPDO();
     }
 
-    // funzione per prendere tutte le richieste
+    /**
+     * Funzione per prendere tutte le richieste
+     * @return array contenente i dati di tutte le richieste
+     */
     public function getAll() {
         $query = 'select B.*, C.`name` as cName, H.`name` as hName
                   from `blood_request` B
@@ -32,6 +37,11 @@ class Request {
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Funzione per prendere una richiesta specifica
+     * @param int $id della richiesta
+     * @return array contenente i dati della richiesta
+     */
     public function getOne($id) {
         $query = 'select * 
                   from `blood_request`
@@ -44,7 +54,11 @@ class Request {
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
-    //funzione per prendere le richieste di una sola SO
+    /**
+     * Funzione per prendere le richieste di una struttura ospedaliera
+     * @param int $hospital id della struttura ospedaliera
+     * @return array contente le richieste
+     */
     public function getFromHospital($hospital) {
         $query = 'select B.*, C.`name`
                   from `blood_request` B
@@ -59,24 +73,36 @@ class Request {
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Funzione per sapere il numero di richieste urgenti
+     * @return array contenente il numero di richieste
+     */
     public function getUrgent() {
         $query = 'select count(0) as QTA
                   from `blood_request` B
                   where `cost` = 0'; 
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
-        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Funzione per sapere il numero di richieste non urgenti
+     * @return array contenente il numero di richieste
+     */
     public function getNotUrgent() {
         $query = 'select count(0) as QTA
                   from `blood_request` B
                   where `cost` <> 0'; 
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
-        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
-    // funzione per aggiungere una richiesta di sangue
+
+    /**
+     * Funzione per aggiungere una richiesta
+     * @param Request $request con i dati della richiesta
+     */
     public function add($request) {
         $query = "insert into `blood_request` (`date`, `blood_type`, `quantity`, `hospital_`, `site_`, `deliveryTime`, `cost`)
                   values (current_date(), :bt, :qta, :hospital, :site, :dt, :cost)";
@@ -90,10 +116,13 @@ class Request {
             'cost' => $request->cost,
         ];
         $stmt->execute($data);
-        return 'OK';
     }
 
-    // funzione per eliminare una richiesta di sangeu
+    /**
+     * Funzione per eliminare una richiesta
+     * @param int $id della richiesta
+     * @return string
+     */
     public function delete($id) {
         $query = 'delete from `blood_request` 
                   where `_id` = :id';
@@ -105,8 +134,12 @@ class Request {
         return 'OK';
     }
 
-    // funzione lato admin che accetta la richiesta di sangue
-    public function accept($id, $value) { //val = 1 accepted, 2 not accepted by admin
+    /**
+     * Funzione per accettare (o non accettare) una richiesta
+     * @param int $id della richiesta
+     * @param mixed $value 1 se accetta, 2 se rigetta
+     */
+    public function accept($id, $value) { //val = 1 accetta, 2 rigettata
         $query = 'update `blood_request`
                   set `isPending` = :val 
                   where `_id` = :id ';

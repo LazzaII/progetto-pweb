@@ -1,6 +1,6 @@
-drop database if exists bloodbank;
-create schema bloodbank default character set utf8;
-use bloodbank;
+drop database if exists lazzarelli_635366;
+create schema lazzarelli_635366 default character set utf8;
+use lazzarelli_635366;
 
 set foreign_key_checks = 0; -- per rimuovere il controllo sulle fk
 
@@ -66,7 +66,7 @@ create table if not exists `hospital` (
     primary key (`_id`),
     foreign key (`city_`) references `city` (`_id`)
         on update cascade
-        on delete set null
+        on delete cascade
 ) engine = InnoDB;
 
 create index `index_city_2` ON `hospital` (`city_`);
@@ -82,7 +82,7 @@ create table if not exists `site` (
     primary key (`_id`),
     foreign key (`city_`) references `city` (`_id`)
         on update cascade
-        on delete set null
+        on delete cascade
 ) engine = InnoDB;
 
 create index `index_city_3` ON `site` (`city_`);
@@ -104,10 +104,10 @@ create table if not exists `blood_request` (
     primary key (`_id`),
     foreign key (`hospital_`) references `hospital` (`_id`)
         on update cascade
-        on delete set null,
+        on delete cascade,
     foreign key (`site_`) references `site` (`_id`)
         on update cascade
-        on delete set null
+        on delete cascade
 ) engine = InnoDB;
 
 create index `index_hospital` ON `blood_request` (`hospital_`);
@@ -116,16 +116,16 @@ create index `index_site_1` ON `blood_request` (`site_`);
 create table if not exists `donation` (
     `_id` int not null auto_increment,
     `date` date not null, --  data della donazione perchè non può donare entro tot mesi controllare ultima data e bloccare tasto dona
-    `donator_` int not null, -- fk
+    `donator_` int, -- fk
     `site_` int not null, -- fk
     `isUsed` tinyint default 0 check (`isUsed` in (0, 1)), -- 0 non usato, 1 usato
     primary key (`_id`),
     foreign key (`donator_`) references `donator` (`_id`)
         on update cascade
-        on delete set null,
+        on delete cascade,
     foreign key (`site_`) references `site` (`_id`)
         on update cascade
-        on delete set null
+        on delete cascade
 ) engine = InnoDB;
 
 create index `index_donator` ON `donation` (`donator_`);
@@ -157,7 +157,7 @@ create table if not exists `news` (
     primary key (`_id`),
     foreign key (`author_`) references `admin` (`_id`)
         on update cascade
-        on delete set null
+        on delete cascade
 ) engine = InnoDB;
 
 create index `index_author` ON `news` (`author_`);

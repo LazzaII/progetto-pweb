@@ -5,8 +5,9 @@ var indexUrl = '../';
 var divs = ['donation', 'account',  'news', 'contacts'];
 var cookiesName = ['login', 'auth', 'blood_group', 'email', 'first', 'id', 'second', 'phone'];
 
-// ACCOUNT
-
+/**
+ * Funzione per attivare modifiche account
+ */
 function activateModify() {
   // attiva gli input
   for (const cookie of cookiesName) {
@@ -23,6 +24,9 @@ function activateModify() {
   document.getElementById('btn-reset').style.display = 'block';
 }
 
+/**
+ * Funzione per resettare le informazioni
+ */
 function resetInfo() {
   for (const cookie of cookiesName) {
     if(document.getElementById(cookie) !== null)
@@ -30,20 +34,18 @@ function resetInfo() {
   }
   document.getElementById('pwd').value = '';
   document.getElementById('pwd').disabled = true;
-  
-  info();
-
   document.getElementById('btn-modify').style.display = 'block';
   document.getElementById('btn-elimina').style.display = 'block';  
   document.getElementById('btn-confirm').style.display = 'none';
   document.getElementById('btn-reset').style.display = 'none';
+  info();
 }
 
-// login - logout
-
+/**
+ * Funzione per controllare se accendendo alla pagine si è loggati 
+ */
 function checkLogin() {
   if(!getCookie('login')) document.location.href = indexUrl;
-
   getDonation();
   info();
 }

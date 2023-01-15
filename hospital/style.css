@@ -1,124 +1,16 @@
 @import '../styles/news.css';
 @import '../styles/form.css';
 @import '../common/account.css';
-/* system variables */
-:root {
-    --snow: #fcf7f8ff;
-    --light-gray: rgb(155, 139, 139);
-    --vivid-burgundy: #a7333fff;
-    --persian-plum: #74121dff;
-    --dark-sienna: #580c1fff;
-    --light-green: #55d86bbb;
-    --light-green-2: #6EEB8344;
-    --text-color: #333;
+
+#request {
+    color: var(--text-color);
 }
 
-/* common elements */
-body, html {
-    margin: 0;
-    padding: 0;
-    background-color: var(--vivid-burgundy);
-    font-family: 'Montserrat',sans-serif;
-    scroll-behavior: smooth;
-    overflow-x: hidden;
+#request > form > label {
+    font-weight: bold;
+    margin: 0 10px;
 }
 
-main{
-    min-height: 80vh;
-}
-
-footer {
-    position: relative;
-    padding: 20px;
-    margin: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: var(--persian-plum);
-    color: var(--snow);
-}
-
-footer div p {
+#request > table {
     text-align: center;
-    margin: 0;
 }
-
-/* navbar */
-nav {
-    display: flex;
-    flex-direction: row;
-    width: 80vw;
-    margin: 0 auto;
-    padding: 1rem 0;
-}
-
-nav img{
-    filter: invert(1);
-    cursor: pointer;
-    transition: all 200ms ease-in-out;
-}
-
-nav img:hover{
-    filter: invert(.9);
-}
-
-#menu{
-    padding: 0;
-    margin: 0;
-}
-
-#menu li{
-    font-size: 15px;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: inline;
-    color: var(--snow);
-    font-weight: 600;
-}  
-
-#menu li span{
-    width: 100%;
-    margin: 0;
-    border-bottom: 1px solid transparent;
-    transition: all 200ms ease-in-out;
-}
-
-#menu li span:hover {
-    border-color: var(--snow);
-}
-
-#menu li span {
-    padding: 1rem;
-}
-
-.nav-item-ce {
-    width: 60%;
-    display: grid;
-    place-items: center;
-}
-
-.nav-item-t, .nav-item-bt {
-    width: 30%;
-    display: flex;
-    justify-content: end;
-    align-items: center;
-}
-
-.nav-item-t {
-    display: flex;
-    justify-content: start;
-}
-
-.nav-item-bt img {
-    width: 8%;
-    margin-right: 0.7rem;
-}
-
-.title {
-    color: var(--snow);
-    font-size: 2.8rem;
-    margin: 0;
-}
-
-
-

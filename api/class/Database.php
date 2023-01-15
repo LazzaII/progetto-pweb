@@ -13,6 +13,9 @@ require_once __DIR__.'/../include/config.inc.php';
 class Database {
     private $pdo;
     
+    /**
+     * Costruttore per il collegamento al db
+     */
     public function __construct(){
         try {
             $this->pdo = new PDO("mysql:host=". BB_HOST .";dbname=". BB_DB , BB_USER , BB_PWD, array(
@@ -26,12 +29,12 @@ class Database {
         }
     }
 
+    /**
+     * Funzione che rende il collegamento al db
+     * @return PDO collegamento al database
+     */
     public function getPDO(){
         return $this->pdo;
-    }
-
-    public function closeConnection(){
-        $this->pdo = null;
     }
 }
 

@@ -1,4 +1,6 @@
-insert into `admin` values 
+use lazzarelli_635366;
+
+insert into `admin` (`first_name`, `second_name`, `type`, `email`, `hash_pwd`) values 
 ('Mario', 'Rossi', 0, 'mario@rossi.com', '$2y$10$FivlRR/HgDipCOiKXzbOqu/ZLF9HBGAQXTxI0IsZM8kQ1m26PJZUu'); -- questo è l'hash della password Prova123
 
 insert into `region` (`name`) values 
@@ -9,7 +11,7 @@ insert into `region` (`name`) values
 ('Marche'), ('Basilicata'), ('Molise'), ('Valle d’Aosta');
 
 
-insert into `city` (`_id`, `city`, `lat`, `lng`, `region_`) values
+insert into `city` (`_id`, `name`, `lat`, `lng`, `region_`) values
 (1, 'Rome', 41.8931, 12.4828, '1'),
 (2, 'Milan', 45.4669, 9.19, '2'),
 (3, 'Naples', 40.8333, 14.25, '3'),
@@ -1052,7 +1054,7 @@ insert into `city` (`_id`, `city`, `lat`, `lng`, `region_`) values
 (1040, 'Gemona del Friuli', 46.2833, 13.1333, '11'),
 (1041, 'Ramacca', 37.3833, 14.7, '5');
 
-INSERT INTO `city` (`_id`, `city`, `lat`, `lng`, `region_`) VALUES
+INSERT INTO `city` (`_id`, `name`, `lat`, `lng`, `region_`) VALUES
 (1042, 'Botticino Sera', 45.5339, 10.3078, '2'),
 (1043, 'Medesano', 44.7568, 10.1403, '7'),
 (1044, 'Grezzana', 45.5167, 11.0167, '10'),
@@ -2048,7 +2050,7 @@ INSERT INTO `city` (`_id`, `city`, `lat`, `lng`, `region_`) VALUES
 (2034, 'Sarcedo', 45.7, 11.5333, '10'),
 (2035, 'Botricello', 38.9333, 16.85, '12');
 
-INSERT INTO `city` (`_id`, `city`, `lat`, `lng`, `region_`) VALUES
+INSERT INTO `city` (`_id`, `name`, `lat`, `lng`, `region_`) VALUES
 (2036, 'Calatabiano', 37.8228, 15.2278, '5'),
 (2037, 'Polla', 40.5167, 15.5, '3'),
 (2038, 'Muravera', 39.4196, 9.5763, '14'),
@@ -3046,7 +3048,7 @@ INSERT INTO `city` (`_id`, `city`, `lat`, `lng`, `region_`) VALUES
 (3030, 'Cassine', 44.7508, 8.5289, '4'),
 (3031, 'Monterosso Almo', 37.1, 14.7667, '5'),
 (3032, 'San Giorgio la Molara', 41.2667, 14.9167, '3');
-INSERT INTO `city` (`_id`, `city`, `lat`, `lng`, `region_`) VALUES
+INSERT INTO `city` (`_id`, `name`, `lat`, `lng`, `region_`) VALUES
 (3033, 'Prata Camportaccio', 46.3167, 9.4, '2'),
 (3034, 'Montevago', 37.7033, 12.9867, '5'),
 (3035, 'Pollina', 38, 14.15, '5'),
@@ -3389,12 +3391,12 @@ INSERT INTO `city` (`_id`, `city`, `lat`, `lng`, `region_`) VALUES
 (3372, 'Revere', 45.0572, 11.1302, '2'),
 (3373, 'Rive d’Arcano', 46.1333, 13.0333, '11');
 
-insert into `site` (`address`, `city`) values 
+insert into `site` (`address`, `city_`) values 
 ('Via Nicola Pisano', 5),
 ('Via Roma', 145),
 ('Piazza della Libertà', 8),
 ('Via Modigliani', 2),
 ('Piazza Garibaldi', 4),
 ('Via Bovio', 2),
-('Via Diotisalvi', 3),
+('Via Diotisalvi', 3);
 

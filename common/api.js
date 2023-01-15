@@ -1,4 +1,9 @@
-// Regioni
+/* API IN COMUNE ALLE VARIE PAGINE */
+
+/**
+ * Funzione per prendere le regioni e creare il menù 
+ * @param {Number} setDef intero per prendere la regione default (si utilizza nella modifica delle info)
+ */
 function getRegions(setDef = null) {
   // chiamata a http://localhost/progetto-pweb/api/region.php per prendere tutte le regioni
   let xhr = new XMLHttpRequest;
@@ -23,7 +28,10 @@ function getRegions(setDef = null) {
   xhr.send();
 }
   
-// Città
+/**
+ * Funzione per prendere le città e creare il menù 
+ * @param {Number} setDef intero per prendere la città default (si utilizza nella modifica delle info)
+ */
 function getCity(setDef = null) {
   // chiamata a http://localhost/progetto-pweb/api/city.php per prendere tutte le città di una regione
   let xhr = new XMLHttpRequest;
@@ -46,11 +54,11 @@ function getCity(setDef = null) {
   xhr.send();
 }
 
-// News
+/**
+ * Funzione per prendere tutt le news
+ */
 function getNews() {
-  // pulisce il div
-  document.getElementById('news-container').textContent = '';
-
+  document.getElementById('news-container').textContent = ''; // puliziza del div
   // chiamata a http://localhost/progetto-pweb/api/news.php per prendere tutte le news
   let xhr = new XMLHttpRequest();
   xhr.open('GET', url + 'news.php', true);
@@ -80,31 +88,14 @@ function getNews() {
   xhr.send();
 }
 
-/*
-  Messaggio
-*/
-// controlla la validità degli input
-function checkContact() {
-  if(document.getElementById('fname').value === '')return 0;
-  if(document.getElementById('sname').value === '') return 0;
-  if(document.getElementById('c-email').value === '') return 0;
-  if(document.getElementById('body').value === '') return 0;
-  if(document.getElementById('obj').value === '') return 0;
-  if(!validateEmail(document.getElementById('c-email').value)) return 0;
-  return 1;
-}
-  
-// invia messaggio
+const contactInfo = ['fname', 'sname','c-email', 'body', 'obj']
+/**
+ * Funzione per l'invio di un messagio
+ * @returns per uscire in caso di errore
+ */
 function sendMessage() {
-  if(checkContact() === 0) {
-    document.getElementById('message').classList.add('errore');
-    document.getElementById('message').style.display = 'block';
-    document.querySelectorAll('#message p')[0].innerText = 'Compila tutti i campi correttamente';
-    interval = setInterval(() =>  {
-      document.getElementById('message').style.display = 'none';
-      document.getElementById('message').classList.remove('errore');
-      clearInterval(interval);
-    }, 4000);
+  if(!checkInput(contactInfo, 2)) {
+    showMessage('message', 'Compila tutti i campi correttamente', 'errore');
     return;
   }
 
@@ -117,27 +108,15 @@ function sendMessage() {
   });
 
   // pulisce gli input
-  document.getElementById('fname').value = "";
-  document.getElementById('sname').value = "";
-  document.getElementById('c-email').value = "";
-  document.getElementById('body').value = "";
-  document.getElementById('obj').value = "";
+  clearValue(contactInfo);
 
   // chiamata a http://localhost/progetto-pweb/api/message.php per inviare il messaggio
   let xhr = new XMLHttpRequest();
   xhr.open('POST', url + 'message.php', true);
   xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
   xhr.onload = function () {
-    if(xhr.status === 200){
-      document.getElementById('message').classList.add('corretto');
-      document.getElementById('message').style.display = 'block';
-      document.querySelectorAll('#message p')[0].innerText = 'Messaggio inviato correttamente';
-      interval = setInterval(() =>  {
-        document.getElementById('message').style.display = 'none';
-        document.getElementById('message').classList.remove('corretto');
-        clearInterval(interval);
-      }, 4000);
-    }
+    if(xhr.status === 200)
+      showMessage('message', 'Messaggio inviato correttamente', 'corretto');
   }
   xhr.send(data);
 }

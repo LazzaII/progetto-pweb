@@ -66,7 +66,7 @@ switch($method) {
                         setcookie('region',  (new Region())->getOne((new City())->getOne($decodeBody->city)['region_'])['name'], time() + 3600, '/');
                     } 
                 } else {
-                    $donator->pwd = password_hash($decodeBody->pwd, PASSWORD_DEFAULT);
+                    $hospital->pwd = password_hash($decodeBody->pwd, PASSWORD_DEFAULT);
                     if($hospital->update($hospital) == 'ERR')
                         http_response_code(409); # conflitto (email già in uso)
                     else { # aggiorna il valore dei cookie

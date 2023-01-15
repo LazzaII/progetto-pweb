@@ -1,21 +1,25 @@
-/*
-    tutti gli utenti
-*/
+/* API USERS PAGINA ADMIN */
 
-// funzione di caricamento di tutti gli utenti
+/**
+ * Funzione per il avviare processo di caricament di tutti gli utenti
+ */
 function getUsers() {
     getDonator();
     getSo();
     getAdmin();
 }
 
-// funzione per eliminare o autenticare l'utente
+/**
+ * Funzione per svolgere un'azione su un utente (eliminazine o conferma account) 
+ * @param {Intero} id intero che rappresenta l'utente su cui svolgere l'azione
+ * @param {Char} type tipo di utente (A, D, H)
+ * @param {String} METHOD tipo di metodo (PUT, DELETE)
+ */
 function actionUsers(id, type, METHOD) {
     let data = JSON.stringify({
         id : id,
         type : type
     });
-
     // chiamata a http://localhost/progetto-pweb/api/users.php per eliminare o autenticare l'utente
     let xhr = new XMLHttpRequest();
     xhr.open(METHOD, url + 'users.php?type=' + type, true);
@@ -29,15 +33,11 @@ function actionUsers(id, type, METHOD) {
     xhr.send(data);
 }
 
-// prende i donatori
+/**
+ * Funzione per caricare tutti i donatori
+ */
 function getDonator() {
-    let tbody = document.getElementById('tbody-donator');
-
-    // pulisce il contenuto della tabella per poi ripopolarla sotto
-    let prevTr = document.querySelectorAll('#tbody-donator tr');
-    for (let i = 1; i < prevTr.length; i++) // il primo viene saltato perchè è l'header della tabella
-        prevTr[i].remove();
-
+    clearTBody('tbody-donator');
     // chiamata a http://localhost/progetto-pweb/api/users.php per caricare tutti i donatori
     let xhr = new XMLHttpRequest();
     xhr.open('GET', url + 'users.php?type=D', true);
@@ -75,22 +75,18 @@ function getDonator() {
                 tr.append(phone);
                 tr.append(btype);
                 tr.append(azioni);
-                tbody.append(tr);
+                document.getElementById('tbody-donator').append(tr);
             }
         }
     }
     xhr.send();
 }
 
-// prende le strutture ospedaliera
+/**
+ * Funzione per caricare tutte le strutture ospedaliere
+ */
 function getSo() {
-    let tbody = document.getElementById('tbody-so');
-
-    // pulisce il contenuto della tabella per poi ripopolarla sotto
-    let prevTr = document.querySelectorAll('#tbody-so tr');
-    for (let i = 1; i < prevTr.length; i++) // il primo viene saltato perchè è l'header della tabella
-        prevTr[i].remove();
-
+    clearTBody('tbody-so');
     // chiamata a http://localhost/progetto-pweb/api/users.php per caricare tutti i donatori
     let xhr = new XMLHttpRequest();
     xhr.open('GET', url + 'users.php?type=H', true);
@@ -131,22 +127,18 @@ function getSo() {
                 tr.append(city);
                 tr.append(region);
                 tr.append(azioni);
-                tbody.append(tr);
+                document.getElementById('tbody-so').append(tr);
             }
         }
     }
     xhr.send();
 }
 
-// prende gli admin
+/**
+ * Funzione per caircar tuti gli admin
+ */
 function getAdmin() {
-    let tbody = document.getElementById('tbody-admin');
-
-    // pulisce il contenuto della tabella per poi ripopolarla sotto
-    let prevTr = document.querySelectorAll('#tbody-admin tr');
-    for (let i = 1; i < prevTr.length; i++) // il primo viene saltato perchè è l'header della tabella
-        prevTr[i].remove();
-
+    clearTBody('tbody-admin');
     // chiamata a http://localhost/progetto-pweb/api/users.php per caricare tutti i donatori
     let xhr = new XMLHttpRequest();
     xhr.open('GET', url + 'users.php?type=A', true);
@@ -172,7 +164,7 @@ function getAdmin() {
                 tr.append(sname);
                 tr.append(email);
                 tr.append(azioni);
-                tbody.append(tr);
+                document.getElementById('tbody-admin').append(tr);
             }
         }
     }

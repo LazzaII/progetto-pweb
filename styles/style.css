@@ -1,0 +1,35 @@
+/* other css */
+@import './why.css';
+@import './form.css';
+@import './manual.css';
+@import './log-reg.css';
+@import './news.css';
+
+/* common id */
+#contacts {
+    display: none;
+}
+
+#why {
+    display: none;
+}
+
+#news {
+    display: none;
+}
+
+#login {
+    display: none;
+}
+
+.not-auth {
+    background-color: var(--light-gray);
+    box-shadow:0 0 30px -10px var(--text-color);
+    margin: 15px 0;
+}
+
+a {
+    color: var(--text-color);
+    text-decoration: none;
+}
+

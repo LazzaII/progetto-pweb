@@ -48,44 +48,51 @@
                 </ul>
             </div>
             <div class="nav-item-bt">
-                <img src="../icon/account.svg" onclick="showDiv('account'), showForm()"/>
+                <img src="../icon/account.svg" onclick="showDiv('account'), checkLogged(), showForm()"/>
                 <img src="../icon/exit.svg" onclick="exitAdmin()"/>
             </div>
         </nav>
 
         <main>
             <section id="dashboard">
-                <h1 id="dashboard-title">Statistiche</h1>
-                <div>
-                    <h3>Utenti</h3>
-                    <div id="total-user">
-
+                <h1 id="dashboard-title" class="title-dash">Statistiche</h1>
+                <h2 class="title-dash">Utenti</h2>
+                <div class="container-dash">
+                    <div id="tot-users" class="box-dash">
+                        <p>Numero di utenti totali:</p>
+                        <h3 class="numero"></h3>
                     </div>
-                    <div id="donators">
-
+                    <div id="donators" class="box-dash">
+                        <p>Numero di donatori totali:</p>
                     </div>
-                    <div id="hospitals">
-
+                    <div id="hospitals" class="box-dash">
+                        <p>Numero di strutture ospedaliere totali:</p>
                     </div>
-                    <h3>Donazioni</h3>
-                    <div id="total-donations">
-                       
+                </div>
+                <h2 class="title-dash">Donazioni</h2>
+                <div class="container-dash">
+                    <div id="donations" class="box-dash">
+                        <p>Numero di donazioni totali:</p>
+                        <h3 class="numero"></h3>
                     </div>
-                    <div id="donations-used">
-                        
+                    <div id="used-d" class="box-dash">
+                        <p>Numero di donazioni utilizzate:</p>
                     </div>
-                    <div id="not-used">
-                        
+                    <div id="not-used" class="box-dash">
+                        <p>Numero di donazioni da utilizzare:</p>
                     </div>
-                    <h3>Richieste</h3>
-                    <div id="total-req">
-
+                </div>
+                <h2 class="title-dash">Richieste</h2>
+                <div class="container-dash">
+                    <div id="tot-req" class="box-dash">
+                        <p>Numero di richieste totali:</p>
+                        <h3 class="numero"></h3>
                     </div>
-                    <div id="req-urg">
-
+                    <div id="req-urg" class="box-dash">
+                        <p>Numero di richieste urgenti:</p>
                     </div>
-                    <div id="not-urg">
-
+                    <div id="not-urg" class="box-dash">
+                        <p>Numero di richieste non urgenti:</p>
                     </div>
                 </div>
             </section>
@@ -272,12 +279,12 @@
 
     <script src="../common/utilities.js"></script>
     <script src="../common/api.js"></script>
+    <script src="./logic/api-dashboard.js"></script>
     <script src="./logic/api-users.js"></script>
     <script src="./logic/api-request.js"></script>
     <script src="./logic/api-news.js"></script>
     <script src="./logic/api-account.js"></script>
     <script src="./logic/api-mex.js"></script>
-    <script src="./logic/api-dashboard.js"></script>
     <script src="./logic/logic-admin.js"></script>
 </body>
 </html>

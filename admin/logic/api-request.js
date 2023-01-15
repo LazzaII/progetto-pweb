@@ -1,12 +1,9 @@
-// tutte le richieste di sangue
+/* API RICHIESTE PAGINA ADMIN */
+/**
+ * Funzione per mettere in tabella tutte le richieste di sangue
+ */
 function getRequest() {
-    let table = document.getElementById('tbody-request');
-
-    // pulisce il contenuto della tabella per poi ripopolarla sotto
-    let prevTr = document.querySelectorAll('#tbody-request tr');
-    for (let i = 1; i < prevTr.length; i++) // il primo viene saltato perchè è l'header della tabella
-        prevTr[i].remove();
-
+    clearTBody('tbody-request')
     // chiamata a http://localhost/progetto-pweb/api/blood_request.php per caricare tutte le richieste di sangue
     let xhr = new XMLHttpRequest();
     xhr.open('GET', url + 'blood_request.php', true);
@@ -31,19 +28,17 @@ function getRequest() {
                 qta.innerText = r.quantity;
                 cost.innerText = r.cost;
                 if(r.isPending === '0'){
-                    let btnR = document.createElement('button'); // sostituire con icona 
+                    let btnR = document.createElement('button');
                     btnR.innerText = 'R';
                     btnR.addEventListener('click', () => { actionRequest(r._id, 2) })
                     azioni.append(btnR);
-                    let btnA = document.createElement('button'); // sostituire con icona 
+                    let btnA = document.createElement('button');
                     btnA.innerText = 'A';
                     btnA.addEventListener('click', () => { actionRequest(r._id, 1) })
                     azioni.append(btnA);
                 }
-                else if (r.isPending === '2')
-                    azioni.innerText = 'Rigettata';
-                else 
-                    azioni.innerText = 'Accettata';
+                else if (r.isPending === '2') azioni.innerText = 'Rigettata';
+                else azioni.innerText = 'Accettata';
                 tr.append(date);
                 tr.append(hName);
                 tr.append(cName);
@@ -51,20 +46,22 @@ function getRequest() {
                 tr.append(qta);
                 tr.append(cost);
                 tr.append(azioni);
-                table.append(tr);
+                document.getElementById('tbody-request').append(tr);
             }
         }
     }
     xhr.send();
 }
-
-// accetta o rigetta la richiesta a seconda del valore di val (1 = accettata, 2 = rigettata)
+/**
+ * Funzione per svolgere una azione su una richiesta (rigetto o accettazione)
+ * @param {Intero} id numero di richiesta su cui svolgere l'azione
+ * @param {Intero} val valore della richiesta, 1 accettata, 2 rigettata
+ */
 function actionRequest(id, val) {
     let data = JSON.stringify({
         id : id,
         value : val
     });
-
     // chiamata a http://localhost/progetto-pweb/api/blood_request.php per eliminare o autenticare l'utente
     let xhr = new XMLHttpRequest();
     xhr.open('PUT', url + 'blood_request.php', true);

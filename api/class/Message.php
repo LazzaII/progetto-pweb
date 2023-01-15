@@ -17,6 +17,10 @@ class Message {
         $this->pdo = $this->pdo->getPDO();
     }
 
+    /**
+     * Funzione per prendere tutti i messaggi
+     * @return array con tutti i dati dei vari messaggi
+     */
     public function getAll(){
         $query = 'select * 
                   from `message`
@@ -26,6 +30,10 @@ class Message {
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Funzione per aggiungere un messaggio
+     * @param mixed $message
+     */
     public function add($message) {
         $query = 'insert into `message` (`object`, `body`, `first_name`, `second_name`, `email`)
                   values (:obj, :body, :fn, :sn, :email)';
@@ -40,6 +48,10 @@ class Message {
         $stmt->execute($data);
     }
 
+    /**
+     * Funzione per eliminare un messagio
+     * @param mixed $id
+     */
     public function delete($id) {
         $query = 'delete from `message` 
                   where `_id` = :id';

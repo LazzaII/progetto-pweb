@@ -12,14 +12,22 @@ class Donator {
     public $phone;
     public $pwd;
     public $blood;
-
     public $isAuth;
     
+    /**
+     * Costruttore
+     */
     public function __construct(){
         $this->pdo = new Database();
         $this->pdo = $this->pdo->getPDO();
     }
 
+    /**
+     * Funzione che cerca un donatore data una mail
+     * @param string $email del donatore
+     * @param int $id da utilizzare in caso si modifichino i dati dell'utente per controllare tutte la mail tranne la sua
+     * @return array contenente i dati del donatore
+     */
     public function findFromEmail($email, $id = null){
         if($id == null){
             $query = 'select * 
@@ -44,15 +52,22 @@ class Donator {
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Funzione che rende il numero totale di donatori
+     * @return array contente il numero di donatori
+     */
     public function getTot(){
         $query = 'select count(0) as QTA 
-                  from `donator`
-                  where `isAuth` = 1';
+                  from `donator`';
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
-        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Funzione che rende le informazioni riguardanti tutti i donatori
+     * @return array contente i dati di tutti i donatori
+     */
     public function getAll(){
         $query = 'select * from `donator`';
         $stmt = $this->pdo->prepare($query);
@@ -60,6 +75,11 @@ class Donator {
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Funzione per aggiungere un donatore
+     * @param Donator $donator contenente i dati da aggiungere
+     * @return string esito dell'operazione
+     */
     public function add($donator) {
         if(empty(self::findFromEmail($donator->email))) {
             $query = "insert into `donator` (`first_name`, `second_name`, `email`, `phone`, `hash_pwd`, `blood_group`)
@@ -78,7 +98,11 @@ class Donator {
         }
         return 'ERR';
     }
-
+    
+    /**
+     * Funzione per eliminare un donaotre
+     * @param int $id contente l'id del donatore da eliminare
+     */
     public function delete($id) {
         $query = 'delete from `donator`
                   where `_id` = :id';
@@ -87,9 +111,14 @@ class Donator {
             'id' => $id
         ];
         $stmt->execute($data);
-        return 'OK';
     }
 
+    /**
+     * Funzione per aggiornare le informazioni di un utente
+     * @param Donator $donator con le nuove informazioni
+     * @param boolean $isPassword in caso vada modificata anche la password
+     * @return string esito dell'operazione
+     */
     public function update($donator, $isPassword = true) {
         if (empty(self::findFromEmail($donator->email, $donator->id))) {
             if($isPassword) {
@@ -125,6 +154,10 @@ class Donator {
         return 'ERR';
     }
 
+    /**
+     * Funzione per autenticare l'utente
+     * @param int $id dell'utente
+     */
     public function authetication($id) {
         $query = 'update `donator` 
                   set `isAuth` = 1
@@ -134,7 +167,6 @@ class Donator {
             'id' => $id
         ];
         $stmt->execute($data);
-        return 'OK';
     }
 }
 

@@ -1,6 +1,6 @@
 /* css comune a tutte le pagine*/
 
-/* system variables */
+/* palette di colori */
 :root {
     --snow: #fcf7f8ff;
     --light-gray: rgb(155, 139, 139);
@@ -12,6 +12,115 @@
     --text-color: #333;
 }
 
+/* sfondo e footer */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    background-color: var(--vivid-burgundy);
+    font-family: 'Montserrat',sans-serif;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+main{
+    min-height: 82vh;
+}
+
+footer {
+    position: relative;
+    padding: 20px;
+    margin: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: var(--persian-plum);
+    color: var(--snow);
+}
+
+footer div p {
+    text-align: center;
+    margin: 0;
+}
+
+/* navbar */
+nav {
+    display: flex;
+    flex-direction: row;
+    width: 80vw;
+    margin: 0 auto;
+    padding: 1rem 0;
+}
+
+nav img{
+    filter: invert(1);
+    cursor: pointer;
+    transition: all 200ms ease-in-out;
+}
+
+nav img:hover{
+    filter: invert(.9);
+}
+
+#menu{
+    padding: 0;
+    margin: 0;
+}
+
+#menu li{
+    font-size: 15px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: inline;
+    color: var(--snow);
+    font-weight: 600;
+}  
+
+#menu li span{
+    width: 100%;
+    margin: 0;
+    border-bottom: 1px solid transparent;
+    transition: all 200ms ease-in-out;
+}
+
+#menu li span:hover {
+    border-color: var(--snow);
+}
+
+#menu li span {
+    padding: 1rem;
+}
+
+.nav-item-ce {
+    width: 60%;
+    display: grid;
+    place-items: center;
+}
+
+.nav-item-t, .nav-item-bt {
+    width: 30%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.nav-item-t {
+    display: flex;
+    justify-content: start;
+}
+
+.nav-item-bt img {
+    width: 8%;
+    margin-right: 0.7rem;
+}
+
+.title {
+    color: var(--snow);
+    font-size: 2.8rem;
+    margin: 0;
+}
+
+/* altro */
 
 .centered{
     display: grid;
@@ -99,7 +208,7 @@ input[type=button]:hover {
 }
 
 
-#history, #request, #users, #mex, #news-list{
+#history, #request, #users, #mex, #news-list, #dashboard{
     width: 80vw;
     margin: auto;
     background-color: white;
@@ -108,14 +217,14 @@ input[type=button]:hover {
     margin-top: 100px;
 }
 
-#history h1, #request h3, #request h1, #users h1, #users h3, #mex h3, #mex h1, #news-list h1, #news-list h3, #form-new-admin h1{
+#history h1, #request h3, #request h1, #users h1, #users h3, #mex h3, #mex h1, #news-list h1, #news-list h3, #form-new-admin h1, .title-dash {
     text-align: center;
     width: 100%;
     font-size: 2rem;
     color: var(--dark-sienna);
 }
 
-#users h1, #users h3, #mex h3, #mex h1, #form-new-admin h1{
+#users h1, #users h3, #mex h3, #mex h1, #form-new-admin h1, #dashboard h2{
     font-size: 1.5rem;
 }
 
@@ -142,12 +251,12 @@ input[type=button]:hover {
 }
 
 #btn-modify, #btn-elimina, #btn-reset, #btn-confirm{
- margin: 0;
- padding: 10px 15px;
- border-radius: 5px;
- color: white;
- border: none;
- transition: all 200ms ease-in-out;
+    margin: 0;
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: white;
+    border: none;
+    transition: all 200ms ease-in-out;
 }
 
 #btn-modify, #btn-confirm{

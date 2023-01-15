@@ -10,21 +10,17 @@ var vm1 = 45; // entro in 30 km {si presume non venga presa l'autostrada}
 var vm2 = 90; // entro i 150 km {si presume strade extraurbane secondarie}
 var vm3 = 120; // sopra i 150 km {si presume l'utilizzo principalmente di autostrade}
               // è una stima per cui le isole non vengono considerate come tali ma come terra tutta unità
-
-
 // tempo standard stessa citta
 var timeS = 40;
 
 // raggio della terra
 var R = 6373;
 
-/*
- ACCOUNT
-*/
-// attiva bottoni modifica 
+/**
+ * Funzione per attivare le modifiche nell'account
+ */
 function activateModify() {
-  // attiva input 
-  for (const cookie of cookiesName) {
+  for (const cookie of cookiesName) { // attiva gli input
     if(document.getElementById(cookie) !== null)
       document.getElementById(cookie).disabled = false;
   }
@@ -43,7 +39,9 @@ function activateModify() {
   document.getElementById('btn-reset').style.display = 'block';
 }
 
-// reset delle informazioni
+/**
+ * Funzione per resettare le informazioni dai cookie
+ */
 function resetInfo() {
   for (const cookie of cookiesName) {
     if(document.getElementById(cookie) !== null)
@@ -64,7 +62,9 @@ function resetInfo() {
   document.getElementById('btn-reset').style.display = 'none';
 }
 
-// controllo del login
+/**
+ * Funzione per controllare se chi sta accendendo alla pagine è loggato
+ */
 function checkLogin() {
   if(!getCookie('login')) document.location.href = indexUrl;
 
@@ -74,7 +74,9 @@ function checkLogin() {
   getCityInfo();
 }
 
-// visto che la funzione info è standard non popola i select
+/**
+ * Funzione per popolare i select quando si prova a modificare l'account
+ */
 function infoCityRegion() {
   opCity = document.createElement('option');
   opCity.value = getCookie('cityId');

@@ -1,16 +1,10 @@
-/*
-    API MESSAGGI
-*/
+/* API MESSAGGI PAGINA ADMIN */
 
-// tutti i messaggi
+/**
+ * Funzione per prendere tutti i messaggi e scriverli nella tabella
+ */
 function getMex() {
-    let tbody = document.getElementById('tbody-mex');
-
-    // pulisce il contenuto della tabella per poi ripopolarla sotto
-    let prevTr = document.querySelectorAll('#tbody-mex tr');
-    for (let i = 1; i < prevTr.length; i++) // il primo viene saltato perchè è l'header della tabella
-        prevTr[i].remove();
-
+    clearTBody('tbody-mex');
     // chiamata a http://localhost/progetto-pweb/api/message.php per caricare tutti i messaggi
     let xhr = new XMLHttpRequest();
     xhr.open('GET', url + 'message.php', true);
@@ -26,7 +20,7 @@ function getMex() {
                 let obj = document.createElement('td');
                 let body = document.createElement('td');
                 let azioni = document.createElement('td');
-                let btnE = document.createElement('button'); // sostituire con icona 
+                let btnE = document.createElement('button');
                 
                 fname.innerText = m.first_name;
                 sname.innerText = m.second_name;
@@ -42,16 +36,19 @@ function getMex() {
                 tr.append(obj);
                 tr.append(body);
                 tr.append(azioni);
-                tbody.append(tr);
+                document.getElementById('tbody-mex').append(tr);
             }
         }
     }
     xhr.send();
 }
 
-// cancella il messaggio
+/**
+ * Funzione per eliminare un messaggio
+ * @param {Number} id intero che rappresenta il messggio da eliminare
+ */
 function deleteMessage(id) {
-    // chiamata a http://localhost/progetto-pweb/api/message.php per eliminare o autenticare l'utente
+    // chiamata a http://localhost/progetto-pweb/api/message.php per eliminare il messaggio
     let xhr = new XMLHttpRequest();
     xhr.open('DELETE', url + 'message.php/' + id, true);
     xhr.onload = function () {

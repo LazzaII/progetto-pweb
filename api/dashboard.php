@@ -1,4 +1,5 @@
 <?php
+
 $method = $_SERVER['REQUEST_METHOD'];
 
 switch($method) {
@@ -14,7 +15,7 @@ switch($method) {
                 break;
             case 2:
                 require_once __DIR__ . '/class/Hospital.php';
-                $hospital = new Donator();
+                $hospital = new Hospital();
                 $js_encode = json_encode($hospital->getTot(), true);
                 echo ($js_encode);
 

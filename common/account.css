@@ -2,6 +2,7 @@
     color: var(--text-color);
     width: 450px;
     height: fit-content;
+    min-height: fit-content;
     background: var(--snow);
     border-radius:8px;
     box-shadow:0 0 40px -10px var(--dark-sienna);
@@ -41,7 +42,7 @@ input:disabled {
     text-align: center;
     color: var(--snow);
     border-radius: 5px;
-    border-radius:8px; 
+    border-radius: 8px; 
     padding: 10px 5px;
 }
 

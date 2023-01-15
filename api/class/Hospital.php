@@ -14,11 +14,19 @@ class Hospital {
     public $addr;
     public $city;
     
+    /**
+     * Costruttire
+     */
     public function __construct(){
         $this->pdo = new Database();
         $this->pdo = $this->pdo->getPDO();
     }
-
+/**
+     * Funzione che cerca una struttura ospedalieradata una mail
+     * @param string $email della struttura ospedaliera
+     * @param int $id da utilizzare in caso si modifichino i dati dell'utente per controllare tutte la mail tranne la sua
+     * @return array contenente i dati della struttura ospedaliera
+     */
     public function findFromEmail($email, $id = null){
         if($id == null){
             $query = 'select * 
@@ -43,6 +51,10 @@ class Hospital {
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
     
+    /**
+     * Funzione che rende tutte le strutture ospedaliere
+     * @return array
+     */
     public function getAll(){
         $query = 'select H.*, C.`name` as cName, R.`name` as rName 
                   from `hospital` H
@@ -53,15 +65,23 @@ class Hospital {
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Funzione che rende il numero di strutture ospedaliere
+     * @return array contente il numero
+     */
     public function getTot(){
         $query = 'select count(0) as QTA 
-                  from `hospital`
-                  where `isAuth` = 1';
+                  from `hospital`';
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
-        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Funzione per aggiungere una nuova struttura ospedaliera
+     * @param Hospital $hospital con tutti i dati 
+     * @return string esito dell'operazione
+     */
     public function add($hospital) {
         if(empty(self::findFromEmail($hospital->email))) {
             $query = "insert into `hospital` (`name`, `email`, `phone`, `hash_pwd`, `address`, `city_`)
@@ -92,6 +112,12 @@ class Hospital {
         return 'ERR';
     }
 
+    /**
+     * Funzione per aggiornare i dai di una struttura ospedaliera
+     * @param Hospital $hospital con i nuovi dati
+     * @param boolean $isPassword in caso vada modificata anche la password
+     * @return string con l'esito
+     */
     public function update($hospital, $isPassword = true) {
         if (empty(self::findFromEmail($hospital->email, $hospital->id))) {
             if($isPassword) {
@@ -129,6 +155,10 @@ class Hospital {
         return 'ERR';
     }
 
+    /**
+     * Funzione per autenticare la struttura
+     * @param int $id della struttura
+     */
     public function authetication($id) {
         $query = 'update `hospital`
                   set `isAuth` = 1
@@ -138,7 +168,6 @@ class Hospital {
             'id' => $id,
         ];
         $stmt->execute($data);
-        return 'OK';
     }
 }
 

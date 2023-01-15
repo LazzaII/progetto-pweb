@@ -11,12 +11,20 @@ class Admin {
     public $type;
     public $email;
     public $pwd;
-    
+    /**
+     * Costruttore
+     */
     public function __construct(){
         $this->pdo = new Database();
         $this->pdo = $this->pdo->getPDO();
     }
 
+    /**
+     * Funzione per trovare un utente dalla mail
+     * @param string $email
+     * @param int $id in caso si vuole modificare i dati si controlla che l'utente sia lo stesso tramite l'id
+     * @return array contente i dati dell'utente
+     */
     public function findFromEmail($email, $id = null){
         if($id == null){
             $query = 'select * 
@@ -41,6 +49,10 @@ class Admin {
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Funzione per prendere tutti gli amministratori
+     * @return array contenente tutti i dati
+     */
     public function getAll(){
         $query = 'select * 
                   from `admin`
@@ -50,6 +62,11 @@ class Admin {
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    /**
+     * Funzione per aggiungere un amministratore
+     * @param Admin $admin contenente tutti i dati
+     * @return string contenente il risultato dell'operazione (ERR email già usata - OK inserito correttamente)
+     */
     public function add($admin) {
         if(empty(self::findFromEmail($admin->email))) {
             $query = 'insert into `admin` (`first_name`, `second_name`, `email`, `hash_pwd`)
@@ -67,6 +84,11 @@ class Admin {
         return 'ERR';
     }
 
+    /**
+     * Funzione per eliminare un amministratore
+     * @param int $id dell'admin da eliminare
+     * @return string
+     */
     public function delete($id) {
         $query = 'delete from `admin` 
                   where `_id` = :id';
@@ -77,7 +99,12 @@ class Admin {
         $stmt->execute($data);
         return 'OK';
     }
-
+    /**
+     * Funzione per aggiornare i dati dell'amministratore
+     * @param Admin $admin contenente i dati
+     * @param boolean $isPassword true se deve modificare anche la password, false altrimenti
+     * @return string contenente il risultato dell'operazione (ERR email già in uso)
+     */
     public function update($admin, $isPassword = false) {
         if (empty(self::findFromEmail($admin->email, $admin->id))) {
             if($isPassword){
