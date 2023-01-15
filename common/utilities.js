@@ -64,7 +64,7 @@ function exit() {
     document.location.href = indexUrl; // torna alla pagina principale
 }
 
-// qualsiasi carattere fino alla chiocciola stessa cosa per la parte dopo la chioccola tranne per i caratteri speciali
+// qualsiasi carattere fino alla chiocciola stessa cosa per la parte dopo la chioccola
 const emailRegex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}')  
 /**
  * Funzione per il controllo della validità della mail
@@ -75,7 +75,7 @@ function validateEmail(email) {
     return emailRegex.test(email);
 }
 
-// 8 caratteri, almeno una lettere e un numero
+// 8 caratteri, almeno una lettera maiuscola, una minuscola, un numero e un carattere speciale
 const pwdRegex = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')
 /**
  * 
@@ -100,11 +100,11 @@ function validateNumber(number) {
 /**
  * Funzione per calolcare la distanza tra due città in linea d'aria.
  * Basato sulla formula di Haversine per il calcolo della distanza terrestre
- * @param {Number} lat1 latitudine punto 1
- * @param {Number} lon1 longitudine punto 1
- * @param {Number} lat2 latitudine punto 2
- * @param {Number} lon2 longitudnie punto 2
- * @returns {Number} Km di distanza tra le due città
+ * @param {Intero} lat1 latitudine punto 1
+ * @param {Intero} lon1 longitudine punto 1
+ * @param {Intero} lat2 latitudine punto 2
+ * @param {Intero} lon2 longitudnie punto 2
+ * @returns {Intero} Km di distanza tra le due città
  */
 function distance(lat1, lon1, lat2, lon2) {
     lat1 = Math.PI * lat1/180;
@@ -126,19 +126,15 @@ function clearTBody(id) {
 
 /**
  * Funzione per il controllo degli input
- * @param {Array} whatChek array di stringhe che contiene il valode dell'id dell'input da controllare
- * @param {Number} email posizione nell'array contenente l'email da controllare, non essendo necessario in tutti i form default a false
- * @param {Number} phone posizione nell'array contenente il numero da controllare, non essendo necessario in tutti i form default a false
- * @param {Number} pwd posizione nell'array contenente la password da controllare, non essendo necessario in tutti i form default a false
+ * @param {Array} whatCheck array di stringhe che contiene il valode dell'id dell'input da controllare
+ * @param {Intero} email posizione nell'array contenente l'email da controllare, non essendo necessario in tutti i form default a false
+ * @param {Intero} phone posizione nell'array contenente il numero da controllare, non essendo necessario in tutti i form default a false
+ * @param {Intero} pwd posizione nell'array contenente la password da controllare, non essendo necessario in tutti i form default a false
  * @returns {Boolean} true se vanno tutti bene, false altrimenti
  */
 function checkInput(whatCheck, email = false, phone = false, pwd = false) {
-    console.log('funziona controllo');
-    for (let i = 0; i < whatCheck.length; i++) {
-        console.log(whatCheck[i]);
-        console.log(document.getElementById(whatCheck[i]).value);
+    for (let i = 0; i < whatCheck.length; i++) 
         if(document.getElementById(whatCheck[i]).value === '') return false;
-    }
     if(email) 
         if(!validateEmail(document.getElementById(whatCheck[email]).value)) return false;
     if(phone) 
@@ -154,19 +150,17 @@ function checkInput(whatCheck, email = false, phone = false, pwd = false) {
  * @param {Array} whatClear array di stringhe che contiene il valode dell'id dell'input da pulire
  */
 function clearValue(whatClear) {
-    console.log('funziona pulizia');
     for (let i = 0; i < whatClear.length; i++) 
         document.getElementById(whatClear[i]).value = '';
 }
 
 /**
  * Funzione per mostrare per 4 secondi messaggio di errore o conferma
- * @param {String} id 
- * @param {String} testo 
- * @param {String} classe 
+ * @param {String} id del div
+ * @param {String} testo testo del messagio
+ * @param {String} classe  classe da aggiungere
  */
 function showMessage(id, text, classe) {
-    console.log('funziona messaggio')
     document.getElementById(id).classList.add(classe);
     document.getElementById(id).style.display = 'block';
     document.querySelectorAll('#' + id + ' p')[0].innerText = text;

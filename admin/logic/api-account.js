@@ -7,7 +7,6 @@ const loginInfo = ['email-l', 'password-l'];
  */
 function login() {
     if(!checkInput(loginInfo)) {
-      console.log('qui dentro');
       showMessage('message-l', 'Compila tutti i campi correttamente', 'errore');
       return; 
     }

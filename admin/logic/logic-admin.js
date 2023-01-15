@@ -75,7 +75,6 @@ function resetInfo() {
  * Funzione che mostra il form solo se è super admin
  */
 function showForm() {
-    console.log(getCookie('type'));
     if(getCookie('type') === '0') document.getElementById('form-new-admin').style.display = 'block';
 }
 
