@@ -101,9 +101,7 @@ function findSite() {
                 }
                 tdqta.append(qta);
                 tdBtnU.append(btnU);
-                tr.setAttribute('id', s.site); // set degli attributi e del testo
-                citta.setAttribute('id', s.cId); citta.setAttribute('class', 'city');
-                regione.setAttribute('id', s.rId); regione.setAttribute('class', 'regione');
+                tr.setAttribute('id', 'tr' + s.site);// set degli attributi e del testo
                 tempoArr.setAttribute('class', 'time');
                 qta.setAttribute('class', 'qta-r');
                 btnU.setAttribute('class', 'urgente')
@@ -115,8 +113,8 @@ function findSite() {
                 time = calcoloTempo(dt, false);
                 tempoArr.setAttribute('id', time);
                 tempoArr.innerText = parseInt(time/60) + ' H : ' + Math.floor(time - (60*parseInt(time/60))) + ' m';
-                btnU.addEventListener('change', () => updateTime(s.site, Math.floor(dt)));
-                btnAdd.addEventListener('click', () => sendRequest(s.site, Math.floor(dt)));
+                btnU.addEventListener('change', () => updateTime('tr' + s.site, Math.floor(dt)));
+                btnAdd.addEventListener('click', () => sendRequest('tr' + s.site, Math.floor(dt)));
 
                 tdBtn.append(btnAdd)
                 tr.append(citta); // aggiunta delle caselle
@@ -141,7 +139,7 @@ function findSite() {
 
 /**
  * Invia la richiesta di sangue
- * @param {Intero} id del magazzino di spedizione
+ * @param {String} id tr + id del magazzino di spedizione
  * @param {Intero} km tra i due edifici
  */
 function sendRequest(id, km) {
@@ -154,7 +152,7 @@ function sendRequest(id, km) {
         type : document.getElementById('btype').value,
         qta : box.getElementsByClassName('qta-r')[0].value,
         hospital : getCookie('id'),
-        site : id,
+        site : id.substring(2),
         time : box.getElementsByClassName('time')[0].id,
         cost : costo 
     });
