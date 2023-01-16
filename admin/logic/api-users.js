@@ -157,9 +157,11 @@ function getAdmin() {
                 fname.innerText = a.first_name;
                 sname.innerText = a.second_name;
                 email.innerText = a.email;
-                btnE.innerText = 'E';
-                btnE.addEventListener('click', () => { actionUsers(a._id, 'A', 'DELETE') })
-                azioni.append(btnE);
+                if(getCookie('id') !== a._id) { // non può eliminare se stesso dalla lista utenti
+                    btnE.innerText = 'E';
+                    btnE.addEventListener('click', () => { actionUsers(a._id, 'A', 'DELETE') })
+                    azioni.append(btnE);
+                }
                 tr.append(fname);
                 tr.append(sname);
                 tr.append(email);

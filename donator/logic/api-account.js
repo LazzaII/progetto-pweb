@@ -29,7 +29,7 @@ const infoDonator = ['first', 'second', 'email', 'phone']
  * @returns solo per uscire in caso di errore
  */
 function updateInfo() {
-    if(!checkInput(infoDonator, 2)) {
+    if(!checkInput(infoDonator, 2, 3)) {
         showMessage('message-acc', 'Compila tutti i campi correttamente', 'errore');
         resetInfo();
         return;
