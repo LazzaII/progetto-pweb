@@ -20,7 +20,7 @@
                 <!-- input -->
                 <label for="email">Email</label>
                 <input type="email" class="input-text" name="email-l" id="email-l" placeholder="mario@rossi.it" >
-                <label for="password">Password</label>
+                <label>Password</label>
                 <input type="password" class="input-text" name="passsword-l" id="password-l" placeholder="********">
             </div>
             
@@ -60,7 +60,7 @@
                 <div class="container-dash">
                     <div id="tot-users" class="box-dash">
                         <p>Numero di utenti totali:</p>
-                        <h3 class="numero"></h3>
+                        <h3 class="numero">0</h3>
                     </div>
                     <div id="donators" class="box-dash">
                         <p>Numero di donatori totali:</p>
@@ -73,7 +73,7 @@
                 <div class="container-dash">
                     <div id="donations" class="box-dash">
                         <p>Numero di donazioni totali:</p>
-                        <h3 class="numero"></h3>
+                        <h3 class="numero">0</h3>
                     </div>
                     <div id="used-d" class="box-dash">
                         <p>Numero di donazioni utilizzate:</p>
@@ -86,7 +86,7 @@
                 <div class="container-dash">
                     <div id="tot-req" class="box-dash">
                         <p>Numero di richieste totali:</p>
-                        <h3 class="numero"></h3>
+                        <h3 class="numero">0</h3>
                     </div>
                     <div id="req-urg" class="box-dash">
                         <p>Numero di richieste urgenti:</p>
@@ -168,10 +168,10 @@
                 <div id="news-form" class="centered">
                     <h1>Inserisci una nuova news</h1>
                     <form>
-                        <label for="title">Inserisci titolo</label>
+                        <label>Inserisci titolo</label>
                         <input type="text" class="input-text" name="obg" id="title-news" placeholder="oggetto" >
-                        <label for="body">Inserisci la notizia</label>
-                        <input type="text" name="body" class="input-text body-message" id="body-news" cols="35" rows="7" placeholder="..." ></input>
+                        <label>Inserisci la notizia</label>
+                        <textarea name="body" class="input-text body-message" id="body-news" cols="35" rows="7" placeholder="..." ></textarea>
                     
                         <input type="button" onclick="sendNews()" value="Invia" class="full-width-btn"/>
 
@@ -247,23 +247,23 @@
                     </div>
                 </div>
                 <div id="form-new-admin" hidden>
-                <h1>Aggiungi un nuovo admin</h1>
-                <form>
-                    <label for="fname">Nome</label>
-                    <input type="text" class="input-text" name="fname" id="fname" placeholder="mario">
-                    <label for="sname">Cognome</label>
-                    <input type="text" class="input-text" name="sname" id="sname" placeholder="rossi">
-                    <label for="email">Email</label>
-                    <input type="email" class="input-text" name="n-email" id="n-email" placeholder="mario@rossi.it">
-                    <label for="password">Password</label>
-                    <input type="password" class="input-text" name="n-passsword" id="n-password" placeholder="********">
+                    <h1>Aggiungi un nuovo admin</h1>
+                    <form id="form-admin">
+                        <label for="fname">Nome</label>
+                        <input type="text" class="input-text" name="fname" id="fname" placeholder="mario">
+                        <label for="sname">Cognome</label>
+                        <input type="text" class="input-text" name="sname" id="sname" placeholder="rossi">
+                        <label for="email">Email</label>
+                        <input type="email" class="input-text" name="n-email" id="n-email" placeholder="mario@rossi.it">
+                        <label>Password</label>
+                        <input class="input-text" name="n-passsword" id="n-password" placeholder="********">
+                        <label class="text-l-r" >La password deve contenere almeno una lettera maiuscola, minuscola un numero e un carattere speciale</label>
+                        <input type="button" onclick="registerAdmin()" value="Invia" class="full-width-btn"/>
+                    </form>
 
-                    <input type="button" onclick="registerAdmin()" value="Invia" class="full-width-btn"/>
-                </form>
-
-                <div id="message-new">
-                    <p></p>
-                </div>
+                    <div id="message-new">
+                        <p></p>
+                    </div>
                 
                 </div>
             </section>

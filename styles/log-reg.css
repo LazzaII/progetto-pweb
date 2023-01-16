@@ -1,17 +1,3 @@
-/* COMMON */
-.text-l-r {
-    padding: 10px 0;
-    font-size: 14px;
-    bottom: 0;
-    float: right;
-    color: var(--light-gray);
-    text-align: center;
-}
-
-/* LOGIN */
-
-/* REGISTRAZIONE */
-
 #form-r{
     width: 400px;
     height: fit-content;

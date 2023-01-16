@@ -274,3 +274,12 @@ input[type=button]:hover {
 #btn-elimina:hover, #btn-reset:hover{
     background-color:brown;
 }
+
+.text-l-r {
+    padding: 10px 0;
+    font-size: 14px;
+    bottom: 0;
+    float: right;
+    color: var(--light-gray);
+    text-align: center;
+}
