@@ -21,7 +21,7 @@ L'`amministratore` invece ha il compito di accetare nuovi utenti, eliminarli, ac
 
 ### Account
 
-Nel file [account.md](./account.md) è possibile trovare alcuni account già predisposti per provare tutte le funzionalità del sito.
+Nel file [account.md](./account.md) è possibile trovare alcuni account già predisposti per provare tutte le funzionalità del sito, usando il dump del database [dump.sql](./sql/dump.sql).
 
 ### Autore
 
