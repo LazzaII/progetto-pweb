@@ -43,7 +43,7 @@ const adminInfo = ['first', 'second', 'email'];
  * @returns solo per uscire in caso di errore
  */
 function updateInfo() {
-  if(!checkInput(adminInfo, 2)) {
+  if(!checkInput(adminInfo, 2) || (document.getElementById('pwd').value !== '' && !validatePwd(document.getElementById('pwd').value))) {
     showMessage('message-acc', 'Compila tutti i campi correttamente', 'errore');
     resetInfo();
     return;

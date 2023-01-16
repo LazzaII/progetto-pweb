@@ -13,8 +13,8 @@ switch($method){
         
         break;
     case 'POST':
-        if($_COOKIE['login'] == 'logged-a'){ // only admin can create message
-            $body = file_get_contents("php://input"); //get the body
+        if($_COOKIE['login'] == 'logged-a'){ // solo gli admin possono scrivere news
+            $body = file_get_contents("php://input"); //prende il contenuto del boody
             $decodeBody = json_decode($body);
     
             $news->title = $decodeBody->title;
@@ -22,18 +22,18 @@ switch($method){
             $news->author = $decodeBody->author;
             $news->add($news);
         } else
-            http_response_code(401); // Unauthorized 
+            http_response_code(401); // Non autorizzato
         
 
         break;
     case 'DELETE':
-        if($_COOKIE['login'] == 'logged-a'){ // only admin can delete message
-            $substringedURI = explode('/', $_SERVER["REQUEST_URI"]); //To get the id of the news  
+        if($_COOKIE['login'] == 'logged-a'){ // solo gli admin possono eliminare le news
+            $substringedURI = explode('/', $_SERVER["REQUEST_URI"]); // per prendere l'id della news
             $news->delete($substringedURI[count($substringedURI)-1]);
         } else
-            http_response_code(401); // Unauthorized
+            http_response_code(401); // non autorizzato
         
         break;
     default:
-        http_response_code(405); // method error
+        http_response_code(405); // metodo non riconosciuto
 }

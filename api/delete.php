@@ -4,7 +4,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 switch($method) {
     case 'DELETE':
-        $body = file_get_contents("php://input"); //get the body
+        $body = file_get_contents("php://input"); // prende il contenuto del body
         $decodeBody = json_decode($body);
         $type = $decodeBody->type;
         
@@ -29,6 +29,6 @@ switch($method) {
                 
         break;
     default:
-        http_response_code(405); // method error
+        http_response_code(405); // metodo non riconosciuto
 }
 

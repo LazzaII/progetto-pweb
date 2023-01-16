@@ -2,14 +2,14 @@
 
 $method = $_SERVER['REQUEST_METHOD'];
 
-foreach ($_COOKIE as $key => $value) { # to clear cookie both side
+foreach ($_COOKIE as $key => $value) { # per pulire i cookie da entrambi i lati
     unset($value);
     setcookie($key, '', time() - 3600, '/');
 }
 
 switch($method) {
     case 'POST':
-        $body = file_get_contents("php://input"); # get the body
+        $body = file_get_contents("php://input"); # prende il body
         $decodeBody = json_decode($body);
         $type = $decodeBody->type;
 
@@ -31,9 +31,9 @@ switch($method) {
                         setcookie('cityId', $check['city_'], time() + 3600, '/');
                         setcookie('auth', $check['isAuth'], time() + 3600, '/');
                     } 
-                    else http_response_code(403); # forbidden (password error)
+                    else http_response_code(403); # vietato (password sbagliata)
                 }    
-                else http_response_code(403); # forbidden (email error)            
+                else http_response_code(403); # vietato (email sbagliata)            
 
                 break;
             case 'H':
@@ -54,17 +54,17 @@ switch($method) {
                         setcookie('phone', $check['phone'], time() + 3600, '/'); 
                         setcookie('auth', $check['isAuth'], time() + 3600, '/');
                         setcookie('address', $check['address'], time() + 3600, '/');
-                        setcookie('city', (new City())->getOne($check['city_'])['name'], time() + 3600, '/'); # city name
+                        setcookie('city', (new City())->getOne($check['city_'])['name'], time() + 3600, '/'); # nome della città
                         setcookie('cityId', $check['city_'], time() + 3600, '/');
                         setcookie('regionId', (new City())->getOne($check['city_'])['region_'], time() + 3600, '/');
                         setcookie('region', (new Region())->getOne((new City())->getOne($check['city_'])['region_'])['name'], time() + 3600, '/');
                     } 
-                    else http_response_code(403); # forbidden (password error)
+                    else http_response_code(403); # vietato (password sbagliata)
                 }    
-                else http_response_code(403); # forbidden (email error)
+                else http_response_code(403); # vietato (email sbagliata) 
 
                 break;
-            default: # if is not a donator or hospital is an admin
+            default: # se non è un donatore o una struttura ospedaliera è un admin
                 require_once __DIR__ . '/class/Admin.php';
                 $admin = new Admin();
 
@@ -78,12 +78,12 @@ switch($method) {
                         setcookie('type', $check['type'], time() + 3600, '/');
                         setcookie('email', $check['email'], time() + 3600, '/'); 
                     } 
-                    else http_response_code(403); # forbidden (password error)
+                    else http_response_code(403); # vietato (password sbagliata)
                 }    
-                else http_response_code(403); # forbidden (email error)
+                else http_response_code(403); # vietato (email sbagliata) 
         }
 
         break;
     default:
-        http_response_code(405); # method error
+        http_response_code(405); # metodo non riconosciuto
 }

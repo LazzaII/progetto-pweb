@@ -19,5 +19,5 @@ switch($method) {
             
         break;
     default:
-        http_response_code(405); // method error
+        http_response_code(405); // metodo non riconosciuto
 }

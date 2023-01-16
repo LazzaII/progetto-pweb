@@ -27,7 +27,7 @@ const infoSo = ['name', 'email', 'phone', 'address']
  * @returns solo per uscire in caso di errore
  */
 function updateInfo() {
-    if(!checkInput(infoSo, 1, 2)) {
+    if(!checkInput(infoSo, 1, 2) || (document.getElementById('pwd').value !== '' && !validatePwd(document.getElementById('pwd').value))) {
       showMessage('message-acc', 'Compila i campi correttamente', 'errore')
       resetInfo();
       return;

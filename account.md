@@ -9,7 +9,7 @@ email: CristinaCalabresi@teleworm.us
 pwd: Ghalabr45!
 
 email: CarolinaSchiavone@dayrep.com
-pwd: Stogrortered70
+pwd: Stogrortered70!
 
 email: RaffaelloNapolitani@rhyta.com
 pwd: Dellucci12$

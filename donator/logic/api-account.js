@@ -29,7 +29,7 @@ const infoDonator = ['first', 'second', 'email', 'phone']
  * @returns solo per uscire in caso di errore
  */
 function updateInfo() {
-    if(!checkInput(infoDonator, 2, 3)) {
+    if(!checkInput(infoDonator, 2, 3) || (document.getElementById('pwd').value !== '' && !validatePwd(document.getElementById('pwd').value))) {
         showMessage('message-acc', 'Compila tutti i campi correttamente', 'errore');
         resetInfo();
         return;

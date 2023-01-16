@@ -4,7 +4,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 switch($method) {
     case 'POST':
-        $body = file_get_contents("php://input"); //get the body
+        $body = file_get_contents("php://input"); // prende il contenuto del body
         $decodeBody = json_decode($body);
         $type = $decodeBody->type;
 
@@ -21,7 +21,7 @@ switch($method) {
                 $donator->blood = $decodeBody->blood;
 
                 if($donator->add($donator) == 'ERR') 
-                    http_response_code(409); # conflict (email already used)
+                    http_response_code(409); # conflitto (email già in uso)
 
                 break;
             case 'H':
@@ -36,10 +36,10 @@ switch($method) {
                 $hospital->city = $decodeBody->city;
 
                 if($hospital->add($hospital) == 'ERR')
-                    http_response_code(409); # conflict (email already used)
+                    http_response_code(409); # conflitto (email già in uso)
 
                 break;
-            default: # if is not a donator or hospital is an admin
+            default: # se non è un donatore o una struttura ospedaliera è un admin
                 require_once __DIR__ . '/class/Admin.php';
                 $admin = new Admin();
 
@@ -49,12 +49,12 @@ switch($method) {
                 $admin->pwd = password_hash($decodeBody->pwd, PASSWORD_DEFAULT);
 
                 if($admin->add($admin) == 'ERR')
-                    http_response_code(409); # conflict (email already used)
+                    http_response_code(409); # conflitto (email già in uso)
                 
                 break;
         }
 
         break;
     default:
-        http_response_code(405); # method error
+        http_response_code(405); # metodo non riconosciuto
 }

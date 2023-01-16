@@ -65,7 +65,7 @@ function exit() {
 }
 
 // qualsiasi carattere fino alla chiocciola stessa cosa per la parte dopo la chioccola
-const emailRegex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}')  
+const emailRegex = new RegExp(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)  
 /**
  * Funzione per il controllo della validità della mail
  * @param {String} email email da validare
@@ -76,7 +76,7 @@ function validateEmail(email) {
 }
 
 // 8 caratteri, almeno una lettera maiuscola, una minuscola, un numero e un carattere speciale
-const pwdRegex = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$')
+const pwdRegex = new RegExp(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/)
 /**
  * 
  * @param {String} pwd password da validare
@@ -87,7 +87,7 @@ function validatePwd(pwd) {
 }
 
 // solo numeri
-const numberRegex = new RegExp('^[0-9]+$');
+const numberRegex = new RegExp(/^[0-9]+$/);
 /**
  * Funzione per il controllo della validità del numero
  * @param {String} number numero da validare
@@ -134,7 +134,7 @@ function clearTBody(id) {
  */
 function checkInput(whatCheck, email = false, phone = false, pwd = false) {
     for (let i = 0; i < whatCheck.length; i++) 
-        if(document.getElementById(whatCheck[i]).value === '') return false;
+        if(document.getElementById(whatCheck[i]).value === '' ) return false;
     if(email) 
         if(!validateEmail(document.getElementById(whatCheck[email]).value)) return false;
     if(phone) 

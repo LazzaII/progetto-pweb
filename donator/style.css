@@ -5,6 +5,7 @@
     color: var(--text-color);
     height: fit-content;
     width: fit-content;
+    width: -moz-fit-content;
     background: var(--snow);
     border-radius:8px;
     box-shadow:0 0 40px -10px var(--dark-sienna);

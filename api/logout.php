@@ -4,11 +4,11 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 switch($method) {
     case 'GET':
-        foreach ($_COOKIE as $key => $value) { # to clear cookie both side
+        foreach ($_COOKIE as $key => $value) { # pulisce i cookie da entrambi i "lati"
             unset($value);
             setcookie($key, '', time() - 3600, '/');
         }
         break;
     default:
-        http_response_code(405); # method error
+        http_response_code(405); # metodo non riconosciuto
 }
