@@ -12,12 +12,12 @@ function login() {
     }
   
     let data = JSON.stringify({
-      email: document.getElementById('email-l').value,
+      email: document.getElementById('email-l').value.toLowerCase(),
       pwd: document.getElementById('password-l').value,
       type: 'A'
     });
   
-    // chiamata a http://localhost/progetto-pweb/api/login.php per fare il login 
+    //chiamata a http://localhost/progetto-pweb/api/login.php per fare il login 
     let xhr = new XMLHttpRequest();
     xhr.open('POST', url + 'login.php', true);
     xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
@@ -53,7 +53,7 @@ function updateInfo() {
     id : getCookie('id'),
     fn : document.getElementById('first').value,
     sn : document.getElementById('second').value,
-    email : document.getElementById('email').value,
+    email : document.getElementById('email').value.toLowerCase(),
     pwd : document.getElementById('pwd').value,
     type : 'A'
   })
@@ -88,7 +88,7 @@ function registerAdmin() {
     id : getCookie('id'),
     fn : document.getElementById('fname').value,
     sn : document.getElementById('sname').value,
-    email : document.getElementById('n-email').value,
+    email : document.getElementById('n-email').value.toLowerCase(),
     pwd : document.getElementById('n-password').value,
     type : 'A'
   })

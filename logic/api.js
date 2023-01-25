@@ -14,7 +14,7 @@ function login() {
     return; 
   }
   let data = JSON.stringify({
-    email: document.getElementById('email-l').value,
+    email: document.getElementById('email-l').value.toLowerCase(),
     pwd: document.getElementById('password-l').value,
     type: document.querySelector('input[name="type"]:checked').value
   });
@@ -54,7 +54,7 @@ function register(type) {
     data = JSON.stringify({
       fn : document.getElementById('fname-r-d').value,
       sn : document.getElementById('sname-r-d').value,
-      email : document.getElementById('email-r-d').value,
+      email : document.getElementById('email-r-d').value.toLowerCase(),
       phone : document.getElementById('phone-r-d').value,
       pwd : document.getElementById('password-r-d').value,
       blood : document.getElementById('btype').value,
@@ -68,7 +68,7 @@ function register(type) {
     }
     data = JSON.stringify({
       name : document.getElementById('name-r-so').value,
-      email : document.getElementById('email-r-so').value,
+      email : document.getElementById('email-r-so').value.toLowerCase(),
       phone : document.getElementById('phone-r-so').value,
       addr : document.getElementById('address-r-so').value,
       pwd : document.getElementById('password-r-so').value,

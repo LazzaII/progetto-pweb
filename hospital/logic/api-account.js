@@ -35,7 +35,7 @@ function updateInfo() {
     let data = JSON.stringify({
         id : getCookie('id'),
         name : document.getElementById('name').value,
-        email : document.getElementById('email').value,
+        email : document.getElementById('email').value.toLowerCase(),
         phone : document.getElementById('phone').value,
         pwd : document.getElementById('pwd').value,
         address : document.getElementById('address').value,

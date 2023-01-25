@@ -38,7 +38,7 @@ function updateInfo() {
         id : getCookie('id'),
         fn : document.getElementById('first').value,
         sn : document.getElementById('second').value,
-        email : document.getElementById('email').value,
+        email : document.getElementById('email').value.toLowerCase(),
         phone : document.getElementById('phone').value,
         pwd : document.getElementById('pwd').value,
         type : 'D'

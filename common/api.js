@@ -102,7 +102,7 @@ function sendMessage() {
   let data = JSON.stringify({
     fn: document.getElementById('fname').value,
     sn: document.getElementById('sname').value,
-    email: document.getElementById('c-email').value,
+    email: document.getElementById('c-email').value.toLowerCase(),
     body: document.getElementById('body').value,
     obj: document.getElementById('obj').value,
   });

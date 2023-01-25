@@ -1,6 +1,4 @@
 /* FUNZIONE DI UTILITÀ COMUNI A TUTTE LE PAGINE */
-// interval usato in tutte le pagine per far apparire e sparire i messaggi di errore o conferma
-var interval;
 
 /**
  * Funzione per prendere il valore di un singolo cookie
@@ -119,9 +117,10 @@ function distance(lat1, lon1, lat2, lon2) {
  * @param {String} id id della tbody da ripulire
  */
 function clearTBody(id) {
-    let prevTr = document.querySelectorAll('#' + id +' tr');
-    for (let i = 1; i < prevTr.length; i++) // il primo viene saltato perchè è l'header della tabella
-        prevTr[i].remove();
+    document.getElementById(id).innerText = '';
+    // let prevTr = document.querySelectorAll('#' + id +' tr');
+    // for (let i = 1; i < prevTr.length; i++) // il primo viene saltato perchè è l'header della tabella
+    //     prevTr[i].remove();
 }
 
 /**
@@ -164,9 +163,8 @@ function showMessage(id, text, classe) {
     document.getElementById(id).classList.add(classe);
     document.getElementById(id).style.display = 'block';
     document.querySelectorAll('#' + id + ' p')[0].innerText = text;
-    interval = setInterval(() =>  {
-      document.getElementById(id).style.display = 'none';
-      document.getElementById(id).classList.remove(classe);
-      clearInterval(interval);
+    setTimeout(() => {
+        document.getElementById(id).style.display = 'none';
+        document.getElementById(id).classList.remove(classe);
     }, 4000);
 }

@@ -2,19 +2,19 @@
 email: gialli@gmail.com
 pwd: Giallo89!
 
-email: QuiricoMazzanti@teleworm.us
+email: quiricomazzanti@teleworm.us
 pwd: Scorpio60!
 
-email: CristinaCalabresi@teleworm.us
+email: cristinacalabresi@teleworm.us
 pwd: Ghalabr45!
 
-email: CarolinaSchiavone@dayrep.com
+email: carolinaschiavone@dayrep.com
 pwd: Stogrortered70!
 
-email: RaffaelloNapolitani@rhyta.com
+email: raffaellonapolitani@rhyta.com
 pwd: Dellucci12$
 
-email: SettimoSiciliani@jourrapide.com
+email: settimosiciliani@jourrapide.com
 pwd: Ous3Sa3o#
 
 ### strutture dspedaliere

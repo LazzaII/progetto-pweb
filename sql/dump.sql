@@ -3530,11 +3530,11 @@ CREATE TABLE `donator` (
 
 INSERT INTO `donator` (`_id`, `first_name`, `second_name`, `email`, `phone`, `hash_pwd`, `blood_group`, `isAuth`) VALUES
 (2, 'Lorenzo', 'Giallone', 'gialli@gmail.com', 34112390, '$2y$10$LOgyt4DLijAs80E7FHSWZuXK2rXkp71EG.EPPUzY8caUfcWvrVRye', 'ab-', 1),
-(5, 'Quirico', 'Mazzanti', 'QuiricoMazzanti@teleworm.us', 32263221, '$2y$10$gT08KfEyiUWRlVLW9kyrv.UVt/AIAq.IVkBEI7MjetaJ5Ez6nfpfO', 'ab-', 1),
-(8, 'Raffaello', 'Napolitani', 'RaffaelloNapolitani@rhyta.com', 387388, '$2y$10$gEUU1zn54OPi/8h9NmenY.QGSpedu3mapJ0jIrkpvNzzoWgPjJCxy', 'ab+', 0),
-(10, 'Settimo', 'Siciliani', 'SettimoSiciliani@jourrapide.com', 333444111, '$2y$10$WATvmqXniRWAhXhaf6twD.8aNgF5O2oS90UTDWGwO3wFROjtrW1dm', 'a+', 0),
-(11, 'Cristina', 'Calabresi', 'CristinaCalabresi@teleworm.us', 3339900, '$2y$10$49QtLUlUvTpiMD/g6owAueXd89.DjzadnwmO.fNloDCy6fNmk1rQe', 'z+', 1),
-(12, 'Carolina', 'Schiavone', 'CarolinaSchiavone@dayrep.com', 8231001, '$2y$10$cqHoL53YXFEjoW8F8ibDB..Z8N9d5xKsYEiJj6TZRJlEEdHgrqMHK', 'b+', 1);
+(5, 'Quirico', 'Mazzanti', 'quiricomazzanti@teleworm.us', 32263221, '$2y$10$gT08KfEyiUWRlVLW9kyrv.UVt/AIAq.IVkBEI7MjetaJ5Ez6nfpfO', 'ab-', 1),
+(8, 'Raffaello', 'Napolitani', 'raffaellonapolitani@rhyta.com', 387388, '$2y$10$gEUU1zn54OPi/8h9NmenY.QGSpedu3mapJ0jIrkpvNzzoWgPjJCxy', 'ab+', 0),
+(10, 'Settimo', 'Siciliani', 'settimosiciliani@jourrapide.com', 333444111, '$2y$10$WATvmqXniRWAhXhaf6twD.8aNgF5O2oS90UTDWGwO3wFROjtrW1dm', 'a+', 0),
+(11, 'Cristina', 'Calabresi', 'cristinacalabresi@teleworm.us', 3339900, '$2y$10$49QtLUlUvTpiMD/g6owAueXd89.DjzadnwmO.fNloDCy6fNmk1rQe', 'z+', 1),
+(12, 'Carolina', 'Schiavone', 'carolinaschiavone@dayrep.com', 8231001, '$2y$10$cqHoL53YXFEjoW8F8ibDB..Z8N9d5xKsYEiJj6TZRJlEEdHgrqMHK', 'b+', 1);
 
 -- --------------------------------------------------------
 
