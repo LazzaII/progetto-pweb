@@ -2,22 +2,18 @@
 
 /**
  * Funzione per prendere il valore di un singolo cookie
- * CODICE PRESO DA https://www.tabnine.com/academy/javascript/how-to-get-cookies/
  * @param {String} cName nome del cookie di cui si vuole sapere il valore
  * @returns valore del cookie
  */
-function getCookie(cName) {
-    const name = cName + "=";
-    const cDecoded = decodeURIComponent(document.cookie); 
-    const cArr = cDecoded.split('; ');
-    let res;
-    cArr.forEach(val => {
-      if (val.indexOf(name) === 0) res = val.substring(name.length);
+function getCookie(name) {
+    const cookies = decodeURIComponent(document.cookie); 
+    const splittedCookies = cookies.split('; ');
+    let res
+    splittedCookies.forEach(val => {
+      if (val.indexOf(name + "=") === 0) res = val.substring(name.length+1);
     })
-    return res
+    return res;
 }
-// FINE CODICE PRESO DA https://www.tabnine.com/academy/javascript/how-to-get-cookies/
-
 
 /**
  * Funzione per eliminare un cookie, setta ad un tempo passato il cookie
@@ -132,16 +128,29 @@ function clearTBody(id) {
  * @returns {Boolean} true se vanno tutti bene, false altrimenti
  */
 function checkInput(whatCheck, email = false, phone = false, pwd = false) {
-    for (let i = 0; i < whatCheck.length; i++) 
-        if(document.getElementById(whatCheck[i]).value === '' ) return false;
+    let ok = true;
+    for (let i = 0; i < whatCheck.length; i++) {
+        if(document.getElementById(whatCheck[i]).value === '' ) {
+            showError(whatCheck[i], 'input-errato');
+            ok = false;
+        }
+    }
     if(email) 
-        if(!validateEmail(document.getElementById(whatCheck[email]).value)) return false;
+        if(!validateEmail(document.getElementById(whatCheck[email]).value))  {
+            showError(whatCheck[email], 'input-errato');
+            ok = false;
+        };
     if(phone) 
-        if(!validateNumber(document.getElementById(whatCheck[phone]).value)) return false;
+        if(!validateNumber(document.getElementById(whatCheck[phone]).value))  {
+            showError(whatCheck[phone], 'input-errato');
+            ok = false;
+        }
     if(pwd) 
-        if(!validatePwd(document.getElementById(whatCheck[pwd]).value)) return false;
-
-    return true;
+        if(!validatePwd(document.getElementById(whatCheck[pwd]).value)) {
+            showError(whatCheck[pwd], 'input-errato');
+            ok = false;
+        }
+    return ok;
 }
 
 /**
@@ -166,5 +175,17 @@ function showMessage(id, text, classe) {
     setTimeout(() => {
         document.getElementById(id).style.display = 'none';
         document.getElementById(id).classList.remove(classe);
-    }, 4000);
+    }, 3000);
+}
+
+/**
+ * Funzione per aggiungere e rimuovere una classe ad un elemento dopo 2 secondi
+ * @param {String} id a cui aggiungere la classe 
+ * @param {String} classe da aggiungere all'elemento
+ */
+function showError(id, classe) {
+    document.getElementById(id).classList.add(classe);
+    setTimeout(() => {
+        document.getElementById(id).classList.remove(classe);
+    }, 3000);
 }

@@ -1,5 +1,5 @@
 // Array utili
-var divs = ['manual', 'why',  'news', 'contacts', 'login'];
+const divs = ['manual', 'why',  'news', 'contacts', 'login'];
 
 /**
  * Funzione per mostrare la sezione di login.
@@ -54,6 +54,23 @@ function showDonatorSo() {
 
         document.getElementById('swDonatore').classList.remove('selezionato');
         document.getElementById('swSo').classList.add('selezionato');
+    }
+}
+
+
+function isLogged() {
+    if(getCookie('login')) {
+        switch (getCookie('type')) {
+            case 'D':
+                document.location.href = 'donator'; // redirect all'index della struttura ospedaliera
+                break;
+            case 'H':
+                document.location.href = 'hospital'; // redirect all'index dell donatore
+                break;
+            default:
+                document.location.href = 'admin'; // redirect all'index dell donatore
+                break;
+        }
     }
 }
 

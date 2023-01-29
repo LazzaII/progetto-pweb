@@ -1,7 +1,7 @@
 /* API DONAZIONE PAGINA DONATORE*/
 
 // url
-var url = '../api/';
+const url = '../api/';
 
 /**
  * Prende tutte le donazioni effettuate dall'utente

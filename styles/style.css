@@ -1,9 +1,7 @@
 /* other css */
 @import './why.css';
-@import './form.css';
 @import './manual.css';
 @import './log-reg.css';
-@import './news.css';
 
 /* common id */
 #contacts {

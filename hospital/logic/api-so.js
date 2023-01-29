@@ -1,10 +1,10 @@
 /* API RICHIESTE PAGINA SO*/
 // url
-var url = '../api/';
+const url = '../api/';
 
 // latitudeine e longitudine
-var ltn = 0;
-var lng = 0;
+let ltn = 0;
+let lng = 0;
 
 /**
  * prende latitudine e longitudine della struttura ospedaliera

@@ -1,7 +1,7 @@
 /* CHIAMATE API PAGINA VISITATORE*/
 
 // url
-var url = './api/';
+const url = './api/';
 
 const loginInfo = ['email-l', 'password-l']
 /**

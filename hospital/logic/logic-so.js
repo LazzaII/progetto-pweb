@@ -1,20 +1,19 @@
 // index url
-var indexUrl = '../';
+const indexUrl = '../';
 
 // Array utili
-var divs = ['request', 'history', 'account',  'news', 'contacts'];
-var cookiesName = ['login', 'auth', 'address', 'email', 'name', 'id', 'city', 'cityId', 'phone', 'region', 'regionId'];
+const divs = ['request', 'history', 'account',  'news', 'contacts'];
+const cookiesName = ['login', 'auth', 'address', 'email', 'name', 'id', 'city', 'cityId', 'phone', 'region', 'regionId'];
 
 // velocità medie 
-var vm1 = 45; // entro in 30 km {si presume non venga presa l'autostrada}
-var vm2 = 90; // entro i 150 km {si presume strade extraurbane secondarie}
-var vm3 = 120; // sopra i 150 km {si presume l'utilizzo principalmente di autostrade}
-              // è una stima per cui le isole non vengono considerate come tali ma come terra tutta unità
+const vm1 = 45; // entro in 30 km {si presume non venga presa l'autostrada}
+const vm2 = 90; // entro i 150 km {si presume strade extraurbane secondarie}
+const vm3 = 120; // sopra i 150 km {si presume l'utilizzo principalmente di autostrade}
+// è una stima per cui le isole non vengono considerate come tali ma come terra tutta unità
 // tempo standard stessa citta
-var timeS = 40;
-
+const timeS = 40;
 // raggio della terra
-var R = 6373;
+const R = 6373;
 
 /**
  * Funzione per attivare le modifiche nell'account
@@ -66,7 +65,7 @@ function resetInfo() {
  * Funzione per controllare se chi sta accendendo alla pagine è loggato
  */
 function checkLogin() {
-  if(!getCookie('login')) document.location.href = indexUrl;
+  if(!getCookie('login')  && getCookie('type') === 'H') document.location.href = indexUrl;
 
   history();
   info();

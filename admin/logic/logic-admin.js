@@ -1,9 +1,9 @@
 // Array utili
-var divs = ['dashboard', 'users',  'request', 'news', 'mex', 'account'];
-var cookiesName = ['email', 'first', 'second', 'login', 'id', 'type']
+const divs = ['dashboard', 'users',  'request', 'news', 'mex', 'account'];
+const cookiesName = ['email', 'first', 'second', 'login', 'id', 'type']
 
 //url
-var url = '../api/';
+const url = '../api/';
 
 /**
  * Funzione per uscire dall'account
@@ -18,7 +18,7 @@ function exitAdmin() {
  * Funzione per controllare se è già loggato, sennò mostra login
  */
 function checkLogged() {
-    if(getCookie('login')) {
+    if(getCookie('login') && getCookie('type') === 'A') {
         document.getElementById('sec-login').style.display = 'none';
         document.getElementById('admin-section').style.display = 'block';
         info();

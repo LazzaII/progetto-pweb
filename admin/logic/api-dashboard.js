@@ -1,9 +1,9 @@
 /* API DASHBOARD PAGINA ADMIN */
-// var di appoggio
-var num = 0;
+// variabile di appoggio
+let num = 0;
 // array utili
-var div_name = ['donators', 'hospitals', 'used-d', 'not-used', 'req-urg', 'not-urg'];
-var div_total = ['tot-users', 'donations', 'tot-req']
+const div_name = ['donators', 'hospitals', 'used-d', 'not-used', 'req-urg', 'not-urg'];
+const div_total = ['tot-users', 'donations', 'tot-req']
 
 /**
  * Funzione per inizio processo di caricamento dashboard

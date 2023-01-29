@@ -1,12 +1,12 @@
 /* API LOGIN PAGINA ADMIN*/
 
-const loginInfo = ['email-l', 'password-l'];
+const loginInfoA = ['email-l', 'password-l'];
 /**
  * Funzione per il controllo del login
  * @returns solo per uscire in caso di errore
  */
 function login() {
-    if(!checkInput(loginInfo)) {
+    if(!checkInput(loginInfoA)) {
       showMessage('message-l', 'Compila tutti i campi correttamente', 'errore');
       return; 
     }

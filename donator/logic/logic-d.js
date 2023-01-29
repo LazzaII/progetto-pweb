@@ -1,9 +1,9 @@
 // index url
-var indexUrl = '../';
+const indexUrl = '../';
 
 //useful arrays
-var divs = ['donation', 'account',  'news', 'contacts'];
-var cookiesName = ['login', 'auth', 'blood_group', 'email', 'first', 'id', 'second', 'phone'];
+const divs = ['donation', 'account',  'news', 'contacts'];
+const cookiesName = ['login', 'auth', 'blood_group', 'email', 'first', 'id', 'second', 'phone'];
 
 /**
  * Funzione per attivare modifiche account
@@ -45,7 +45,7 @@ function resetInfo() {
  * Funzione per controllare se accendendo alla pagine si è loggati 
  */
 function checkLogin() {
-  if(!getCookie('login')) document.location.href = indexUrl;
+  if(!getCookie('login') && getCookie('type') === 'D') document.location.href = indexUrl;
   getDonation();
   info();
 }
