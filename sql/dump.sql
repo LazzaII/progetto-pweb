@@ -18,10 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `lazzarelli_635366`
+-- Database: `bloodbankdb`
 --
-CREATE DATABASE IF NOT EXISTS `lazzarelli_635366` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `lazzarelli_635366`;
+CREATE DATABASE IF NOT EXISTS `bloodbankdb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `bloodbankdb`;
 
 -- --------------------------------------------------------
 

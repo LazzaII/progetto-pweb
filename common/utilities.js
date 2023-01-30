@@ -114,9 +114,6 @@ function distance(lat1, lon1, lat2, lon2) {
  */
 function clearTBody(id) {
     document.getElementById(id).innerText = '';
-    // let prevTr = document.querySelectorAll('#' + id +' tr');
-    // for (let i = 1; i < prevTr.length; i++) // il primo viene saltato perchè è l'header della tabella
-    //     prevTr[i].remove();
 }
 
 /**

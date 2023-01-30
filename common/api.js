@@ -123,8 +123,5 @@ async function sendMessage() {
     },
     body: data
   });
-  if(response.ok) showMessage('message', 'Messaggio inviato correttamente', 'corretto');
-
-
-  
+  if(response.ok) showMessage('message', 'Messaggio inviato correttamente', 'corretto'); 
 }
