@@ -35,8 +35,10 @@ async function login() {
       else 
         document.location.href = 'donator'; // redirect all'index dell donatore
   } 
-  else 
+  else if(response.status === 403)
     showMessage('message-l', 'Password e/o email errati', 'errore'); 
+  else 
+    showMessage('message-r', 'Non è stato possibile creare l\'account per un errore sul server', 'errore');
 }
 
 const registerDonator = ['fname-r-d', 'sname-r-d', 'email-r-d', 'phone-r-d', 'password-r-d'];
@@ -88,6 +90,9 @@ async function register(type) {
   });
   if(response.ok) 
     showMessage('message-r', 'Account creato, in attesa di conferma', 'corretto');
-  else // possibili errori di ritorno: 409 (conflitto -> email già in uso)
+  else if(response.status === 409) // (conflitto -> email già in uso)
     showMessage('message-r', 'Email già in uso', 'errore');
+  else 
+    showMessage('message-r', 'Account non creato per un errore sul server', 'errore');
+
 }

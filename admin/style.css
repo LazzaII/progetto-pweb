@@ -35,3 +35,8 @@
     position: absolute;
     bottom: 0;
 }
+
+#btn-elimina:disabled {
+    cursor: auto;
+    background-color: var(--light-gray) !important;
+}

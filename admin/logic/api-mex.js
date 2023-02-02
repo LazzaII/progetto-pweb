@@ -3,16 +3,15 @@
 /**
  * Funzione per prendere tutti i messaggi e scriverli nella tabella
  */
-function getMex() {
+async function getMex() {
     clearTBody('tbody-mex');
     // chiamata a http://localhost/progetto-pweb/api/message.php per caricare tutti i messaggi
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', url + 'message.php', true);
-    xhr.onload = function () {
-        if(xhr.status === 200 ){
-            let messages =  JSON.parse(xhr.response);
+    const response = await fetch(url + 'message.php', {
+        method: 'GET'
+    });
+    if(response.ok) {
+        response.json().then((messages) => {
             for (const m of messages) {
-                
                 let tr = document.createElement('tr');
                 let fname = document.createElement('td');
                 let sname = document.createElement('td');
@@ -38,24 +37,22 @@ function getMex() {
                 tr.append(azioni);
                 document.getElementById('tbody-mex').append(tr);
             }
-        }
+        });
     }
-    xhr.send();
 }
 
 /**
  * Funzione per eliminare un messaggio
  * @param {Number} id intero che rappresenta il messggio da eliminare
  */
-function deleteMessage(id) {
+async function deleteMessage(id) {
     // chiamata a http://localhost/progetto-pweb/api/message.php per eliminare il messaggio
-    let xhr = new XMLHttpRequest();
-    xhr.open('DELETE', url + 'message.php/' + id, true);
-    xhr.onload = function () {
-        if(xhr.status === 200) {
-            alert("Messaggio eliminato con successo");
-            getMex();
-        }
+    const response = await fetch(url + 'message.php/' + id, {
+        method: 'DELETE'
+    });
+    if(response.ok) {
+        alert("Messaggio eliminato con successo");
+        getMex();
     }
-    xhr.send();
+    
 }

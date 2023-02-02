@@ -29,10 +29,8 @@ async function getDonation() {
                 tr.append(num);
                 city.innerText = d.city;
                 tr.append(city);
-                if(d.isUsed === '0')
-                    used.innerText = 'in magazzino';
-                else 
-                    used.innerText = 'usato';
+                if(d.isUsed === '0') used.innerText = 'in magazzino';
+                else used.innerText = 'usato';
                 tr.append(used);
                 document.getElementById('donazioni').append(tr);
             }
@@ -54,7 +52,10 @@ async function donate() {
     if(response.ok) {
         showMessage('message-d', 'Donazione effettuata ti ringraziamo per la collaborazione. Donare è un gesto di soliderietà, invita gli amici a donare!', 'corretto');
         getDonation(); 
-    } else 
+    } else if (response.status === 409) // ultima donazione troppo recente 
         showMessage('message-d', 'Non è stato possibile donare. L\'ultima donazione risale a meno di 3 mesi fa.', 'errore');
+    else 
+        showMessage('message-d', 'Non è stato possibile donare per un errore sul server.', 'errore');
+
 }
 

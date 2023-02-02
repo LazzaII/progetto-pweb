@@ -82,6 +82,7 @@ switch($method) {
                         setcookie('type', $check['type'], time() + 3600, '/');
                         setcookie('email', $check['email'], time() + 3600, '/');
                         setcookie('type', 'A', time() + 3600, '/'); 
+                        setcookie('type-admin', $check['type'], time() + 3600, '/'); 
                     } 
                     else http_response_code(403); # vietato (password sbagliata)
                 }    

@@ -81,7 +81,7 @@ function validatePwd(pwd) {
 }
 
 // solo numeri
-const numberRegex = new RegExp(/^[0-9]+$/);
+const numberRegex = new RegExp(/^[0-9]{1,11}$/);
 /**
  * Funzione per il controllo della validità del numero
  * @param {String} number numero da validare
@@ -129,6 +129,7 @@ function checkInput(whatCheck, email = false, phone = false, pwd = false) {
     for (let i = 0; i < whatCheck.length; i++) {
         if(document.getElementById(whatCheck[i]).value === '' ) {
             showError(whatCheck[i], 'input-errato');
+            console.log('no');
             ok = false;
         }
     }

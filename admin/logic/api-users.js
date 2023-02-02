@@ -15,37 +15,38 @@ function getUsers() {
  * @param {Char} type tipo di utente (A, D, H)
  * @param {String} METHOD tipo di metodo (PUT, DELETE)
  */
-function actionUsers(id, type, METHOD) {
+async function actionUsers(id, type, METHOD) {
     let data = JSON.stringify({
         id : id,
         type : type
     });
     // chiamata a http://localhost/progetto-pweb/api/users.php per eliminare o autenticare l'utente
-    let xhr = new XMLHttpRequest();
-    xhr.open(METHOD, url + 'users.php?type=' + type, true);
-    xhr.onload = function () {
-        if(xhr.status === 200) {
-            if(METHOD === 'DELETE') alert("Account eliminato con successo");
-            else alert("Account abilitato")
-            getUsers();
-        }
+    const response = await fetch(url + 'users.php?type=' + type, {
+        method: METHOD,
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: data
+    });
+    if(response.ok) {
+        if(METHOD === 'DELETE') alert("Account eliminato con successo");
+        else alert("Account abilitato")
+        getUsers();
     }
-    xhr.send(data);
 }
 
 /**
  * Funzione per caricare tutti i donatori
  */
-function getDonator() {
+async function getDonator() {
     clearTBody('tbody-donator');
     // chiamata a http://localhost/progetto-pweb/api/users.php per caricare tutti i donatori
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', url + 'users.php?type=D', true);
-    xhr.onload = function () {
-        if(xhr.status === 200 ){
-            let donators =  JSON.parse(xhr.response);
+    const response = await fetch(url + 'users.php?type=D', {
+        method: 'GET'
+      });
+      if(response.ok) {
+        response.json().then((donators) => {
             for (const d of donators) {
-                
                 let tr = document.createElement('tr');
                 let fname = document.createElement('td');
                 let sname = document.createElement('td');
@@ -77,24 +78,22 @@ function getDonator() {
                 tr.append(azioni);
                 document.getElementById('tbody-donator').append(tr);
             }
-        }
+        });
     }
-    xhr.send();
 }
 
 /**
  * Funzione per caricare tutte le strutture ospedaliere
  */
-function getSo() {
+async function getSo() {
     clearTBody('tbody-so');
     // chiamata a http://localhost/progetto-pweb/api/users.php per caricare tutti i donatori
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', url + 'users.php?type=H', true);
-    xhr.onload = function () {
-        if(xhr.status === 200 ){
-            let hospitals =  JSON.parse(xhr.response);
+    const response = await fetch(url + 'users.php?type=H', {
+        method: 'GET'
+      });
+      if(response.ok) {
+        response.json().then((hospitals) => {
             for (const h of hospitals) {
-                
                 let tr = document.createElement('tr');
                 let name = document.createElement('td');
                 let addr = document.createElement('td');
@@ -129,24 +128,22 @@ function getSo() {
                 tr.append(azioni);
                 document.getElementById('tbody-so').append(tr);
             }
-        }
+        });
     }
-    xhr.send();
 }
 
 /**
  * Funzione per caircar tuti gli admin
  */
-function getAdmin() {
+async function getAdmin() {
     clearTBody('tbody-admin');
     // chiamata a http://localhost/progetto-pweb/api/users.php per caricare tutti i donatori
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', url + 'users.php?type=A', true);
-    xhr.onload = function () {
-        if(xhr.status === 200 ){
-            let admins =  JSON.parse(xhr.response);
+    const response = await fetch(url + 'users.php?type=A', {
+        method: 'GET'
+      });
+      if(response.ok) {
+        response.json().then((admins) => {
             for (const a of admins) {
-                
                 let tr = document.createElement('tr');
                 let fname = document.createElement('td');
                 let sname = document.createElement('td');
@@ -168,7 +165,6 @@ function getAdmin() {
                 tr.append(azioni);
                 document.getElementById('tbody-admin').append(tr);
             }
-        }
+        });
     }
-    xhr.send();
 }

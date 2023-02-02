@@ -9,18 +9,16 @@ let lng = 0;
 /**
  * prende latitudine e longitudine della struttura ospedaliera
  */
-function getCityInfo() {
-    // chiamata a http://localhost/progetto-pweb/api/city.php per caricare le vecchie richieste
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', url + 'city.php/?id=' + getCookie('cityId'), true);
-    xhr.onload = function () {
-        let request = JSON.parse(xhr.response);
-        if(xhr.status === 200 ){
-            lng = request.lng;
-            ltn = request.lat;
-        }
+async function getCityInfo() {
+    const response = await fetch(url + 'city.php/?id=' + getCookie('cityId'), {
+        method: 'GET'
+      });
+    if(response.ok) {
+        response.json().then((city) => {
+            lng = city.lng;
+            ltn = city.lat;
+        });
     }
-    xhr.send();
 }
 
 /**
@@ -67,18 +65,21 @@ function updateTime(id, dt) {
 /**
  * Funzione che ricerca i magazzini a seconda del sangue selezionato
  */
-function findSite() {
+async function findSite() {
     clearTBody('tbody-city'); clearTBody('tbody-region'); clearTBody('tbody-it');
     let data = JSON.stringify({
         type : document.getElementById('btype').value
     });
-    // chiamata a http://localhost/progetto-pweb/api/donation.php per caricare i magazzini disponibili
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST', url + 'donation.php' , true);
-    xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
-    xhr.onload = function () {
-        let stocks = JSON.parse(xhr.response);
-        if(xhr.status === 200 ){
+    // chiamata a http://localhost/progetto-pweb/api/donation.php per trovare le richieste della struttura ospedaliera
+    const response = await fetch(url + 'donation.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: data
+      });
+    if(response.ok) {
+        response.json().then((stocks) => {
             for (const s of stocks) {
                 let tr = document.createElement('tr');
                 let citta = document.createElement('td');
@@ -132,9 +133,8 @@ function findSite() {
                 else 
                     document.getElementById('tbody-it').append(tr);
             }
-        }
+        });
     }
-    xhr.send(data);
 }
 
 /**
@@ -142,7 +142,7 @@ function findSite() {
  * @param {String} id tr + id del magazzino di spedizione
  * @param {Intero} km tra i due edifici
  */
-function sendRequest(id, km) {
+async function sendRequest(id, km) {
     box = document.getElementById(id);
     if(box.getElementsByClassName('urgente')[0].checked) costo = 0;
     else if(km < 1) costo = 10;
@@ -156,31 +156,30 @@ function sendRequest(id, km) {
         time : box.getElementsByClassName('time')[0].id,
         cost : costo 
     });
-    // chiamata a http://localhost/progetto-pweb/api/blood_request.php per eliminare account
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST', url + 'blood_request.php', true);
-    xhr.setRequestHeader('Content-type','application/json; charset=utf-8');
-    xhr.onload = function () {
-        if(xhr.status === 200 ){
-            document.location.reload();
-        }
-    }
-    xhr.send(data);
+    // chiamata a http://localhost/progetto-pweb/api/blood_request.php per aggiungere la richiesta sangue
+    const response = await fetch(url + 'blood_request.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: data
+      });
+    if(response.ok) 
+        document.location.reload();
 }
 
 /**
  * Funzione per il calcolo della cronologia delle vecchie richieste di sangue
  */
-function history() {
+async function history() {
     // pulisce il contenuto della tabella per poi ripopolarla sotto
-    clearTBody('ordini');
-
+    clearTBody('ordini-body');
     // chiamata a http://localhost/progetto-pweb/api/blood_request.php per caricare le vecchie richieste
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', url + 'blood_request.php/?id=' + getCookie('id'), true);
-    xhr.onload = function () {
-        let request = JSON.parse(xhr.response);
-        if(xhr.status === 200 ){
+    const response = await fetch(url + 'blood_request.php/?id=' + getCookie('id'), {
+        method: 'GET'
+      });
+    if(response.ok) {
+        response.json().then((request) => {
             for (const r of request) {
                 let tr = document.createElement('tr');
                 let data = document.createElement('td');
@@ -214,26 +213,26 @@ function history() {
                 else
                     pending.innerText = 'Approvato' 
                 tr.append(pending);
-                document.getElementById('ordini').append(tr);
+                document.getElementById('ordini-body').append(tr);
             }
-        }
+        });
     }
-    xhr.send();
 }
 
 /**
  * Funzione che permette di eliminare una richiesta di sangue in caso non sia stata ancora accettata
  * @param {Intero} id della richiesta da eliminare
  */
-function deleteRequest(id) {
+async function deleteRequest(id) {
     // chiamata a http://localhost/progetto-pweb/api/blood_request.php per eliminare richiesta sangue
-    let xhr = new XMLHttpRequest();
-    xhr.open('DELETE', url + 'blood_request.php/' + id, true);
-    xhr.onload = function () {
-        if(xhr.status === 200 ){
-            alert('Richiesta eliminata');
-            history();
+    const response = await fetch(url + 'blood_request.php/' + id, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
         }
+      });
+    if(response.ok) {
+        alert('Richiesta eliminata');
+        history();
     }
-    xhr.send();
 }

@@ -6,10 +6,7 @@
 async function getRegions(setDef = null) {
   // chiamata a http://localhost/progetto-pweb/api/region.php per prendere tutte le regioni
   const response = await fetch(url + 'region.php', {
-    method: 'GET',
-    headers: {
-        'Content-Type': 'application/json',
-    }
+    method: 'GET'
   });
   if(response.ok) {
     response.json().then((regions) => {
@@ -40,10 +37,7 @@ async function getCity(setDef = null) {
   let region = document.getElementById('region-input').value;
   if(!region) region = 1; // serve solo per settare le città default nella registazione dato che la prima regione è il Lazio
   const response = await fetch(url + 'city.php?region=' + region, {
-    method: 'GET',
-    headers: {
-        'Content-Type': 'application/json',
-    }
+    method: 'GET'
   });
   if(response.ok) {
     response.json().then((cities) => {
@@ -65,12 +59,9 @@ async function getCity(setDef = null) {
  */
 async function getNews() {
   document.getElementById('news-container').textContent = ''; // puliziza del div
-
+  // chiamata a http://localhost/progetto-pweb/api/news.php per prendere tutte le news
   const response = await fetch(url + 'news.php', {
-    method: 'GET',
-    headers: {
-        'Content-Type': 'application/json',
-    }
+    method: 'GET'
   });
   if(response.ok) {
     response.json().then((news) => {

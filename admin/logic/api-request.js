@@ -2,16 +2,15 @@
 /**
  * Funzione per mettere in tabella tutte le richieste di sangue
  */
-function getRequest() {
+async function getRequest() {
     clearTBody('tbody-request')
     // chiamata a http://localhost/progetto-pweb/api/blood_request.php per caricare tutte le richieste di sangue
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', url + 'blood_request.php', true);
-    xhr.onload = function () {
-        if(xhr.status === 200 ){
-            let requests =  JSON.parse(xhr.response);
+    const response = await fetch(url + 'blood_request.php', {
+        method: 'GET'
+      });
+    if(response.ok) {
+        response.json().then((requests) => {
             for (const r of requests) {
-                
                 let tr = document.createElement('tr');
                 let date = document.createElement('td');
                 let hName = document.createElement('td');
@@ -48,27 +47,26 @@ function getRequest() {
                 tr.append(azioni);
                 document.getElementById('tbody-request').append(tr);
             }
-        }
+        });
     }
-    xhr.send();
 }
 /**
  * Funzione per svolgere una azione su una richiesta (rigetto o accettazione)
  * @param {Intero} id numero di richiesta su cui svolgere l'azione
  * @param {Intero} val valore della richiesta, 1 accettata, 2 rigettata
  */
-function actionRequest(id, val) {
+async function actionRequest(id, val) {
     let data = JSON.stringify({
         id : id,
         value : val
     });
     // chiamata a http://localhost/progetto-pweb/api/blood_request.php per eliminare o autenticare l'utente
-    let xhr = new XMLHttpRequest();
-    xhr.open('PUT', url + 'blood_request.php', true);
-    xhr.onload = function () {
-        if(xhr.status === 200) {
-            getRequest();
-        }
-    }
-    xhr.send(data);
+    const response = await fetch(url + 'blood_request.php', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: data
+    });
+    if(response.ok) getRequest();
 }

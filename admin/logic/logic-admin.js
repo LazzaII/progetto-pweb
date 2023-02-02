@@ -23,7 +23,7 @@ function checkLogged() {
         document.getElementById('admin-section').style.display = 'block';
         info();
         dashboard();
-        if(getCookie('type') === '0') document.getElementById('btn-elimina').disabled = true;
+        if(getCookie('type-admin') === '0') document.getElementById('btn-elimina').disabled = true;
         // il super admin non può eliminare il proprio account
         showForm();
     }
@@ -75,6 +75,6 @@ function resetInfo() {
  * Funzione che mostra il form solo se è super admin
  */
 function showForm() {
-    if(getCookie('type') === '0') document.getElementById('form-new-admin').style.display = 'block';
+    if(getCookie('type-admin') === '0') document.getElementById('form-new-admin').style.display = 'block';
 }
 

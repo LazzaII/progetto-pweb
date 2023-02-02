@@ -13,7 +13,6 @@
 }
 
 /* sfondo e footer */
-
 body, html {
     margin: 0;
     padding: 0;
@@ -303,4 +302,8 @@ input[type=button]:hover {
     float: right;
     color: var(--light-gray);
     text-align: center;
+}
+
+button {
+    cursor: pointer;
 }

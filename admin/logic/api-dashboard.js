@@ -31,21 +31,21 @@ function writeTotal(div) {
  * @param {Number} id interno che rappresenta il numero di chiamata 
  * @returns solo per uscire
  */
-function getVal(id) {
+async function getVal(id) {
     if(id === 6) return; // alla sesta chiamata deve finire
     // chiamata a http://localhost/progetto-pweb/api/dashboard.php per il numero di donatori
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', url + 'dashboard.php?id=' + parseInt(id+1), true);
-    xhr.onload = function () {
-        if(xhr.status === 200 ){
-            num = JSON.parse(xhr.response).QTA
+    const response = await fetch(url + 'dashboard.php?id=' + parseInt(id+1), {
+        method: 'GET'
+    });
+    if(response.ok) {
+        response.json().then((donations) => {
+            num = donations.QTA;
             let h3 = document.createElement('h3');
             h3.classList.add('numero') // solo per eliminazione
             h3.innerText = num;
             document.getElementById(div_name[id]).append(h3);
             writeTotal(Math.floor(id/2));
             getVal(id+1); //ricorsione per 6 volte
-        }
+        });
     }
-    xhr.send();
 }

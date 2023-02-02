@@ -35,10 +35,8 @@ switch($method){
         // "blocca" la quantità di sacche di sangue richiesta (modifica in usato le donazioni)
         for ($i = 0; $i < $decodeBody->qta; $i++) 
             $donation->use($decodeBody->site, $decodeBody->type);
-        
 
         break;
-
     case 'PUT':
         $body = file_get_contents("php://input"); // prende il body
         $decodeBody = json_decode($body);
