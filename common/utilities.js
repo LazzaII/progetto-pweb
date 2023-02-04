@@ -129,7 +129,6 @@ function checkInput(whatCheck, email = false, phone = false, pwd = false) {
     for (let i = 0; i < whatCheck.length; i++) {
         if(document.getElementById(whatCheck[i]).value === '' ) {
             showError(whatCheck[i], 'input-errato');
-            console.log('no');
             ok = false;
         }
     }
@@ -186,4 +185,18 @@ function showError(id, classe) {
     setTimeout(() => {
         document.getElementById(id).classList.remove(classe);
     }, 3000);
+}
+
+/**
+ * Funzione per il riempimento automatico dei campi personali nella sezione contatti
+ * i dati vengono ripresi dai cookie.
+ */
+function autoFill() {
+    if(getCookie('type') === 'H') 
+        document.getElementById(contactInfo[2]).value = getCookie('email');
+    else {
+        document.getElementById(contactInfo[0]).value = getCookie('first');
+        document.getElementById(contactInfo[1]).value = getCookie('second');
+        document.getElementById(contactInfo[2]).value = getCookie('email');
+    }
 }

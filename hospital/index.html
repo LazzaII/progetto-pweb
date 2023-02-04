@@ -24,12 +24,12 @@
                 <li onclick="showDiv('history'), history()"><span>Cronologia</span></li>
                 <li onclick="showDiv('request'), findSite()"><span>Richiedi</span></li>
                 <li onclick="showDiv('news'), getNews()"><span>News</span></li>
-                <li onclick="showDiv('contacts')"><span>Contatti</span></li>
+                <li onclick="showDiv('contacts'), autoFill()"><span>Contatti</span></li>
             </ul>
         </div>
         <div class="nav-item-bt">
-            <img src="../icon/account.svg" alt="account" onclick="showDiv('account')"/>
-            <img src="../icon/exit.svg" alt="esci" onclick="exit()"/>
+            <img src="../icon/account.svg" alt="account" onclick="showDiv('account')">
+            <img src="../icon/exit.svg" alt="esci" onclick="exit()">
         </div>
     </nav>
     
@@ -143,7 +143,7 @@
                     <label for="body">Messaggio</label>
                     <textarea name="body" class="input-text body-message" id="body" cols="30" rows="5" placeholder="..." ></textarea>
                 </div>
-                <input type="button" onclick="sendMessage()" value="Invia" class="full-width-btn"/>
+                <input type="button" onclick="sendMessage()" value="Invia" class="full-width-btn">
 
                 <div id="message">
                     <p></p>
@@ -223,6 +223,7 @@
 
     <script src="../common/utilities.js"></script>
     <script src="../common/api.js"></script>
+    <script src="./logic/utils.js"></script>
     <script src="./logic/api-so.js"></script>
     <script src="./logic/api-account.js"></script>
     <script src="./logic/logic-so.js"></script>

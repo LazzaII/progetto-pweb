@@ -22,47 +22,6 @@ async function getCityInfo() {
 }
 
 /**
- * Funzione per il calolo del tempo che ci vuole da una struttura all'altra,
- * in caso si urgente viene calcolato il tempo effettivo con un 10% per gli imprevisti
- * altrimenti il tempo può variare fino a 48 ore + tempo effettivo + 10%
- * @param {Intero} dt intero che rappresenta la distanza tra i due edifici
- * @param {Boolean} urg 
- * @returns {Intero} che rappresenta il tempo che ci vuole per la spedizione
- */
-function calcoloTempo(dt, urg) {
-    let tmp;
-    if(dt === 0) tmp = timeS;
-    else if(dt < 30) tmp = Math.floor(dt/vm1 * 60);
-    else if(dt < 150) tmp = Math.floor(dt/vm2 * 60);
-    else tmp = Math.floor(dt/vm3 * 60);
-    if(urg === false ) {
-        tmp +=  Math.random() * 2880 // numero di minuti random da 0 a 48 ore
-    }
-    tmp += tmp*0.1// 10% per imprevisti
-    return tmp; 
-}
-
-/**
- * Funzione che aggiorna il tempo in caso urgente sia spuntato o no
- * @param {Intero} id che rappresenta l'id del magazzino
- * @param {Intero} dt distaza tra i due edifici
- */
-function updateTime(id, dt) {
-    let time;
-    box = document.getElementById(id);
-    if(box.getElementsByClassName('urgente')[0].checked){
-        time = calcoloTempo(dt, true);
-        box.getElementsByClassName('time')[0].id = time;
-        box.getElementsByClassName('time')[0].innerText = parseInt(time/60) + ' H : ' + Math.floor(time - (60*parseInt(time/60))) + ' m';
-    }
-    else {
-        time = calcoloTempo(dt, false);
-        box.getElementsByClassName('time')[0].id = time;
-        box.getElementsByClassName('time')[0].innerText = parseInt(time/60) + ' H : ' + Math.floor(time - (60*parseInt(time/60))) + ' m';
-    } 
-}
-
-/**
  * Funzione che ricerca i magazzini a seconda del sangue selezionato
  */
 async function findSite() {
@@ -147,7 +106,14 @@ async function sendRequest(id, km) {
     if(box.getElementsByClassName('urgente')[0].checked) costo = 0;
     else if(km < 1) costo = 10;
     else costo = km * 3 //se è meno di un km il costo default è 10 euro, altrimenti il costo è km * 3 (costante scelta ipoteticamente, stessa cosa per il prezzo default)
-
+    
+    if(!box.getElementsByClassName('urgente')[0].checked){ // se la richiesta non è urgnete si controllano le disponibilità degli altri magazzini
+        let key = checkWarehouse(costo);
+        if(key === -1)
+            return;
+        else 
+            costo = key;
+    }
     let data = JSON.stringify({
         type : document.getElementById('btype').value,
         qta : box.getElementsByClassName('qta-r')[0].value,

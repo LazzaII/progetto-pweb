@@ -65,8 +65,7 @@ function resetInfo() {
  * Funzione per controllare se chi sta accendendo alla pagine è loggato
  */
 function checkLogin() {
-  if(!getCookie('login')  && getCookie('type') === 'H') document.location.href = indexUrl;
-
+  if(getCookie('type') !== 'H') document.location.href = indexUrl;
   history();
   info();
   infoCityRegion();

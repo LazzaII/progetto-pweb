@@ -11,7 +11,7 @@ const url = '../api/';
 function exitAdmin() {
     for (const cookie of cookiesName) // cancella tutti i cookie
         deleteCookie(cookie);
-    checkLogged(); // richiama la funzione per mostrare il form di login
+    document.location.reload();
 }
 
 /**

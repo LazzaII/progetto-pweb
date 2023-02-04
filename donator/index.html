@@ -24,12 +24,12 @@
             <ul id="menu">
                 <li onclick="showDiv('donation')"><span>Dona</span></li>
                 <li onclick="showDiv('news'), getNews()"><span>News</span></li>
-                <li onclick="showDiv('contacts')"><span>Contatti</span></li>
+                <li onclick="showDiv('contacts'), autoFill()"><span>Contatti</span></li>
             </ul>
         </div>
         <div class="nav-item-bt">
-            <img src="../icon/account.svg" alt="account" onclick="showDiv('account')"/>
-            <img src="../icon/exit.svg" alt="esci" onclick="exit()"/>
+            <img src="../icon/account.svg" alt="account" onclick="showDiv('account')">
+            <img src="../icon/exit.svg" alt="esci" onclick="exit()">
         </div>
     </nav>
 
@@ -37,7 +37,7 @@
         <section id="donation">
             <!-- lista delle donazioni e bottone per far donare -->
             <h3>Ultime donazioni</h3>
-            <table>
+            <table class="ordini">
                 <thead>
                     <tr>
                         <th>Data</th>
@@ -84,7 +84,7 @@
                     <label for="body">Messaggio</label>
                     <textarea name="body" class="input-text body-message" id="body" cols="30" rows="5" placeholder="..." ></textarea>
                 </div>
-                <input type="button" onclick="sendMessage()" value="Invia"/>
+                <input type="button" onclick="sendMessage()" value="Invia">
 
                 <div id="message">
                     <p></p>
