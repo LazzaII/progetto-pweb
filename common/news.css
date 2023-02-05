@@ -19,6 +19,12 @@
     width: 100%;
 }
 
+.news-img {
+    border: 1px solid var(--dark-sienna);
+    border-radius: 5px;
+    margin-bottom: 2vh;
+    height: 25vh;
+}
 
 /* box */
 .box-news {

@@ -153,6 +153,7 @@ create table if not exists `news` (
     `_id` int not null auto_increment,
     `title` varchar(140) not null,
     `body` text not null,
+    `img_uri` tinytext not null,
     `author_` int not null, -- fk ad admin
     primary key (`_id`),
     foreign key (`author_`) references `admin` (`_id`)

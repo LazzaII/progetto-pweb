@@ -78,7 +78,12 @@ async function getNews() {
         let author = document.createElement('span');
         author.innerText = n.second_name + ' ' + n.first_name; 
         author.setAttribute('class', 'news-author')
+        let image = document.createElement('img')
+        image.setAttribute('src', indexUrl + n.img_uri);
+        image.setAttribute('class', 'news-img')
+        image.setAttribute('alt', 'img-news')
         article.append(h4);
+        article.append(image);
         article.append(body);
         article.append(author);
         sect.append(article);

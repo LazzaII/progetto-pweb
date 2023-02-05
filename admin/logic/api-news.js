@@ -1,6 +1,5 @@
 /* API NEWS PAGINA ADMIN */
-//const newsInfo = ['title-news', 'body-news', 'image'];
-const newsInfo = ['title-news', 'body-news'];
+const newsInfo = ['title-news', 'body-news', 'image'];
     
 /**
  * Funzione per l'inserimento della nuova news
@@ -11,23 +10,15 @@ async function sendNews() {
     showMessage('message', 'Compila tutti i campi', 'errore');
     return;
   }
-  // const data = new FormData();
-  // data.append('title', document.getElementById('title-news').value);
-  // data.append('body', document.getElementById('body-news').value);
-  // data.append('author', getCookie('id'));
-  // data.append('image', document.getElementById('image').files[0]);
-  let data = JSON.stringify({
-    title : document.getElementById('title-news').value,
-    body : document.getElementById('body-news').value,
-    author : getCookie('id'),
-  });
+  const data = new FormData();
+  data.append('title', document.getElementById('title-news').value);
+  data.append('body', document.getElementById('body-news').value);
+  data.append('author', getCookie('id'));
+  data.append('image', document.getElementById('image').files[0]);
   clearValue(newsInfo);
   // chiamata a http://localhost/progetto-pweb/api/news.php per inviare la news
   const response = await fetch(url + 'news.php', {
     method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-    },
     body: data
   });
   if(response.ok) {

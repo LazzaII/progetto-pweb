@@ -1,3 +1,6 @@
+// index url
+const indexUrl = './';
+
 // Array utili
 const divs = ['manual', 'why',  'news', 'contacts', 'login'];
 

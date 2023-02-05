@@ -18,10 +18,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `bloodbankdb`
+-- Database: `lazzarelli_635366`
 --
-CREATE DATABASE IF NOT EXISTS `bloodbankdb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `bloodbankdb`;
+CREATE DATABASE IF NOT EXISTS `lazzarelli_635366` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `lazzarelli_635366`;
 
 -- --------------------------------------------------------
 
@@ -3596,6 +3596,7 @@ CREATE TABLE `news` (
   `_id` int(11) NOT NULL,
   `title` varchar(140) NOT NULL,
   `body` text NOT NULL,
+  `img_uri` tinytext NOT NULL,
   `author_` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -3603,10 +3604,10 @@ CREATE TABLE `news` (
 -- Dump dei dati per la tabella `news`
 --
 
-INSERT INTO `news` (`_id`, `title`, `body`, `author_`) VALUES
-(6, 'Giornata Mondiale del donatore di sangue 2022', 'La Giornata Mondiale del Donatore di Sangue è stata istituita nel 2005 dall’Organizzazione Mondiale della Sanità e si celebra in tutto il mondo il 14 giugno.  La Giornata Mondiale nasce per sensibilizzare sull’importanza che i donatori di sangue, volontari, periodici, non retribuiti, rivestono per coloro che necessitano di trasfusioni sicure.    Per il 2022, lo slogan internazionale, scelto dall’OMS, della Giornata mondiale del donatore di sangue è \"Donating blood is an act of solidarity. Join the effort and save lives” per richiamare l\'attenzione sul ruolo che le donazioni volontarie di sangue svolgono nel salvare vite umane e per rafforzare la solidarietà all\'interno delle comunità.', 1),
-(7, ' Donatori di sangue al Lucca Comics & Games con Simple & Madama', 'I donatori di sangue, eroi di tutti i giorni, arrivano al Lucca Comics & Games, perché per salvare la vita di tante persone non servono i super poteri ma basta un gesto semplice e altruistico. Sarà questo il tema di “Be a Hero”, l’albo con protagonisti Simple & Madama, frutto della collaborazione tra il Centro Nazionale Sangue, Panini Comics – editore in Italia di Topolino e delle storie dei più celebri supereroi Marvel e DC Comics, da Batman a Spider-Man – e Civis, il coordinamento interassociativo che vede al suo interno le principali associazioni di donatori volontari: AVIS, Croce Rossa Italiana, FIDAS e Fratres. Il fumetto sarà presentato e distribuito gratuitamente nel corso della più importante fiera del settore d’Italia che si terrà nel capoluogo toscano tra il 28 ottobre e il 1° novembre.', 1),
-(8, 'Male la raccolta plasma, nel 2022 è stata inferiore ai livelli del lockdown', 'Il 2022 è stato un anno negativo per la raccolta di plasma. Sono stati raccolti 842.949 chili, circa 20mila in meno rispetto al 2021, quando ne erano stati raccolti 862.401. In definitiva il calo percentuale del 2,3% fa sì che la raccolta della parte liquida del sangue, necessaria alla produzione di farmaci salvavita, sia addirittura inferiore ai livelli del 2020, quando i mesi di lockdown avevano fatto sentire i loro effetti su tutto il sistema sanitario nazionale.    La causa principale del crollo della raccolta è ascrivibile all’andamento dell’epidemia di Covid e in particolare alla variante Omicron, come dimostrato nei monitoraggi mensili pubblicati sul sito del Centro Nazionale Sangue. In corrispondenza dei picchi di contagi segnalati a gennaio, aprile e luglio infatti sono corrisposte brusche frenate nella raccolta di plasma (rispettivamente -10%, -13% e -6,7% rispetto all’anno precedente). Nonostante l’impegno messo in campo ogni giorno, i servizi trasfusionali devono fare i conti con una grave carenza di personale, che incide inevitabilmente anche sulle attività di raccolta di sangue e plasma.', 1);
+INSERT INTO `news` (`_id`, `title`, `body`, `img_uri`, `author_`) VALUES
+(6, 'Giornata Mondiale del donatore di sangue 2022', 'La Giornata Mondiale del Donatore di Sangue è stata istituita nel 2005 dall’Organizzazione Mondiale della Sanità e si celebra in tutto il mondo il 14 giugno.  La Giornata Mondiale nasce per sensibilizzare sull’importanza che i donatori di sangue, volontari, periodici, non retribuiti, rivestono per coloro che necessitano di trasfusioni sicure.    Per il 2022, lo slogan internazionale, scelto dall’OMS, della Giornata mondiale del donatore di sangue è \"Donating blood is an act of solidarity. Join the effort and save lives” per richiamare l\'attenzione sul ruolo che le donazioni volontarie di sangue svolgono nel salvare vite umane e per rafforzare la solidarietà all\'interno delle comunità.', 'images/blood-day.jpeg' , 1),
+(7, ' Donatori di sangue al Lucca Comics & Games con Simple & Madama', 'I donatori di sangue, eroi di tutti i giorni, arrivano al Lucca Comics & Games, perché per salvare la vita di tante persone non servono i super poteri ma basta un gesto semplice e altruistico. Sarà questo il tema di “Be a Hero”, l’albo con protagonisti Simple & Madama, frutto della collaborazione tra il Centro Nazionale Sangue, Panini Comics – editore in Italia di Topolino e delle storie dei più celebri supereroi Marvel e DC Comics, da Batman a Spider-Man – e Civis, il coordinamento interassociativo che vede al suo interno le principali associazioni di donatori volontari: AVIS, Croce Rossa Italiana, FIDAS e Fratres. Il fumetto sarà presentato e distribuito gratuitamente nel corso della più importante fiera del settore d’Italia che si terrà nel capoluogo toscano tra il 28 ottobre e il 1° novembre.', 'images/comics.png' , 1),
+(8, 'Male la raccolta plasma, nel 2022 è stata inferiore ai livelli del lockdown', 'Il 2022 è stato un anno negativo per la raccolta di plasma. Sono stati raccolti 842.949 chili, circa 20mila in meno rispetto al 2021, quando ne erano stati raccolti 862.401. In definitiva il calo percentuale del 2,3% fa sì che la raccolta della parte liquida del sangue, necessaria alla produzione di farmaci salvavita, sia addirittura inferiore ai livelli del 2020, quando i mesi di lockdown avevano fatto sentire i loro effetti su tutto il sistema sanitario nazionale.    La causa principale del crollo della raccolta è ascrivibile all’andamento dell’epidemia di Covid e in particolare alla variante Omicron, come dimostrato nei monitoraggi mensili pubblicati sul sito del Centro Nazionale Sangue. In corrispondenza dei picchi di contagi segnalati a gennaio, aprile e luglio infatti sono corrisposte brusche frenate nella raccolta di plasma (rispettivamente -10%, -13% e -6,7% rispetto all’anno precedente). Nonostante l’impegno messo in campo ogni giorno, i servizi trasfusionali devono fare i conti con una grave carenza di personale, che incide inevitabilmente anche sulle attività di raccolta di sangue e plasma.', 'images/plasma.jpeg' , 1);
 
 -- --------------------------------------------------------
 

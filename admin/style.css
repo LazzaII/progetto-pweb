@@ -40,3 +40,7 @@
     cursor: auto;
     background-color: var(--light-gray) !important;
 }
+
+#image {
+    border: none !important;
+}

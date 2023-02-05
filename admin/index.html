@@ -25,7 +25,7 @@
             </div>
             
             <input type="button" onclick="login()" value="Invia" class="full-width-btn"/>
-            
+            <label class="text-l-r" >Vuoi tornare all'index? Clicca <span onclick="javascript: window.location = '../'">qui</span></label>
             <div id="message-l">
                 <p ></p>
             </div>
@@ -180,8 +180,8 @@
                         <input type="text" class="input-text" name="obg" id="title-news" placeholder="oggetto" >
                         <label>Inserisci la notizia</label>
                         <textarea name="body" class="input-text body-message" id="body-news" cols="35" rows="7" placeholder="..." ></textarea>
-                        <!-- <label>Inserisci immagine</label>
-                        <input type="file" name="image" accept="image/*" id="image"> -->
+                        <label>Inserisci immagine</label>
+                        <input type="file" name="image" accept="image/*" id="image" class="input-text">
                     
                         <input type="button" onclick="sendNews()" value="Invia" class="full-width-btn"/>
 
@@ -229,24 +229,26 @@
             <section id="account" hidden>
                 <div>
                     <h1 id="title-info">Account info</h1>
-                    <table id="account-info">
-                        <tr>
-                            <td class="title-info">Nome</td>
-                            <td><input disabled type="text" id="first"></td>
-                        </tr>
-                        <tr>
-                            <td class="title-info">Cognome</td>
-                            <td><input disabled type="text" id="second"></td>
-                        </tr>
-                        <tr>
-                            <td class="title-info">Email</td>
-                            <td><input disabled type="email" id="email"></td>
-                        </tr>
-                        <tr>
-                            <td class="title-info">Password</td>
-                            <td><input disabled type="password" id="pwd"></td>
-                        </tr>
-                    </table>
+                    <form>
+                        <table id="account-info">
+                            <tr>
+                                <td class="title-info">Nome</td>
+                                <td><input disabled type="text" id="first"></td>
+                            </tr>
+                            <tr>
+                                <td class="title-info">Cognome</td>
+                                <td><input disabled type="text" id="second"></td>
+                            </tr>
+                            <tr>
+                                <td class="title-info">Email</td>
+                                <td><input disabled type="email" id="email"></td>
+                            </tr>
+                            <tr>
+                                <td class="title-info">Password</td>
+                                <td><input disabled type="password" id="pwd"></td>
+                            </tr>
+                        </table>
+                    </form>
     
                     <div id="message-acc">
                         <p></p>

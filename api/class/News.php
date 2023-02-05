@@ -33,17 +33,36 @@ class News {
     }
 
     /**
+     * Funzione per prendere l'uri di una immagine, viene usata quando si
+     * rimuove una news per rimuovere anche il file
+     * @param int $id della news da ricercare
+     * @return array contenente l'uri dell'immagine della news ricercata
+     */
+    public function getUri($id){
+        $query = 'select N.`img_uri`
+                  from `news` N
+                  where N.`_id` = :id';
+        $stmt = $this->pdo->prepare($query);
+        $data = [
+            'id' => $id
+        ];
+        $stmt->execute($data);
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    /**
      * Funzione per aggiungere una nuova news
      * @param News $news contenente tutte le informazioni
      */
     public function add($news) {
-        $query = "insert into `news` (`title`, `body`, `author_`)
-                  values (:title, :body, :author)";
+        $query = "insert into `news` (`title`, `body`, `img_uri`, `author_`)
+                  values (:title, :body, :uri, :author)";
         $stmt = $this->pdo->prepare($query);
         $data = [
             'title' => $news->title,
             'body' => $news->body,
-            'author' => $news->author
+            'author' => $news->author,
+            'uri' => $news->img
         ];
         $stmt->execute($data);
     }
