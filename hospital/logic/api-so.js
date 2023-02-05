@@ -105,13 +105,13 @@ async function sendRequest(id, km) {
     box = document.getElementById(id);
     if(box.getElementsByClassName('urgente')[0].checked) costo = 0;
     else if(km < 1) costo = 10;
-    else costo = km * 3 //se è meno di un km il costo default è 10 euro, altrimenti il costo è km * 3 (costante scelta ipoteticamente, stessa cosa per il prezzo default)
+    else costo = km * 3 //se è meno di 1 km il costo default è 10 euro, altrimenti il costo è km * 3 (costante scelta ipoteticamente, stessa cosa per il prezzo default)
     
     if(!box.getElementsByClassName('urgente')[0].checked){ // se la richiesta non è urgnete si controllano le disponibilità degli altri magazzini
-        let key = checkWarehouse(costo);
+        let key = checkWarehouse(costo, id);
         if(key === -1)
             return;
-        else 
+        else if(key !== 0)
             costo = key;
     }
     let data = JSON.stringify({

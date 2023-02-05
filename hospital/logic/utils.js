@@ -3,10 +3,11 @@
 /**
  * Funzione che controlla che non siano presenti dei magazzini in città
  * @param {Intero} costo iniziale di trasporto
- * @returns 0 se non ci sono, -1 se sceglie di ripensarci, il costo finale della tratta
+ * @returns 0 se non ci sono o se è richiesto dal magazzino più vicino, -1 se sceglie di ripensarci, il costo finale della tratta
  */
-function checkCity(costo) {
-    if(document.getElementById('tbody-city').getElementsByTagName('tr') !== 0) {
+function checkCity(costo, id) {
+    if(document.getElementById('tbody-city').getElementsByTagName('tr').namedItem(id)) return 0; // controllo che non sia stato scelto il magazzino più vicinio
+    if(document.getElementById('tbody-city').getElementsByTagName('tr').length !== 0) {
         if(confirm('È presente un magazzino nella tua città, sicuro di voler scegliere un magazzino al di fuori? Riceverai un addebito ulteriore del 15%')) {
              return costo + costo*0.15;
         }
@@ -18,10 +19,12 @@ function checkCity(costo) {
 /**
  * Funzione che controlla che non siano presenti dei magazzini nella stessa regione
  * @param {Intero} costo iniziale di trasporto
- * @returns 0 se non ci sono, -1 se sceglie di ripensarci, il costo finale della tratta
+ * @returns 0 se non ci sono o se è richiesto dal magazzino più vicino,, -1 se sceglie di ripensarci, il costo finale della tratta
  */
-function checkRegion(costo) {
-    if(document.getElementById('tbody-region').getElementsByTagName('tr') !== 0) {
+function checkRegion(costo, id) {
+    if(document.getElementById('tbody-region').getElementsByTagName('tr').namedItem(id)) return 0; // controllo che non sia stato scelto il magazzino più vicinio
+    if(document.getElementById('tbody-region').getElementsByTagName('tr').length !== 0) {
+        console.log(document.getElementById('tbody-region').getElementsByTagName('tr'));
         if(confirm('È presente un magazzino nella tua regione, sicuro di voler scegliere un magazzino al di fuori? Riceverai un addebito ulteriore del 10%'))
             return costo + costo*0.1;
         else 
@@ -35,12 +38,12 @@ function checkRegion(costo) {
  * @param {*} costo 
  * @returns il costo aggiornato, oppure -1 se richiesta annullata 0 altrimenti
  */
-function checkWarehouse(costo) {
+function checkWarehouse(costo, id) {
     let ret = 0;
-    let costoCitta = checkCity(costo)
+    let costoCitta = checkCity(costo, id)
     switch (costoCitta) {
         case 0: //nessun magazzino presente
-            let = costoRegione = checkRegion(costo); // se non c'è nessuno in città si controlla la regione
+            let = costoRegione = checkRegion(costo, id); // se non c'è nessuno in città si controlla la regione
             switch (costoRegione) {
                 case 0: //nessun magazzino presente
                     ret = 0;
