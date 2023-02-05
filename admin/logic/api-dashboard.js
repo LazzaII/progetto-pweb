@@ -10,6 +10,12 @@ const div_total = ['tot-users', 'donations', 'tot-req']
  */
 function dashboard() {
     //pulizia vecchi valori
+    for (const dn of div_name) {
+        let toDelete = document.getElementById(dn).getElementsByClassName('numero');
+        for (const td of toDelete) {
+            td.remove();
+        }
+    }
     let h3s = document.getElementsByClassName('numero')
     for (let i = 0; i < h3s.length; i++) 
         h3s[i].innerText = '';    
