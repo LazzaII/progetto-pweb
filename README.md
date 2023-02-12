@@ -1,5 +1,15 @@
-### Progetto di Proggettazione Web
+# Progetto di Proggettazione Web
 > Progetto per il corso di Progettazione Web A.A. 22/23 dell'Università di Pisa
+
+#### Valutazione
+
+> 30/30
+
+#### Autore
+
+> Francesco Lazzarelli
+
+## Descrizione
 
 Il progetto sviluppato è una banca del sangue. La piattaforma prevede l'interazione di 4 diversi tipi di utente:
 
@@ -19,10 +29,9 @@ La `struttura` ospedaliera invece può richiedere sangue, può fare ordini di sa
 
 L'`amministratore` invece ha il compito di accettare nuovi utenti, eliminarli, accettare o rigettare le richieste. Poi ha la possibilità di visualizzare alcune statistiche riguardanti gli utenti, le donazioni e le richieste. Infine può scrivere nuove news o eliminare quelle vecchie e visualizzare o eliminare i messaggi che gli sono stati inviati.
 
-### Account
+## Setup
 
 Nel file [account.md](./account.md) è possibile trovare alcuni account già predisposti per provare tutte le funzionalità del sito, usando il dump del database [dump.sql](./sql/dump.sql).
 
-### Autore
 
-Francesco Lazzarelli
+

@@ -1,6 +1,6 @@
-drop database if exists lazzarelli_635366;
-create schema lazzarelli_635366 default character set utf8;
-use lazzarelli_635366;
+drop database if exists BloodBankLab;
+create schema BloodBankLab default character set utf8;
+use BloodBankLab;
 
 set foreign_key_checks = 0; -- per rimuovere il controllo sulle fk
 

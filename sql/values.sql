@@ -1,4 +1,4 @@
-use lazzarelli_635366;
+use BloodBankLab;
 
 insert into `admin` (`first_name`, `second_name`, `type`, `email`, `hash_pwd`) values 
 ('Mario', 'Rossi', 0, 'mario@rossi.com', '$2y$10$FivlRR/HgDipCOiKXzbOqu/ZLF9HBGAQXTxI0IsZM8kQ1m26PJZUu'); -- questo è l'hash della password Prova123

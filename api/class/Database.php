@@ -1,12 +1,4 @@
 <?php
-
-/*
-$body = file_get_contents("php://input"); //get the body
-$decodeBody = json_decode($body);
-
-potrebbe servire per prendere i dati nella post invece di usare $_POST['...']
-*/
-
 require_once __DIR__.'/../include/config.inc.php';
 
 # class database
